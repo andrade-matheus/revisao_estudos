@@ -1,0 +1,21 @@
+[
+  {
+    "id" : 0,
+    "nome": "Administrativo"
+  },
+  {
+    "nome": "Ambiental"
+  },
+  {
+    "nome": "Civil"
+  },
+  {
+    "nome": "Constitucional"
+  },
+  {
+    "nome": "Consumidor"
+  },
+  {
+    "nome": "Eleitoral"
+  }
+]
