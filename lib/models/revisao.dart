@@ -29,4 +29,14 @@ class Revisao {
     this.vezesRevisadas = json[DatabaseCreator.vezesRevisadas];
     this.isArchived = json[DatabaseCreator.isArchived] == 1;
   }
+
+  void impimeRevisao(){
+    print("Disciplina: " + this.disciplina);
+    print("Frequencia: " + this.frequencia);
+    print("Nome: " + this.nome);
+    print("Data Cadasto: " + this.dataCadastro.toString());
+    print("Data Prox Rev.: " + this.proxRevisao.toString());
+    print("Vezes Revisadas: " + this.vezesRevisadas.toString());
+    print("Aquivada: " + this.isArchived.toString());
+  }
 }

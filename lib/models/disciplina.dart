@@ -19,5 +19,16 @@ class Disciplina {
     return this.nome;
   }
 
+  bool operator == (other){
+    if(this.nome == other.nome){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  @override
+  int get hashCode => super.hashCode;
+
 }
 

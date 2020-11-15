@@ -7,6 +7,7 @@ import 'package:revisao_estudos/models/revisao.dart';
 import 'package:revisao_estudos/pages/calendario/calendario_page.dart';
 import 'package:revisao_estudos/pages/drawer/drawer.dart';
 import 'package:revisao_estudos/pages/revisoes/adicinar_revisao_page.dart';
+import 'package:revisao_estudos/pages/revisoes/revisao_detalhes_pade.dart';
 
 class RevisoesPage extends StatefulWidget {
   @override
@@ -80,6 +81,11 @@ class _RevisoesPageState extends State<RevisoesPage> {
                                         return ListTile(
                                           contentPadding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                                           title: Text(revisao.nome),
+                                          onTap: (){
+                                            Navigator.push(context,
+                                                MaterialPageRoute(builder: (context) => DetalhesRevisaoPage(revisao))
+                                            );
+                                          },
                                           trailing: IconButton(
                                             icon: Icon(Icons.delete_outline),
                                             onPressed: () => _excluirRevisaoDialog(context, revisao),

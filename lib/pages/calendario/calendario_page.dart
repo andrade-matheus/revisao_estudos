@@ -124,7 +124,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
                                           },
                                         );
                                       } else {
-                                        return CircularProgressIndicator();
+                                        return Column();
                                       }
                                     },
                                   )
@@ -136,7 +136,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
                       );
                     }
                   } else {
-                    return CircularProgressIndicator();
+                    return Column();
                   }
                 },
               ),
@@ -170,7 +170,9 @@ class _CalendarioPageState extends State<CalendarioPage> {
 
     for (final node in revisoes) {
       Disciplina disciplina = Disciplina(0, node.disciplina, false);
-      disciplinas.add(disciplina);
+      if(!disciplinas.contains(disciplina)){
+        disciplinas.add(disciplina);
+      }
     }
 
     return disciplinas;
@@ -183,15 +185,16 @@ class _CalendarioPageState extends State<CalendarioPage> {
 
   confirmarRevisao(Revisao revisao) async {
     List<String> valoresFrequencia = revisao.frequencia.split('-');
+    print("Tamanho frequencia: " + valoresFrequencia.length.toString());
+    revisao.vezesRevisadas += 1;
     int vezesRevisadas = revisao.vezesRevisadas;
 
-    if (vezesRevisadas > valoresFrequencia.length) {
-      vezesRevisadas = valoresFrequencia.length;
+    if (vezesRevisadas >= valoresFrequencia.length) {
+      vezesRevisadas = valoresFrequencia.length - 1;
     }
 
     int diasProxRevisao = int.parse(valoresFrequencia[vezesRevisadas]);
     revisao.proxRevisao = DateTime.now().add(Duration(days: diasProxRevisao));
-    revisao.vezesRevisadas += 1;
 
     await RepositoryServiceRevisao.updateRevisao(revisao);
   }

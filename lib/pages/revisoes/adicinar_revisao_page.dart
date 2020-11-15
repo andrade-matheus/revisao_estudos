@@ -27,6 +27,16 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
   @override
   void initState() {
     dataSelecionada = DateTime.now();
+
+    _vezesRevisadasTextField.value = TextEditingValue(
+        text: "0",
+        selection: TextSelection.fromPosition(
+            TextPosition(
+                offset: "0".length
+            )
+        )
+    );
+
     String data = DateFormat('dd / MM / yyyy').format(dataSelecionada);
     _dataTextField.value = TextEditingValue(
         text: data,
@@ -281,7 +291,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
                       ),
                     );
                   } else {
-                    return CircularProgressIndicator();
+                    return Column();
                   }
                 },
               ));
@@ -313,8 +323,8 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
     List<String> valoresFrequencia = _frequenciaTextField.text.split('-');
     int vezesRevisadas = int.parse(_vezesRevisadasTextField.text);
 
-    if(vezesRevisadas > valoresFrequencia.length){
-      vezesRevisadas = valoresFrequencia.length;
+    if(vezesRevisadas >= valoresFrequencia.length){
+      vezesRevisadas = valoresFrequencia.length - 1;
     }
 
     int diasProxRevisao = int.parse(valoresFrequencia[vezesRevisadas]);
@@ -324,8 +334,8 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
         _frequenciaTextField.text,
         _assuntoTextField.text,
         dataSelecionada,
-        DateTime.now().add(Duration(days: diasProxRevisao)),
-        vezesRevisadas,
+        dataSelecionada.add(Duration(days: diasProxRevisao)),
+        int.parse(_vezesRevisadasTextField.text),
         false
     );
 
