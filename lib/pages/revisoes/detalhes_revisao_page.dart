@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:revisao_estudos/models/revisao.dart';
+import 'package:revisao_estudos/models/classes/revisao.dart';
 
 class DetalhesRevisaoPage extends StatefulWidget {
   final Revisao revisao;
@@ -32,7 +32,7 @@ class _DetalhesRevisaoPageState extends State<DetalhesRevisaoPage> {
                     child: Card(
                       child: ListTile(
                         title: Text("Disciplina: "),
-                        subtitle: Flexible(child: Text(this.widget.revisao.disciplina)),
+                        subtitle: Flexible(child: Text(this.widget.revisao.disciplina.nome)),
                       )
                     ),
                   )
@@ -64,7 +64,7 @@ class _DetalhesRevisaoPageState extends State<DetalhesRevisaoPage> {
                     child: Card(
                         child: ListTile(
                           title: Text("Frequência: "),
-                          subtitle: Flexible(child: Text(this.widget.revisao.frequencia)),
+                          subtitle: Flexible(child: Text(this.widget.revisao.frequencia.frequencia)),
                         )
                     ),
                   )

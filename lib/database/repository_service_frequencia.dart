@@ -1,74 +1,46 @@
-
-import 'database_creator.dart';
-import 'package:revisao_estudos/models/frequencia.dart';
+import 'package:revisao_estudos/controllers/database_controller.dart';
+import 'package:revisao_estudos/controllers/frequencia_controller.dart';
+import 'package:revisao_estudos/database/database_creator.dart';
+import 'package:revisao_estudos/models/classes/frequencia.dart';
 
 class RepositoryServiceFrequencia {
   static Future<List<Frequencia>> getAllFrequencias() async {
-    final sql = '''SELECT * FROM ${DatabaseCreator.frequenciaTable}
-    WHERE ${DatabaseCreator.isArchived} = 0''';
-
-    final data = await db.rawQuery(sql);
+    List<Map> maps = await db.query(
+      DatabaseController.frequenciaTable,
+      columns: [DatabaseController.id, DatabaseController.valorFrequencia],
+    );
 
     List<Frequencia> frequencias = List();
+    Map item;
 
-    for (final node in data) {
-      final frequencia = Frequencia.fromJson(node);
-      frequencias.add(frequencia);
+    for (item in maps) {
+      frequencias.add(FrequenciaController.frequenciaFromMap(item));
     }
     return frequencias;
   }
 
   static Future<Frequencia> getFrequencia(int id) async {
-
-    final sql = '''SELECT * FROM ${DatabaseCreator.frequenciaTable}
-    WHERE ${DatabaseCreator.id} = ?''';
-
-    List<dynamic> params = [id];
-    final data = await db.rawQuery(sql, params);
-
-    final frequencia = Frequencia.fromJson(data.first);
-    return frequencia;
+    List<Map> maps = await db.query(DatabaseController.frequenciaTable,
+        columns: [DatabaseController.id, DatabaseController.valorFrequencia],
+        where: '${DatabaseController.id} = ?',
+        whereArgs: [id]);
+    if (maps.length > 0) {
+      return FrequenciaController.frequenciaFromMap(maps.first);
+    }
+    return null;
   }
 
-  static Future<void> addFrequencia(Frequencia frequencia) async {
-
-    final sql = '''INSERT INTO ${DatabaseCreator.frequenciaTable}
-    (
-      ${DatabaseCreator.frequencia},
-      ${DatabaseCreator.isArchived}
-    )
-    VALUES (?,?)''';
-    List<dynamic> params = [frequencia.frequencia, frequencia.isArchived ? 1 : 0];
-    final result = await db.rawInsert(sql, params);
+  static Future<int> insertFrequencia(Frequencia frequencia) async {
+    return await db.insert(DatabaseController.frequenciaTable, FrequenciaController.frequenciaToMap(frequencia));
   }
 
-  static Future<void> deleteFrequencia(Frequencia frequencia) async {
-
-    final sql = '''DELETE FROM ${DatabaseCreator.frequenciaTable}
-    WHERE ${DatabaseCreator.id} = ?
-    ''';
-
-    List<dynamic> params = [frequencia.id];
-    final result = await db.rawUpdate(sql, params);
+  static Future<int> deleteFrequencia(Frequencia frequencia) async {
+    return await db.delete(DatabaseController.frequenciaTable,
+        where: '${DatabaseController.id} = ?', whereArgs: [frequencia.id]);
   }
 
-  static Future<void> updateFrequencia(Frequencia frequencia) async {
-
-    final sql = '''UPDATE ${DatabaseCreator.frequenciaTable}
-    SET ${DatabaseCreator.frequencia} = ?,
-     ${DatabaseCreator.isArchived} = ?
-    WHERE ${DatabaseCreator.id} = ?
-    ''';
-
-    List<dynamic> params = [frequencia.frequencia, frequencia.isArchived, frequencia.id];
-    final result = await db.rawUpdate(sql, params);
-  }
-
-  static Future<int> frequenciasCount() async {
-    final data = await db.rawQuery('''SELECT COUNT(*) FROM ${DatabaseCreator.frequenciaTable}''');
-
-    int count = data[0].values.elementAt(0);
-    int idForNewItem = count++;
-    return idForNewItem;
+  static Future<int> updateFrequencia(Frequencia frequencia) async {
+    return await db.update(DatabaseController.frequenciaTable, FrequenciaController.frequenciaToMap(frequencia),
+        where: '${DatabaseController.id} = ?', whereArgs: [frequencia.id]);
   }
 }

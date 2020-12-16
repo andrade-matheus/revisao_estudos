@@ -1,29 +1,35 @@
 import 'dart:io';
 
 import 'package:path/path.dart';
+import 'package:revisao_estudos/controllers/database_controller.dart';
 import 'package:sqflite/sqflite.dart';
 
 Database db;
 
 class DatabaseCreator {
-  static const disciplinaTable = 'disciplina';
-  static const frequenciaTable = 'frequencia';
-  static const revisaoTable = 'revisao';
-  static const id = 'id';
-  static const nome = 'nome';
-  static const frequencia = 'frequencia';
-  static const disciplina = 'disciplina';
-  static const vezesRevisadas = 'vezesRevisadas';
-  static const dataCadastro = 'dataCadastro';
-  static const proxRevisao = 'proxRevisao';
-  static const isArchived = 'isArchived';
+  String disciplinaTable = DatabaseController.disciplinaTable;
+  String frequenciaTable = DatabaseController.frequenciaTable;
+  String revisaoTable = DatabaseController.revisaoTable;
+  String logRevisaoTable = DatabaseController.logRevisaoTable;
+
+  String id = DatabaseController.id;
+  String idDisciplina = DatabaseController.idDisciplina;
+  String idFrequencia = DatabaseController.idFrequencia;
+  String idRevisao = DatabaseController.idRevisao;
+
+  String nome = DatabaseController.nome;
+  String valorFrequencia = DatabaseController.valorFrequencia;
+  String vezesRevisadas = DatabaseController.vezesRevisadas;
+  String dataCadastro = DatabaseController.dataCadastro;
+  String proxRevisao = DatabaseController.proxRevisao;
+  String isArchived = DatabaseController.isArchived;
+  String dataRevisao = DatabaseController.dataRevisao;
 
   Future<void> createDisciplinaTable(Database db) async {
     final disciplinaSql = '''CREATE TABLE $disciplinaTable
     (
       $id INTEGER PRIMARY KEY AUTOINCREMENT,
-      $nome TEXT,
-      $isArchived BIT NOT NULL
+      $nome TEXT
     )''';
 
     await db.execute(disciplinaSql);
@@ -33,8 +39,7 @@ class DatabaseCreator {
     final frequenciaSql = '''CREATE TABLE $frequenciaTable
     (
       $id INTEGER PRIMARY KEY AUTOINCREMENT,
-      $frequencia TEXT,
-      $isArchived BIT NOT NULL
+      $valorFrequencia TEXT
     )''';
 
     await db.execute(frequenciaSql);
@@ -44,16 +49,30 @@ class DatabaseCreator {
     final revisaoSql = '''CREATE TABLE $revisaoTable
     (
       $id INTEGER PRIMARY KEY AUTOINCREMENT,
-      $disciplina TEXT,
-      $frequencia TEXT,
+      $idDisciplina INTEGER,
+      $idFrequencia INTEGER,
       $nome TEXT,
       $vezesRevisadas INTEGER,
       $dataCadastro TEXT,
       $proxRevisao TEXT,
-      $isArchived BIT NOT NULL
+      $isArchived BIT NOT NULL,
+      FOREIGN KEY ($idDisciplina) REFERENCES $disciplinaTable($id),
+      FOREIGN KEY ($idFrequencia) REFERENCES $frequenciaTable($id)
     )''';
 
     await db.execute(revisaoSql);
+  }
+
+  Future<void> createLogRevisaoTable(Database db) async {
+    final logRevisaoSql = '''CREATE TABLE $logRevisaoTable
+    (
+      $id INTEGER PRIMARY KEY AUTOINCREMENT,
+      $idRevisao INTEGER,
+      $dataRevisao TEXT,
+      FOREIGN KEY ($idRevisao) REFERENCES $revisaoTable($id)
+    )''';
+
+    await db.execute(logRevisaoSql);
   }
 
   Future<String> getDatabasePath(String dbName) async {
@@ -79,5 +98,6 @@ class DatabaseCreator {
     await createDisciplinaTable(db);
     await createFrequenciaTable(db);
     await createRevisaoTable(db);
+    await createLogRevisaoTable(db);
   }
 }
