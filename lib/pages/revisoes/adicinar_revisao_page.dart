@@ -7,6 +7,7 @@ import 'package:revisao_estudos/controllers/revisao_controller.dart';
 import 'package:revisao_estudos/models/classes/disciplina.dart';
 import 'package:revisao_estudos/models/classes/frequencia.dart';
 import 'package:revisao_estudos/models/classes/revisao.dart';
+import 'package:revisao_estudos/pages/PlanoDeFundo/plano_de_fundo.dart';
 
 
 class AdicionarRevisaoPage extends StatefulWidget {
@@ -48,12 +49,9 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text("Nova Revisão"),
-      ),
-      body: Container(
+    return PlanoDeFundo(
+      title: "Nova Revisão",
+      child: Container(
         padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
         child: Form(
           key: _formKey,

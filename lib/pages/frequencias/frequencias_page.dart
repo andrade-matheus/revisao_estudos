@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/controllers/frequencia_controller.dart';
 import 'package:revisao_estudos/models/classes/frequencia.dart';
+import 'package:revisao_estudos/pages/PlanoDeFundo/plano_de_fundo.dart';
 import 'package:revisao_estudos/pages/calendario/calendario_page.dart';
-import 'package:revisao_estudos/pages/drawer/drawer.dart';
 import 'package:revisao_estudos/pages/frequencias/widget/adicionar_frequencia_dialog.dart';
 import 'package:revisao_estudos/pages/frequencias/widget/excluir_frequencia_dialog.dart';
 
@@ -18,28 +18,25 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => CalendarioPage()));
-        return true;
-      },
-      child: Scaffold(
-          appBar: AppBar(
-            title: Text("Frequências de revisões"),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () async {
-                  final result = await adicionarFrequenciaDialog(context);
-                  if (result) {
-                    setState(() {});
-                  }
-                },
-              ),
-            ],
-          ),
-          drawer: homeDrawer(context),
-          body: Padding(
+        onWillPop: () async {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => CalendarioPage()));
+          return true;
+        },
+        child: PlanoDeFundo(
+          title: "Frequências de revisões",
+          actions: [
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () async {
+                final result = await adicionarFrequenciaDialog(context);
+                if (result) {
+                  setState(() {});
+                }
+              },
+            ),
+          ],
+          child: Padding(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: FutureBuilder(
               future: FrequenciaController.obterTodasFrequencias(),
@@ -55,7 +52,8 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
                           trailing: IconButton(
                             icon: Icon(Icons.delete_outline),
                             onPressed: () async {
-                              final result = await excluirFrequenciaDialog(context, frequencia);
+                              final result = await excluirFrequenciaDialog(
+                                  context, frequencia);
                               if (result) {
                                 setState(() {});
                               }
@@ -72,7 +70,7 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
                 }
               },
             ),
-          )),
-    );
+          ),
+        ));
   }
 }
