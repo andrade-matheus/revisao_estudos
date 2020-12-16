@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:revisao_estudos/controllers/disciplina_controller.dart';
 import 'package:revisao_estudos/controllers/frequencia_controller.dart';
 import 'package:revisao_estudos/controllers/log_revisao_controller.dart';

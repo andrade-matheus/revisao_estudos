@@ -6,10 +6,8 @@ import 'package:revisao_estudos/models/classes/disciplina.dart';
 import 'package:revisao_estudos/models/classes/revisao.dart';
 import 'package:revisao_estudos/pages/PlanoDeFundo/plano_de_fundo.dart';
 import 'package:revisao_estudos/pages/calendario/calendario_page.dart';
-import 'package:revisao_estudos/pages/drawer/drawer.dart';
-import 'package:revisao_estudos/pages/revisoes/adicinar_revisao_page.dart';
-import 'package:revisao_estudos/pages/revisoes/detalhes_revisao_page.dart';
-import 'package:revisao_estudos/pages/revisoes/widget/excluir_revisao_dialog.dart';
+import 'package:revisao_estudos/pages/revisoes/detalhesRevisao/detalhes_revisao_page.dart';
+import 'package:revisao_estudos/pages/revisoes/exculirRevisao/excluir_revisao_dialog.dart';
 
 class RevisoesPage extends StatefulWidget {
   @override

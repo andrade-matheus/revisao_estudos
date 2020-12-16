@@ -6,7 +6,6 @@ import 'package:revisao_estudos/pages/PlanoDeFundo/plano_de_fundo.dart';
 import 'package:revisao_estudos/pages/calendario/calendario_page.dart';
 import 'package:revisao_estudos/pages/disciplinas/widget/adicionar_disciplina_dialog.dart';
 import 'package:revisao_estudos/pages/disciplinas/widget/excluir_disciplina_dialog.dart';
-import 'package:revisao_estudos/pages/drawer/drawer.dart';
 
 class DisciplinasPage extends StatefulWidget {
   @override

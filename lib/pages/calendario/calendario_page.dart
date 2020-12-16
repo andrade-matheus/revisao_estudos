@@ -5,7 +5,6 @@ import 'package:revisao_estudos/models/provider/seletor_model.dart';
 import 'package:revisao_estudos/pages/PlanoDeFundo/plano_de_fundo.dart';
 import 'package:revisao_estudos/pages/calendario/widget/listaRevisoes/ListarRevisoes.dart';
 import 'package:revisao_estudos/pages/calendario/widget/seletorData/seletor_data.dart';
-import 'package:revisao_estudos/pages/drawer/drawer.dart';
 
 class CalendarioPage extends StatefulWidget {
   @override
