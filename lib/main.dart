@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:revisao_estudos/controllers/disciplina_controller.dart';
 import 'package:revisao_estudos/controllers/frequencia_controller.dart';
@@ -15,7 +16,7 @@ import 'database/database_creator.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DatabaseCreator().initDatabase();
-  initializeDateFormatting('pt_BR', null).then((_) => runApp(MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,6 +24,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     imprimeBancoDeDados();
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: [
+        const Locale('pt'),
+      ],
       title: 'Revisão de Estudos',
       theme: ThemeData(
         primarySwatch: Colors.blue,

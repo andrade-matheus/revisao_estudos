@@ -45,6 +45,7 @@ class _SeletorDataState extends State<SeletorData> {
 
   Future<DateTime> _escolherDataDialog(BuildContext context, DateTime dataSelecionada) async {
     final DateTime dataEscolhida = await showDatePicker(
+      locale : const Locale("pt"),
       context: context,
       initialDate: dataSelecionada,
       firstDate: new DateTime(1970, 8),
