@@ -6,6 +6,7 @@ import 'package:revisao_estudos/models/classes/disciplina.dart';
 import 'package:revisao_estudos/models/classes/revisao.dart';
 import 'package:revisao_estudos/pages/PlanoDeFundo/plano_de_fundo.dart';
 import 'package:revisao_estudos/pages/calendario/calendario_page.dart';
+import 'package:revisao_estudos/pages/revisoes/adicionarRevisao/adicinar_revisao_page.dart';
 import 'package:revisao_estudos/pages/revisoes/detalhesRevisao/detalhes_revisao_page.dart';
 import 'package:revisao_estudos/pages/revisoes/exculirRevisao/excluir_revisao_dialog.dart';
 
@@ -30,6 +31,23 @@ class _RevisoesPageState extends State<RevisoesPage> {
       },
       child: PlanoDeFundo(
         title: "Revisões",
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () async {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AdicionarRevisaoPage(),
+                ),
+              ).then((value) {
+                if(value){
+                  setState(() {});
+                }
+              });
+            },
+          ),
+        ],
         child: Padding(
           padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
           child: FutureBuilder(
@@ -50,7 +68,7 @@ class _RevisoesPageState extends State<RevisoesPage> {
                               FutureBuilder(
                                 future: RevisaoController
                                     .obterTodasRevisoesPorDisciplina(
-                                    disciplina),
+                                        disciplina),
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.done) {
@@ -59,19 +77,20 @@ class _RevisoesPageState extends State<RevisoesPage> {
                                       shrinkWrap: true,
                                       itemCount: snapshot.data.length,
                                       itemBuilder: (context, index) {
-                                        Revisao revisao =
-                                        snapshot.data[index];
+                                        Revisao revisao = snapshot.data[index];
                                         return ListTile(
-                                          contentPadding: EdgeInsets.fromLTRB(
-                                              30, 0, 0, 0),
+                                          contentPadding:
+                                              EdgeInsets.fromLTRB(30, 0, 0, 0),
                                           title: Text(revisao.nome),
                                           onTap: () {
                                             Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        DetalhesRevisaoPage(
-                                                            revisao)));
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetalhesRevisaoPage(
+                                                        revisao),
+                                              ),
+                                            );
                                           },
                                           trailing: IconButton(
                                             icon: Icon(Icons.delete_outline),

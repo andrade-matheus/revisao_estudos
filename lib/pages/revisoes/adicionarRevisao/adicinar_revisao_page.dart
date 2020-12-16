@@ -9,7 +9,6 @@ import 'package:revisao_estudos/models/classes/frequencia.dart';
 import 'package:revisao_estudos/models/classes/revisao.dart';
 import 'package:revisao_estudos/pages/PlanoDeFundo/plano_de_fundo.dart';
 
-
 class AdicionarRevisaoPage extends StatefulWidget {
   @override
   _AdicionarRevisaoPageState createState() => _AdicionarRevisaoPageState();
@@ -51,6 +50,10 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
   Widget build(BuildContext context) {
     return PlanoDeFundo(
       title: "Nova Revisão",
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back),
+        onPressed: () => Navigator.pop(context),
+      ),
       child: Container(
         padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
         child: Form(

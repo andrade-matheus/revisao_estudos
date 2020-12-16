@@ -6,8 +6,9 @@ class PlanoDeFundo extends StatelessWidget {
   final String title;
   final Widget child;
   final List<Widget> actions;
+  final Widget leading;
 
-  const PlanoDeFundo({Key key, this.child, this.title, this.actions}) : super(key: key);
+  const PlanoDeFundo({Key key, this.child, this.title, this.actions, this.leading}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class PlanoDeFundo extends StatelessWidget {
         appBar: AppBar(
           title: Text(title),
           actions: actions,
+          leading: leading,
         ),
         drawer: homeDrawer(context),
         body: child,

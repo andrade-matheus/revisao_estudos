@@ -10,21 +10,12 @@ class DetalhesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Card(
-                child: ListTile(
-                  title: Text(title),
-                  subtitle: Flexible(
-                    child: Text(text),
-                  ),
-                )
-            ),
+      padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+      child: Card(
+          child: ListTile(
+            title: Text(title),
+            subtitle: Text(text),
           )
-        ],
       ),
     );
   }
