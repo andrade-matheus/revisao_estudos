@@ -77,13 +77,6 @@ class DisciplinaController{
   }
 
   static deletarDisciplina(Disciplina disciplina) async {
-    // Removendo todas as revisões de uma disciplina ao ela ser apagada.
-    List<Revisao> revisoes = await RevisaoController.obterTodasRevisoesPorDisciplina(disciplina);
-    var item;
-    for(item in revisoes){
-      await RevisaoController.deletarRevisao(item);
-    }
-
     await RepositoryServiceDisciplina.deleteDisciplina(disciplina);
   }
 }

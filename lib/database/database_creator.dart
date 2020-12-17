@@ -56,8 +56,8 @@ class DatabaseCreator {
       $dataCadastro TEXT,
       $proxRevisao TEXT,
       $isArchived BIT NOT NULL,
-      FOREIGN KEY ($idDisciplina) REFERENCES $disciplinaTable($id),
-      FOREIGN KEY ($idFrequencia) REFERENCES $frequenciaTable($id)
+      FOREIGN KEY ($idDisciplina) REFERENCES $disciplinaTable($id) ON DELETE CASCADE,
+      FOREIGN KEY ($idFrequencia) REFERENCES $frequenciaTable($id) ON DELETE CASCADE
     )''';
 
     await db.execute(revisaoSql);
@@ -69,7 +69,7 @@ class DatabaseCreator {
       $id INTEGER PRIMARY KEY AUTOINCREMENT,
       $idRevisao INTEGER,
       $dataRevisao TEXT,
-      FOREIGN KEY ($idRevisao) REFERENCES $revisaoTable($id)
+      FOREIGN KEY ($idRevisao) REFERENCES $revisaoTable($id) ON DELETE CASCADE
     )''';
 
     await db.execute(logRevisaoSql);
@@ -88,9 +88,15 @@ class DatabaseCreator {
     return path;
   }
 
+  _onConfigure(Database db) async {
+    // Ativa as foreign_keys, dando suporte a DELETE ON CASCADE
+    await db.execute("PRAGMA foreign_keys = ON");
+  }
+
+
   Future<void> initDatabase() async {
     final path = await getDatabasePath('revisoes_disciplinas');
-    db = await openDatabase(path, version: 1, onCreate: onCreate);
+    db = await openDatabase(path, version: 1, onCreate: onCreate, onConfigure: _onConfigure);
     print(db);
   }
 

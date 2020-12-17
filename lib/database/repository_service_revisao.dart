@@ -5,6 +5,7 @@ import 'package:revisao_estudos/models/classes/disciplina.dart';
 import 'package:revisao_estudos/models/classes/revisao.dart';
 
 class RepositoryServiceRevisao {
+
   static Future<List<Revisao>> getAllRevisoes() async {
     List<Map> maps = await db.query(
       DatabaseController.revisaoTable,

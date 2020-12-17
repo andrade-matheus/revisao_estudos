@@ -4,6 +4,7 @@ import 'package:revisao_estudos/database/database_creator.dart';
 import 'package:revisao_estudos/models/classes/disciplina.dart';
 
 class RepositoryServiceDisciplina {
+
   static Future<List<Disciplina>> getAllDisciplinas() async {
     List<Map> maps = await db.query(
       DatabaseController.disciplinaTable,
