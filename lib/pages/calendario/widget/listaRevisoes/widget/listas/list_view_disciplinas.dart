@@ -8,7 +8,7 @@ import 'package:revisao_estudos/pages/calendario/widget/listaRevisoes/widget/til
 class ListaDeDisciplinas extends StatelessWidget {
   final List<Disciplina> disciplinas;
   final List<Revisao> revisoes;
-  final bool isLog;
+  final bool isLog; // Define qual widget de listagem das revisões usar
 
   const ListaDeDisciplinas(
       {Key key, this.disciplinas, this.revisoes, this.isLog = false})

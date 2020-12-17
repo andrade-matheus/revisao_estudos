@@ -10,16 +10,16 @@ import 'package:revisao_estudos/pages/calendario/widget/listaRevisoes/widget/lis
 import 'package:revisao_estudos/pages/calendario/widget/listaRevisoes/widget/sem_revisoes/semRevisoes.dart';
 
 class ListarRevisoes extends StatelessWidget {
-  List<Disciplina> disciplinas;
-  List<Revisao> revisoes;
-  bool isLog = false;
+  bool _isLog = false;
 
   @override
   Widget build(BuildContext context) {
+    List<Disciplina> disciplinas;
+    List<Revisao> revisoes;
+
     return Consumer<ListaRevisoesModel>(
       builder: (context, listaRevisoesState, _) {
         DateTime data = listaRevisoesState.dataSelecionada;
-
         return FutureBuilder(
           future: _defineRevisoesPorData(data),
           builder: (context, snapshot) {
@@ -32,7 +32,7 @@ class ListarRevisoes extends StatelessWidget {
                 return ListaDeDisciplinas(
                 disciplinas: disciplinas,
                 revisoes: revisoes,
-                isLog: isLog,
+                isLog: _isLog,
                 );
               }
             } else {
@@ -50,11 +50,13 @@ class ListarRevisoes extends StatelessWidget {
     DateTime amanha = hoje.add(Duration(days: 1));
     List<Revisao> revisoes;
     if (data.isBefore(hoje)) {
-      isLog = true;
+      _isLog = true;
       revisoes = await LogRevisaoController.obterRevisoesDosLogsPorData(data);
     } else if (data.isBefore(amanha)) {
+      _isLog = false;
       revisoes = await RevisaoController.obterTodasRevisoesParaHoje();
     } else {
+      _isLog = true;
       revisoes = await RevisaoController.obterTodasRevisoesPorData(data);
     }
     return revisoes;
