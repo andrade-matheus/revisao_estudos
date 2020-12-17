@@ -5,7 +5,7 @@ import 'package:revisao_estudos/controllers/log_revisao_controller.dart';
 import 'package:revisao_estudos/controllers/revisao_controller.dart';
 import 'package:revisao_estudos/models/classes/disciplina.dart';
 import 'package:revisao_estudos/models/classes/revisao.dart';
-import 'package:revisao_estudos/models/provider/seletor_model.dart';
+import 'package:revisao_estudos/models/provider/lista_revisoes_model.dart';
 import 'package:revisao_estudos/pages/calendario/widget/listaRevisoes/widget/listas/list_view_disciplinas.dart';
 import 'package:revisao_estudos/pages/calendario/widget/listaRevisoes/widget/sem_revisoes/semRevisoes.dart';
 
@@ -16,9 +16,9 @@ class ListarRevisoes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SeletorDataModel>(
-      builder: (context, seletordata, _) {
-        DateTime data = seletordata.dataSelecionada;
+    return Consumer<ListaRevisoesModel>(
+      builder: (context, listaRevisoesState, _) {
+        DateTime data = listaRevisoesState.dataSelecionada;
 
         return FutureBuilder(
           future: _defineRevisoesPorData(data),

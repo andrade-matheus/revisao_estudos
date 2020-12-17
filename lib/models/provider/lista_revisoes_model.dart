@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-class SeletorDataModel extends ChangeNotifier{
+class ListaRevisoesModel extends ChangeNotifier{
 
   DateTime _dataSelecionada = DateTime.now();
 
@@ -9,6 +9,10 @@ class SeletorDataModel extends ChangeNotifier{
 
   set dataSelecionada(DateTime novaData){
     _dataSelecionada = novaData;
+    notifyListeners();
+  }
+
+  updateState(){
     notifyListeners();
   }
 }

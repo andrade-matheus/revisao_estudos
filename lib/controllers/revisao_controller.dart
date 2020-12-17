@@ -103,7 +103,7 @@ class RevisaoController {
   }
 
   // FUNÇÕES AUXILIARES DAS REVISÕES:
-  static realizarRevisao(Revisao revisao) async {
+  static Future<bool> realizarRevisao(Revisao revisao) async {
     List<String> valoresFrequencia = revisao.frequencia.frequencia.split('-');
     int quantidadeFrequencias = valoresFrequencia.length;
     int diasProxRevisao;
@@ -121,5 +121,6 @@ class RevisaoController {
 
     LogRevisao novoLog = LogRevisao(0, revisao, DateTime.now());
     await LogRevisaoController.criarLogRevisao(novoLog);
+    return true;
   }
 }

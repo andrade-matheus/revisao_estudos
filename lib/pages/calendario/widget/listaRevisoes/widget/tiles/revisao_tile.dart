@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:revisao_estudos/controllers/revisao_controller.dart';
 import 'package:revisao_estudos/models/classes/revisao.dart';
+import 'package:revisao_estudos/models/provider/lista_revisoes_model.dart';
 
 class RevisaoTile extends StatefulWidget {
   final Revisao revisao;
@@ -14,6 +16,8 @@ class RevisaoTile extends StatefulWidget {
 class _RevisaoTileState extends State<RevisaoTile> {
   @override
   Widget build(BuildContext context) {
+    var listaRevisoesState = Provider.of<ListaRevisoesModel>(context);
+
     return ListTile(
       contentPadding: EdgeInsets.fromLTRB(30, 0, 50, 0),
       title: Text(widget.revisao.nome),
@@ -23,10 +27,11 @@ class _RevisaoTileState extends State<RevisaoTile> {
       ),
       trailing: IconButton(
         icon: Icon(Icons.check_outlined),
-        onPressed: () {
-          setState(() {
-            RevisaoController.realizarRevisao(widget.revisao);
-          });
+        onPressed: () async {
+          bool resultado = await RevisaoController.realizarRevisao(widget.revisao);
+          if (resultado){
+            listaRevisoesState.updateState();
+          }
         },
       ),
     );

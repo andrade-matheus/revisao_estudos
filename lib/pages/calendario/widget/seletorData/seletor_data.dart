@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import 'package:revisao_estudos/models/provider/seletor_model.dart';
+import 'package:revisao_estudos/models/provider/lista_revisoes_model.dart';
 
 class SeletorData extends StatefulWidget {
   @override
@@ -12,26 +12,26 @@ class _SeletorDataState extends State<SeletorData> {
 
   @override
   Widget build(BuildContext context) {
-    var seletorData = Provider.of<SeletorDataModel>(context);
+    var listaRevisoesState = Provider.of<ListaRevisoesModel>(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         ElevatedButton(
           onPressed: () {
-            seletorData.dataSelecionada = seletorData.dataSelecionada.subtract(Duration(days: 1));
+            listaRevisoesState.dataSelecionada = listaRevisoesState.dataSelecionada.subtract(Duration(days: 1));
           },
           child: Icon(Icons.arrow_back_outlined),
         ),
         ElevatedButton(
           onPressed: () async {
-            seletorData.dataSelecionada = await _escolherDataDialog(context, seletorData.dataSelecionada);
+            listaRevisoesState.dataSelecionada = await _escolherDataDialog(context, listaRevisoesState.dataSelecionada);
           },
-          child: Text(botaoDataToString(seletorData.dataSelecionada)),
+          child: Text(botaoDataToString(listaRevisoesState.dataSelecionada)),
         ),
         ElevatedButton(
           onPressed: () {
-            seletorData.dataSelecionada = seletorData.dataSelecionada.add(Duration(days: 1));
+            listaRevisoesState.dataSelecionada = listaRevisoesState.dataSelecionada.add(Duration(days: 1));
           },
           child: Icon(Icons.arrow_forward_outlined),
         ),

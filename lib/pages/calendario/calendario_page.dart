@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:revisao_estudos/models/provider/seletor_model.dart';
+import 'package:revisao_estudos/models/provider/lista_revisoes_model.dart';
 import 'package:revisao_estudos/pages/PlanoDeFundo/plano_de_fundo.dart';
 import 'package:revisao_estudos/pages/calendario/widget/listaRevisoes/ListarRevisoes.dart';
 import 'package:revisao_estudos/pages/calendario/widget/seletorData/seletor_data.dart';
@@ -24,7 +24,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
       child: PlanoDeFundo(
         title: "Calendário",
         child: ChangeNotifierProvider(
-          create: (context) => new SeletorDataModel(),
+          create: (context) => ListaRevisoesModel() ,
           child: Column(
             children: [
               SeletorData(),

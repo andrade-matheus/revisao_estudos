@@ -31,9 +31,7 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
             onPressed: () async {
               final result = await adicionarDisciplinaDialog(context);
               if (result) {
-                setState(() {
-                  print("UPDATE STATE!!");
-                });
+                setState(() {});
               }
             },
           ),

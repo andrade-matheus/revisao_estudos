@@ -37,11 +37,13 @@ class ListaDeDisciplinas extends StatelessWidget {
     );
   }
 
-  List<Revisao> _revisoesDaDisciplina(Disciplina disciplina, List<Revisao> revisoes){
+  // Filtrando as revisões que são da disciplina dada.
+  List<Revisao> _revisoesDaDisciplina(Disciplina disciplina, List<Revisao> todasRevisoes){
+    List<Revisao> revisoes = List();
     Revisao item;
-    for(item in revisoes){
-      if(item.disciplina.id != disciplina.id){
-        revisoes.remove(item);
+    for(item in todasRevisoes){
+      if(item.disciplina.id == disciplina.id){
+        revisoes.add(item);
       }
     }
     return revisoes;
