@@ -5,6 +5,7 @@ import 'package:revisao_estudos/models/classes/frequencia.dart';
 adicionarFrequenciaDialog(BuildContext context) async {
   TextEditingController _textFieldController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool updateState = false;
 
   await showDialog(
     context: context,
@@ -16,10 +17,18 @@ adicionarFrequenciaDialog(BuildContext context) async {
           child: TextFormField(
             textCapitalization: TextCapitalization.sentences,
             controller: _textFieldController,
-            decoration: InputDecoration(hintText: "Nome da frequencia"),
+            decoration: InputDecoration(hintText: "Exemplo: 0-5-15-30"),
             validator: (text) {
+              List<String> frequencias = text.split('-');
+              RegExp formatoFrequencia = RegExp(r'^([0-9]+[-])*([1-9][0-9]*)$');
               if (text == null || text.isEmpty) {
-                return 'Obrigatório.';
+                return 'Campo obrigatório.';
+              } else if (text == '0') {
+                return 'A frequência não pode ser apenas "0".';
+              } else if (frequencias.last == '0') {
+                return 'A frequência não pode terminar com "0".';
+              } else if (!formatoFrequencia.hasMatch(text)) {
+                return 'A frequencia dada não está dentro do padrão correto.';
               }
               return null;
             },
@@ -37,6 +46,7 @@ adicionarFrequenciaDialog(BuildContext context) async {
             child: new Text('ADICIONAR'),
             onPressed: () {
               if (_formKey.currentState.validate()) {
+                updateState = true;
                 Frequencia novaFrequencia =
                     new Frequencia(0, _textFieldController.text);
                 FrequenciaController.criarFrequencia(novaFrequencia);
@@ -49,5 +59,5 @@ adicionarFrequenciaDialog(BuildContext context) async {
       );
     },
   );
-  return true;
+  return updateState;
 }
