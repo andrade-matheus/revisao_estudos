@@ -6,6 +6,7 @@ import 'package:revisao_estudos/models/classes/disciplina.dart';
 adicionarDisciplinaDialog(BuildContext context) async {
   TextEditingController _textFieldController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool updateState = false;
 
   await showDialog(
     context: context,
@@ -37,6 +38,7 @@ adicionarDisciplinaDialog(BuildContext context) async {
             child: new Text('ADICIONAR'),
             onPressed: () {
               if (_formKey.currentState.validate()) {
+                updateState = true;
                 Disciplina novaDisciplina =
                     Disciplina(0, _textFieldController.text);
                 DisciplinaController.criarDisciplina(novaDisciplina);
@@ -49,5 +51,5 @@ adicionarDisciplinaDialog(BuildContext context) async {
       );
     },
   );
-  return true;
+  return updateState;
 }
