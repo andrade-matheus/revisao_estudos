@@ -53,7 +53,6 @@ class RevisaoController {
     List<Revisao> resultado = List();
     Revisao item;
 
-    // TODO: testar se realmente funciona a remoção
     for(item in revisoes){
       if(item.proxRevisao.isBefore(amanha)){
         resultado.add(item);

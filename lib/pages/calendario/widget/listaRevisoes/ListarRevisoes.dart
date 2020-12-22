@@ -9,7 +9,12 @@ import 'package:revisao_estudos/models/provider/lista_revisoes_model.dart';
 import 'package:revisao_estudos/pages/calendario/widget/listaRevisoes/widget/listas/list_view_disciplinas.dart';
 import 'package:revisao_estudos/pages/calendario/widget/listaRevisoes/widget/sem_revisoes/semRevisoes.dart';
 
-class ListarRevisoes extends StatelessWidget {
+class ListarRevisoes extends StatefulWidget {
+  @override
+  _ListarRevisoesState createState() => _ListarRevisoesState();
+}
+
+class _ListarRevisoesState extends State<ListarRevisoes> {
   bool _isLog = false;
 
   @override

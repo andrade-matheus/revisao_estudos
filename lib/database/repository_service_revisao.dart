@@ -5,7 +5,6 @@ import 'package:revisao_estudos/models/classes/disciplina.dart';
 import 'package:revisao_estudos/models/classes/revisao.dart';
 
 class RepositoryServiceRevisao {
-
   static Future<List<Revisao>> getAllRevisoes() async {
     List<Map> maps = await db.query(
       DatabaseController.revisaoTable,
@@ -147,8 +146,11 @@ class RepositoryServiceRevisao {
   }
 
   static Future<int> updateRevisao(Revisao revisao) async {
-    return await db.update(DatabaseController.revisaoTable,
-        RevisaoController.revisaoToMap(revisao),
-        where: '${DatabaseController.id} = ?', whereArgs: [revisao.id]);
+    return await db.update(
+      DatabaseController.revisaoTable,
+      RevisaoController.revisaoToMap(revisao),
+      where: '${DatabaseController.id} = ?',
+      whereArgs: [revisao.id],
+    );
   }
 }
