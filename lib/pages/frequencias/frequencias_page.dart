@@ -6,6 +6,7 @@ import 'package:revisao_estudos/pages/PlanoDeFundo/plano_de_fundo.dart';
 import 'package:revisao_estudos/pages/calendario/calendario_page.dart';
 import 'package:revisao_estudos/pages/frequencias/widget/adicionar_frequencia_dialog.dart';
 import 'package:revisao_estudos/pages/frequencias/widget/excluir_frequencia_dialog.dart';
+import 'package:revisao_estudos/pages/frequencias/widget/info_frequencia.dart';
 
 class FrequenciasPage extends StatefulWidget {
   @override
@@ -19,13 +20,28 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () async {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => CalendarioPage()));
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CalendarioPage(),
+            ),
+          );
           return true;
         },
         child: PlanoDeFundo(
           title: "Frequências de revisões",
           actions: [
+            IconButton(
+              icon: Icon(Icons.info_outline_rounded),
+              onPressed: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => InfoFrequencia(),
+                  ),
+                );
+              },
+            ),
             IconButton(
               icon: Icon(Icons.add),
               onPressed: () async {

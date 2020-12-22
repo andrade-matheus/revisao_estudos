@@ -18,6 +18,10 @@ class _DetalhesRevisaoPageState extends State<DetalhesRevisaoPage> {
   Widget build(BuildContext context) {
     return PlanoDeFundo(
       title: "Detalhes da Revisão",
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back),
+        onPressed: () => Navigator.pop(context),
+      ),
       child: Column(
         children: [
           DetalhesCard(

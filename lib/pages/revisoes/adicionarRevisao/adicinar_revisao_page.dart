@@ -52,7 +52,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
       title: "Nova Revisão",
       leading: IconButton(
         icon: Icon(Icons.arrow_back),
-        onPressed: () => Navigator.pop(context),
+        onPressed: () => Navigator.pop(context, false),
       ),
       child: Container(
         padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
