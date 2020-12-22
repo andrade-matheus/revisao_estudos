@@ -8,6 +8,7 @@ import 'package:revisao_estudos/models/classes/disciplina.dart';
 import 'package:revisao_estudos/models/classes/frequencia.dart';
 import 'package:revisao_estudos/models/classes/revisao.dart';
 import 'package:revisao_estudos/pages/PlanoDeFundo/plano_de_fundo.dart';
+import 'package:revisao_estudos/pages/appWidgets/date_picker.dart';
 
 class AdicionarRevisaoPage extends StatefulWidget {
   @override
@@ -307,19 +308,17 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
   }
 
   _escolherDataDialog(BuildContext context) async {
-    DateTime dataEscolhida = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: new DateTime(1970, 8),
-        lastDate: new DateTime(2101));
+    DateTime dataEscolhida = await escolherDataDialog(context, dataSelecionada);
     setState(() {
       dataSelecionada = dataEscolhida ?? dataSelecionada;
     });
     String dataStr = DateFormat('dd / MM / yyyy').format(dataSelecionada);
     _dataTextField.value = TextEditingValue(
-        text: dataStr,
-        selection:
-            TextSelection.fromPosition(TextPosition(offset: dataStr.length)));
+      text: dataStr,
+      selection: TextSelection.fromPosition(
+        TextPosition(offset: dataStr.length),
+      ),
+    );
   }
 
   Revisao gerarNovaRevisao() {

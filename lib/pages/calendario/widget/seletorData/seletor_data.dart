@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:revisao_estudos/models/provider/lista_revisoes_model.dart';
+import 'package:revisao_estudos/pages/appWidgets/date_picker.dart';
 
 class SeletorData extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class _SeletorDataState extends State<SeletorData> {
         ),
         ElevatedButton(
           onPressed: () async {
-            listaRevisoesState.dataSelecionada = await _escolherDataDialog(context, listaRevisoesState.dataSelecionada);
+            listaRevisoesState.dataSelecionada = await escolherDataDialog(context, listaRevisoesState.dataSelecionada);
           },
           child: Text(botaoDataToString(listaRevisoesState.dataSelecionada)),
         ),
@@ -41,16 +42,5 @@ class _SeletorDataState extends State<SeletorData> {
 
   String botaoDataToString(DateTime data) {
     return DateFormat.MMMMEEEEd('pt_BR').format(data);
-  }
-
-  Future<DateTime> _escolherDataDialog(BuildContext context, DateTime dataSelecionada) async {
-    final DateTime dataEscolhida = await showDatePicker(
-      locale : const Locale("pt"),
-      context: context,
-      initialDate: dataSelecionada,
-      firstDate: new DateTime(1970, 8),
-      lastDate: new DateTime(2101),
-    );
-    return dataEscolhida ?? dataSelecionada;
   }
 }
