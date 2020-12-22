@@ -9,7 +9,12 @@ class DisciplinaTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      title: Text(title),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontSize: 18,
+        ),
+      ),
       initiallyExpanded: true,
       children: [
         child,
@@ -17,4 +22,3 @@ class DisciplinaTile extends StatelessWidget {
     );
   }
 }
-

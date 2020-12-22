@@ -20,10 +20,7 @@ class _RevisaoTileState extends State<RevisaoTile> {
 
     return ListTile(
       contentPadding: EdgeInsets.fromLTRB(30, 0, 50, 0),
-      leading: Icon(
-        Icons.arrow_forward_ios_rounded,
-        size: 15,
-      ),
+      visualDensity: VisualDensity.compact,
       title: Text(widget.revisao.nome),
       subtitle: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
