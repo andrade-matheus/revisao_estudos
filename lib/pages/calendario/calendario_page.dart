@@ -24,11 +24,13 @@ class _CalendarioPageState extends State<CalendarioPage> {
       child: PlanoDeFundo(
         title: "Calendário",
         child: ChangeNotifierProvider(
-          create: (context) => ListaRevisoesModel() ,
+          create: (context) => ListaRevisoesModel(),
           child: Column(
             children: [
               SeletorData(),
-              ListarRevisoes(),
+              Expanded(
+                child: ListarRevisoes(),
+              ),
             ],
           ),
         ),
