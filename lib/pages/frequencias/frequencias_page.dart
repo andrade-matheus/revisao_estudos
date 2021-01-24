@@ -29,7 +29,7 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
           return true;
         },
         child: PlanoDeFundo(
-          title: "Frequências de revisões",
+          title: "Frequências",
           actions: [
             IconButton(
               icon: Icon(Icons.info_outline_rounded),
