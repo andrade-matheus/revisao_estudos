@@ -60,6 +60,7 @@ class DisciplinaController{
       }
     }
 
+    disciplinas.sort((a,b) => a.nome.compareTo(b.nome));
     return disciplinas;
   }
 
