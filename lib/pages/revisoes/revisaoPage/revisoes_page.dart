@@ -94,9 +94,12 @@ class _RevisoesPageState extends State<RevisoesPage> {
                                           },
                                           trailing: IconButton(
                                             icon: Icon(Icons.delete_outline),
-                                            onPressed: () =>
-                                                excluirRevisaoDialog(
-                                                    context, revisao),
+                                            onPressed: () async {
+                                              bool resultado = await excluirRevisaoDialog(context, revisao);
+                                              if(resultado) {
+                                                setState(() {});
+                                              }
+                                            }
                                           ),
                                         );
                                       },

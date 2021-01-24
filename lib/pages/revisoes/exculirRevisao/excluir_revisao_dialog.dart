@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:revisao_estudos/controllers/revisao_controller.dart';
 import 'package:revisao_estudos/models/classes/revisao.dart';
 
-excluirRevisaoDialog(BuildContext context, Revisao revisao){
-  return showDialog(
+excluirRevisaoDialog(BuildContext context, Revisao revisao) async{
+  bool resultado = false;
+
+  await showDialog(
       context: context,
       builder: (context) {
         return StatefulBuilder(
@@ -14,7 +16,8 @@ excluirRevisaoDialog(BuildContext context, Revisao revisao){
                 new FlatButton(
                   child: new Text('CANCELAR'),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.pop(context);
+                    resultado = false;
                   },
                 ),
                 // Spacer(),
@@ -25,6 +28,7 @@ excluirRevisaoDialog(BuildContext context, Revisao revisao){
                       RevisaoController.deletarRevisao(revisao);
                     });
                     Navigator.pop(context);
+                    resultado = true;
                   },
                 )
               ],
@@ -33,4 +37,6 @@ excluirRevisaoDialog(BuildContext context, Revisao revisao){
         );
       },
   );
+
+  return resultado;
 }
