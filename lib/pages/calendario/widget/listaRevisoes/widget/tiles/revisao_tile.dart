@@ -100,9 +100,11 @@ class _RevisaoTileState extends State<RevisaoTile> {
     }
 
     if(atrasado){
+      String legenda = ' (Atrasado $diasAtraso ';
+      legenda += (diasAtraso > 1) ? "dias)" : "dia)";
       frequenciasWidgets.add(
         TextSpan(
-          text: ' (Atrasado $diasAtraso dias)',
+          text: legenda,
           style: TextStyle(color: Colors.red),
         ),
       );

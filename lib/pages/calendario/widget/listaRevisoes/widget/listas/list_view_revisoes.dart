@@ -9,17 +9,13 @@ class ListaDeRevisoes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return ListView.separated(
+    return ListView.builder(
       physics: ClampingScrollPhysics(),
       shrinkWrap: true,
       itemCount: revisoes.length,
       itemBuilder: (context, index) {
         Revisao revisao = revisoes[index];
         return RevisaoTile(revisao: revisao);
-      },
-      separatorBuilder: (context, index) {
-        return Divider();
       },
     );
   }

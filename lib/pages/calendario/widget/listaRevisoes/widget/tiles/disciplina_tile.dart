@@ -15,7 +15,7 @@ class DisciplinaTile extends StatelessWidget {
           fontSize: 18,
         ),
       ),
-      initiallyExpanded: true,
+      initiallyExpanded: false,
       children: [
         child,
       ],
