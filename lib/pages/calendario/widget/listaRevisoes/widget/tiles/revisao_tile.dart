@@ -33,8 +33,7 @@ class _RevisaoTileState extends State<RevisaoTile> {
       trailing: IconButton(
         icon: Icon(Icons.check_outlined),
         onPressed: () async {
-          bool resultado =
-              await RevisaoController.realizarRevisao(widget.revisao);
+          bool resultado = await realizarRevisaoDialog(context);
           if (resultado) {
             listaRevisoesState.updateState();
           }
@@ -118,5 +117,35 @@ class _RevisaoTileState extends State<RevisaoTile> {
     DateTime hoje = new DateTime(now.year, now.month, now.day);
 
     return hoje.difference(revisao.proxRevisao).inDays;
+  }
+
+  realizarRevisaoDialog(BuildContext context) async {
+    bool resultado = false;
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Concluir revisão?"),
+          actions: [
+            new FlatButton(
+              child: new Text('CANCELAR'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            // Spacer(),
+            new FlatButton(
+              child: new Text('CONCLUIR'),
+              onPressed: () async {
+                resultado = true;
+                await RevisaoController.realizarRevisao(widget.revisao);
+                Navigator.pop(context);
+              },
+            )
+          ],
+        );
+      },
+    );
+    return resultado;
   }
 }
