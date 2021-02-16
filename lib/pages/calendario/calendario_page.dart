@@ -27,9 +27,15 @@ class _CalendarioPageState extends State<CalendarioPage> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => AdicionarRevisaoPage()));
+              context,
+              MaterialPageRoute(
+                builder: (context) => AdicionarRevisaoPage(),
+              ),
+            ).then((value) {
+              if(value){
+                setState(() {});
+              }
+            });
           },
           child: Icon(
             Icons.add,

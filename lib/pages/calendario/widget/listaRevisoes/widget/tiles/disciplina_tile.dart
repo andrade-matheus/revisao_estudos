@@ -9,13 +9,13 @@ class DisciplinaTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+      initiallyExpanded: true,
       title: Text(
         title,
         style: TextStyle(
           fontSize: 18,
         ),
       ),
-      initiallyExpanded: false,
       children: [
         child,
       ],

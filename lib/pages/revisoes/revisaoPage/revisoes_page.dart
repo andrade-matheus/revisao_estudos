@@ -62,7 +62,7 @@ class _RevisoesPageState extends State<RevisoesPage> {
                       children: [
                         Card(
                           child: ExpansionTile(
-                            initiallyExpanded: true,
+                            initiallyExpanded: false,
                             title: Text(disciplina.nome),
                             children: [
                               FutureBuilder(
