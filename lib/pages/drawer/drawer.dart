@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/pages/calendario/calendario_page.dart';
+import 'package:revisao_estudos/pages/configuracoes/configuracoes.dart';
 import 'package:revisao_estudos/pages/disciplinas/disciplinas_page.dart';
 import 'package:revisao_estudos/pages/frequencias/frequencias_page.dart';
 import 'file:///C:/Users/mat_1/AndroidStudioProjects/revisao_estudos/lib/pages/revisoes/revisaoPage/revisoes_page.dart';
@@ -59,6 +60,15 @@ Widget homeDrawer(BuildContext context){
           onTap: (){
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => FrequenciasPage())
+            );
+          },
+        ),
+        ListTile(
+          title: Text("Configurações"),
+          leading: Icon(Icons.settings),
+          onTap: (){
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => Configuracoes())
             );
           },
         ),
