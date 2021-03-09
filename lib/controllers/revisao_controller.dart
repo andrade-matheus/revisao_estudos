@@ -31,12 +31,43 @@ class RevisaoController {
       DatabaseController.nome: revisao.nome,
       DatabaseController.idDisciplina: revisao.disciplina.id,
       DatabaseController.idFrequencia: revisao.frequencia.id,
-      DatabaseController.dataCadastro: DatabaseController.formatarData(revisao.dataCadastro),
-      DatabaseController.proxRevisao: DatabaseController.formatarData(revisao.proxRevisao),
+      DatabaseController.dataCadastro:
+          DatabaseController.formatarData(revisao.dataCadastro),
+      DatabaseController.proxRevisao:
+          DatabaseController.formatarData(revisao.proxRevisao),
       DatabaseController.vezesRevisadas: revisao.vezesRevisadas,
       DatabaseController.isArchived: revisao.isArchived ? 1 : 0,
     };
     return map;
+  }
+
+  // CONVERÕES DE / PARA JSON
+  static Future<Revisao> fromJson(Map<String, dynamic> json) async {
+    Revisao revisao = Revisao(
+      json['id'],
+      json['nome'],
+      await DisciplinaController.obterDisciplina(json['disciplinaId']),
+      await FrequenciaController.obterFrequencia(json['frequenciaId']),
+      DateTime(json['dataCadastro']),
+      DateTime(json['proxRevisao']),
+      json['vezesRevisadas'],
+      json['isArchived'],
+    );
+    return revisao;
+  }
+
+  Map<String, dynamic> toJson(Revisao revisao) {
+    Map<String, dynamic> json = {
+      'id': revisao.id,
+      'nome' : revisao.nome,
+      'disciplinaId' : revisao.disciplina.id,
+      'frequenciaId': revisao.frequencia.id,
+      'dataCadastro' : DatabaseController.formatarData(revisao.dataCadastro),
+      'proxRevisao' : DatabaseController.formatarData(revisao.proxRevisao),
+      'vezesRevisadas' : revisao.vezesRevisadas,
+      'isArchived' : revisao.isArchived
+    };
+    return json;
   }
 
   // OBTER REVISÕES
@@ -53,8 +84,8 @@ class RevisaoController {
     List<Revisao> resultado = [];
     Revisao item;
 
-    for(item in revisoes){
-      if(item.proxRevisao.isBefore(amanha)){
+    for (item in revisoes) {
+      if (item.proxRevisao.isBefore(amanha)) {
         resultado.add(item);
       }
     }
@@ -115,7 +146,8 @@ class RevisaoController {
       diasProxRevisao = int.parse(valoresFrequencia[revisao.vezesRevisadas]);
     }
 
-    revisao.proxRevisao = revisao.proxRevisao.add(Duration(days: diasProxRevisao));
+    revisao.proxRevisao =
+        revisao.proxRevisao.add(Duration(days: diasProxRevisao));
     await RevisaoController.atualizarRevisao(revisao);
 
     LogRevisao novoLog = LogRevisao(0, revisao, DateTime.now());

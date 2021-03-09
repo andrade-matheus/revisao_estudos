@@ -18,10 +18,27 @@ class LogRevisaoController {
   static Map<String, dynamic> logRevisaoToMap(LogRevisao logRevisao) {
     var map = <String, dynamic>{
       DatabaseController.idRevisao: logRevisao.revisao.id,
-      DatabaseController.dataRevisao:
-          DatabaseController.formatarData(logRevisao.dataRevisao),
+      DatabaseController.dataRevisao: DatabaseController.formatarData(logRevisao.dataRevisao),
     };
     return map;
+  }
+
+  // CONVERÕES DE / PARA JSON
+  static Future<LogRevisao> fromJson(Map<String, dynamic> json) async {
+    LogRevisao logRevisao = LogRevisao(
+        json['id'],
+        await RevisaoController.obterRevisao(json['revisao']),
+        DateTime(json['dataLogRevisao']));
+    return logRevisao;
+  }
+
+  Map<String, dynamic> toJson(LogRevisao logRevisao) {
+    Map<String, dynamic> json = {
+      'id': logRevisao.id,
+      'revisao': logRevisao.revisao.id,
+      'dataLogRevisao': DatabaseController.formatarData(logRevisao.dataRevisao)
+    };
+    return json;
   }
 
   // OBTER LOGS DAS REVISÕES
