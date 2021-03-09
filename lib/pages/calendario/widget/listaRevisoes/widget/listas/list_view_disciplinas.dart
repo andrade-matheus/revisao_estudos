@@ -39,7 +39,7 @@ class ListaDeDisciplinas extends StatelessWidget {
 
   // Filtrando as revisões que são da disciplina dada.
   List<Revisao> _revisoesDaDisciplina(Disciplina disciplina, List<Revisao> todasRevisoes){
-    List<Revisao> revisoes = List();
+    List<Revisao> revisoes = [];
     Revisao item;
     for(item in todasRevisoes){
       if(item.disciplina.id == disciplina.id){

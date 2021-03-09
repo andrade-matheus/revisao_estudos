@@ -27,14 +27,14 @@ adicionarDisciplinaDialog(BuildContext context) async {
               },
             )),
         actions: <Widget>[
-          new FlatButton(
+          new TextButton(
             child: new Text('CANCELAR'),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           // Spacer(),
-          new FlatButton(
+          new TextButton(
             child: new Text('ADICIONAR'),
             onPressed: () {
               if (_formKey.currentState.validate()) {

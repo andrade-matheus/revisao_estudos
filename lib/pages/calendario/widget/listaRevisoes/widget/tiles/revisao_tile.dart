@@ -43,7 +43,7 @@ class _RevisaoTileState extends State<RevisaoTile> {
   }
 
   List<TextSpan> _criarLegendaFrequencias(Revisao revisao) {
-    List<TextSpan> frequenciasWidgets = List();
+    List<TextSpan> frequenciasWidgets = [];
     List<String> frequencias = revisao.frequencia.frequencia.split('-');
     int numeroFreq = frequencias.length;
     int vezesRevisadas = revisao.vezesRevisadas;
@@ -127,14 +127,14 @@ class _RevisaoTileState extends State<RevisaoTile> {
         return AlertDialog(
           title: Text("Concluir revisão?"),
           actions: [
-            new FlatButton(
+            new TextButton(
               child: new Text('CANCELAR'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             // Spacer(),
-            new FlatButton(
+            new TextButton(
               child: new Text('CONCLUIR'),
               onPressed: () async {
                 resultado = true;

@@ -10,7 +10,7 @@ class RepositoryServiceFrequencia {
       columns: [DatabaseController.id, DatabaseController.valorFrequencia],
     );
 
-    List<Frequencia> frequencias = List();
+    List<Frequencia> frequencias = [];
     Map item;
 
     for (item in maps) {

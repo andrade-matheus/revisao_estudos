@@ -9,14 +9,14 @@ excluirFrequenciaDialog(BuildContext context, Frequencia frequencia) async {
       return AlertDialog(
         title: Text("Deseja mesmo excluir essa frequencia?"),
         actions: [
-          new FlatButton(
+          new TextButton(
             child: new Text('CANCELAR'),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           // Spacer(),
-          new FlatButton(
+          new TextButton(
             child: new Text('EXCLUIR'),
             onPressed: () {
               FrequenciaController.deletarFrequencia(frequencia);

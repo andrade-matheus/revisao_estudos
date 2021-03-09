@@ -19,7 +19,7 @@ class _RevisoesPageState extends State<RevisoesPage> {
   Color corPrimaria = Colors.blue;
   Revisao novaRevisao;
   Future<List<Revisao>> futureRevisoes;
-  List<Revisao> todasRevisoes = List();
+  List<Revisao> todasRevisoes = [];
 
   @override
   Widget build(BuildContext context) {

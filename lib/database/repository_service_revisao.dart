@@ -21,7 +21,7 @@ class RepositoryServiceRevisao {
       where: '${DatabaseController.isArchived} = 0',
     );
 
-    List<Revisao> revisoes = List();
+    List<Revisao> revisoes = [];
     Map item;
 
     for (item in maps) {
@@ -49,7 +49,7 @@ class RepositoryServiceRevisao {
       whereArgs: [disciplina.id],
     );
 
-    List<Revisao> revisoes = List();
+    List<Revisao> revisoes = [];
     Map item;
 
     for (item in maps) {
@@ -77,7 +77,7 @@ class RepositoryServiceRevisao {
       whereArgs: [DatabaseController.formatarData(data)],
     );
 
-    List<Revisao> revisoes = List();
+    List<Revisao> revisoes = [];
     Map item;
 
     for (item in maps) {
@@ -106,7 +106,7 @@ class RepositoryServiceRevisao {
       whereArgs: [disciplina.id, DatabaseController.formatarData(data)],
     );
 
-    List<Revisao> revisoes = List();
+    List<Revisao> revisoes = [];
     Map item;
 
     for (item in maps) {

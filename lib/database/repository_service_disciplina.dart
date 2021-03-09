@@ -14,7 +14,7 @@ class RepositoryServiceDisciplina {
       ],
     );
 
-    List<Disciplina> disciplinas = List();
+    List<Disciplina> disciplinas = [];
     Map item;
 
     for (item in maps) {

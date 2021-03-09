@@ -15,7 +15,7 @@ class RepositoryServiceLogRevisao {
       ],
     );
 
-    List<LogRevisao> logRevisoes = List();
+    List<LogRevisao> logRevisoes = [];
     Map item;
 
     for (item in maps) {
@@ -36,8 +36,8 @@ class RepositoryServiceLogRevisao {
       whereArgs: [DatabaseController.formatarData(data)],
     );
 
-    List<LogRevisao> logRevisoes = List();
-    List<Revisao> revisoes = List();
+    List<LogRevisao> logRevisoes = [];
+    List<Revisao> revisoes = [];
     Map item;
 
     for (item in maps) {

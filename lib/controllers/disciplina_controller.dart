@@ -32,7 +32,7 @@ class DisciplinaController{
   static obterTodasDisciplinasAtivasPorData(DateTime data) async {
     List<Revisao> revisoes = await RevisaoController.obterTodasRevisoesPorData(data);
     List<LogRevisao> logRevisoes = await LogRevisaoController.obterTodosLogRevisoesPorData(data);
-    List<Disciplina> disciplinas = List();
+    List<Disciplina> disciplinas = [];
 
     // TODO: otimizar os for's
 
@@ -52,7 +52,7 @@ class DisciplinaController{
   }
 
   static obterTodasDisciplinasDeRevisoes(List<Revisao> revisoes) {
-    List<Disciplina> disciplinas = List();
+    List<Disciplina> disciplinas = [];
 
     for (final item in revisoes) {
       if(!disciplinas.contains(item.disciplina)){

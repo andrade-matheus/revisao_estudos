@@ -13,7 +13,7 @@ excluirRevisaoDialog(BuildContext context, Revisao revisao) async{
             return AlertDialog(
               title: Text("Deseja mesmo excluir essa revisão?"),
               actions: [
-                new FlatButton(
+                new TextButton(
                   child: new Text('CANCELAR'),
                   onPressed: () {
                     Navigator.pop(context);
@@ -21,7 +21,7 @@ excluirRevisaoDialog(BuildContext context, Revisao revisao) async{
                   },
                 ),
                 // Spacer(),
-                new FlatButton(
+                new TextButton(
                   child: new Text('EXCLUIR'),
                   onPressed: () {
                     setState(() {

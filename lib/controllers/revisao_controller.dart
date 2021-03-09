@@ -50,7 +50,7 @@ class RevisaoController {
     DateTime now = new DateTime.now().add(Duration(days: 1));
     DateTime amanha = new DateTime(now.year, now.month, now.day);
 
-    List<Revisao> resultado = List();
+    List<Revisao> resultado = [];
     Revisao item;
 
     for(item in revisoes){

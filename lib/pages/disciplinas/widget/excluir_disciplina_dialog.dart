@@ -9,13 +9,13 @@ excluirDisciplinaDialog(BuildContext context, Disciplina disciplina) async {
       return AlertDialog(
         title: Text("Deseja mesmo excluir essa disciplina?"),
         actions: [
-          new FlatButton(
+          new TextButton(
             child: new Text('CANCELAR'),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
-          new FlatButton(
+          new TextButton(
             child: new Text('EXCLUIR'),
             onPressed: () {
               DisciplinaController.deletarDisciplina(disciplina);
