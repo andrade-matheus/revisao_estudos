@@ -8,13 +8,13 @@ import 'package:timezone/timezone.dart' as tz;
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
 Future<tz.TZDateTime> horarioNotificacao() async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  int horaNotificacao = prefs.getInt('HORA_NOTIFICACAO') ?? 9;
-  int minutosNotificacao = prefs.getInt('MINUTOS_NOTIFICACAO') ?? 30;
+  final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  int horaNotificacao = sharedPreferences.getInt('HORA_NOTIFICACAO') ?? 9;
+  int minutosNotificacao = sharedPreferences.getInt('MINUTOS_NOTIFICACAO') ?? 30;
 
   final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-  // tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, horaNotificacao, minutosNotificacao);
-  tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, now.hour, now.minute, now.second + 10);
+  tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, horaNotificacao, minutosNotificacao);
+
   if (scheduledDate.isBefore(now)) {
     scheduledDate = scheduledDate.add(const Duration(days: 1));
   }
@@ -23,10 +23,10 @@ Future<tz.TZDateTime> horarioNotificacao() async {
 
 iniciarNotificacoes() async {
   var androidInitializationSetting =
-  AndroidInitializationSettings("ic_launcher");
+      AndroidInitializationSettings("ic_launcher");
 
   var initializationSettings =
-  InitializationSettings(android: androidInitializationSetting);
+      InitializationSettings(android: androidInitializationSetting);
 
   flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
 
@@ -37,6 +37,14 @@ iniciarNotificacoes() async {
 }
 
 agendarNotificacao() async {
+  final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  bool notificacaoDiaria = sharedPreferences.getBool('NOTIFICACAO_DIARIA') ?? true;
+
+  if (!notificacaoDiaria) {
+    flutterLocalNotificationsPlugin.cancelAll();
+    return;
+  }
+
   var androidDetails = AndroidNotificationDetails(
     "revisoes_diarias",
     "Reviões diárias",
@@ -52,14 +60,9 @@ agendarNotificacao() async {
 
   var generalDetails = NotificationDetails(android: androidDetails);
 
-  // flutterLocalNotificationsPlugin.show(0, "Lembre de fazer suas revisões", "Você tem ?? notificações para hoje.", generalDetails);
-
   tz.initializeTimeZones();
-  tz.setLocalLocation(
-    tz.getLocation(await FlutterNativeTimezone.getLocalTimezone()),
-  );
+  tz.setLocalLocation(tz.getLocation(await FlutterNativeTimezone.getLocalTimezone()));
 
-  // var scheduleTime = tz.TZDateTime.now(tz.local).add(Duration(seconds: 10));
   var scheduleTime = await horarioNotificacao();
 
   flutterLocalNotificationsPlugin.zonedSchedule(
@@ -69,15 +72,8 @@ agendarNotificacao() async {
     scheduleTime,
     generalDetails,
     androidAllowWhileIdle: true,
-    uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-    matchDateTimeComponents:  DateTimeComponents.time,);
-
-  // flutterLocalNotificationsPlugin.periodicallyShow(
-  //     0,
-  //     "Lembre de fazer suas revisões",
-  //     "Venha ver suas revisões de hoje.",
-  //     RepeatInterval.daily,
-  //     generalDetails,
-  //     androidAllowWhileIdle: true
-  // );
+    uiLocalNotificationDateInterpretation:
+        UILocalNotificationDateInterpretation.absoluteTime,
+    matchDateTimeComponents: DateTimeComponents.time,
+  );
 }
