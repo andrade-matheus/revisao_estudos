@@ -1,4 +1,3 @@
-import 'package:revisao_estudos/controllers/database_controller.dart';
 
 class Disciplina {
   int id;
@@ -8,18 +7,6 @@ class Disciplina {
     this.id,
     this.nome,
   );
-
-  Map<String, dynamic> toMap() {
-    var map = <String, dynamic>{
-      DatabaseController.nome: nome,
-    };
-    return map;
-  }
-
-  Disciplina.fromMap(Map<String, dynamic> map) {
-    this.id = map[DatabaseController.id];
-    this.nome = map[DatabaseController.nome];
-  }
 
   @override
   String toString() {
