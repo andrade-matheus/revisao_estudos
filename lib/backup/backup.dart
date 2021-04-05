@@ -19,54 +19,64 @@ class Backup {
   // CRIAÇÃO DO BACKUP
 
   Future<bool> gerarBackup() async {
-    print('GERANDO BACKUP');
+    try{
+      print('GERANDO BACKUP');
 
-    List data = [];
+      List data = [];
 
-    List<Map<String, dynamic>> listMaps = [];
+      List<Map<String, dynamic>> listMaps = [];
 
-    for (var i = 0; i < tables.length; i++) {
-      listMaps = await db.query(tables[i]);
-      data.add(listMaps);
+      for (var i = 0; i < tables.length; i++) {
+        listMaps = await db.query(tables[i]);
+        data.add(listMaps);
+      }
+
+      List backups = [tables, data];
+      String json = convert.jsonEncode(backups);
+
+      String path = await FilePicker.platform.getDirectoryPath();
+      if(path != null){
+        final file = File('$path/revisao_backup.txt');
+        file.writeAsString(json);
+        return true;
+      }else{
+        return false;
+      }
+    }catch(e){
+      return false;
     }
-
-    List backups = [tables, data];
-    String json = convert.jsonEncode(backups);
-    writeToBackupFile(json);
-
-    return true;
-  }
-
-  Future<File> writeToBackupFile(String json) async {
-    String path = await FilePicker.platform.getDirectoryPath();
-    final file = File('$path/revisao_backup.txt');
-    // Write the file.
-    return file.writeAsString(json);
   }
 
   // RESTAURANDO O BACKUP
-  Future<void> restoreBackup() async {
-    FilePickerResult result = await FilePicker.platform.pickFiles();
-    if(result != null) {
-      String path = result.files.single.path;
-      String backup = await readFile(path);
+  Future<String> restoreBackup() async {
+    try {
+      FilePickerResult result = await FilePicker.platform.pickFiles();
+      if(result != null) {
+        String path = result.files.single.path;
+        String backup = await readFile(path);
 
-      await clearAllTables();
+        await clearAllTables();
 
-      Batch batch = db.batch();
-      List json = convert.jsonDecode(backup);
+        Batch batch = db.batch();
+        List json = convert.jsonDecode(backup);
 
-      for (var i = 0; i < json[0].length; i++) {
-        for (var k = 0; k < json[1][i].length; k++) {
-          batch.insert(json[0][i], json[1][i][k]);
+        for (var i = 0; i < json[0].length; i++) {
+          for (var k = 0; k < json[1][i].length; k++) {
+            batch.insert(json[0][i], json[1][i][k]);
+          }
         }
-      }
 
-      await batch.commit(continueOnError: false, noResult: true);
-      print('BACKUP RESTAURADO COM SUCESSO!!');
-    }
-    else{
-      print('NÃO FOI POSSIVEL RESTAURAR O BACKUP');
+        await batch.commit(continueOnError: false, noResult: true);
+        print('BACKUP RESTAURADO COM SUCESSO!!');
+        return 'O backup foi restaurado com sucesso.';
+      }
+      else{
+        print('NÃO FOI POSSIVEL RESTAURAR O BACKUP');
+        return 'A restauração do backup foi cancelada, ou um nenhum arquivo foi selecionado.';
+      }
+    }catch(e){
+      print(e.message);
+      return 'Error: ${e.message}';
     }
   }
 

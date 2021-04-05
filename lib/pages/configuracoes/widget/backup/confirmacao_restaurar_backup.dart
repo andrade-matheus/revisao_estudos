@@ -5,7 +5,7 @@ Future<bool> confirmacaoRestaurarBackup(BuildContext context) async {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text("Tem certeza que deseja restaurar um a partir do backup?"),
+        title: Text("Tem certeza que deseja restaurar um backup?"),
         content: Text("Todos os dados não salvos serão apagados!"),
         actions: [
           new TextButton(

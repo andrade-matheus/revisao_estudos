@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/backup/backup.dart';
 import 'package:revisao_estudos/pages/configuracoes/widget/backup/confirmacao_restaurar_backup.dart';
+import 'package:revisao_estudos/pages/configuracoes/widget/backup/resultado_pop_up.dart';
 
 class RestaurarBackup extends StatelessWidget {
   @override
@@ -11,7 +12,7 @@ class RestaurarBackup extends StatelessWidget {
         bool confirmacao = await confirmacaoRestaurarBackup(context);
         if (confirmacao) {
           Backup backup = Backup();
-          await backup.restoreBackup();
+          backup.restoreBackup().then((result) => mensagemResultadoBackUp(context, result));
         }
       },
     );
