@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/pages/PlanoDeFundo/plano_de_fundo.dart';
-import 'package:revisao_estudos/pages/configuracoes/widget/criar_backup.dart';
-import 'package:revisao_estudos/pages/configuracoes/widget/configuracao_notificacao.dart';
+import 'package:revisao_estudos/pages/configuracoes/widget/backup/criar_backup.dart';
+import 'package:revisao_estudos/pages/configuracoes/widget/backup/restaurar_backup.dart';
+import 'package:revisao_estudos/pages/configuracoes/widget/notificacao/configuracao_notificacao.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Configuracoes extends StatefulWidget {
@@ -23,11 +24,9 @@ class _ConfiguracoesState extends State<Configuracoes> {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: ListView(
                 children: [
-                  ConfiguracaoNotificacao(
-                    sharedPreferences: sharedPreferences,
-                  ),
+                  ConfiguracaoNotificacao(sharedPreferences: sharedPreferences),
                   CriarBackup(),
-
+                  RestaurarBackup(),
                 ],
               ),
             );

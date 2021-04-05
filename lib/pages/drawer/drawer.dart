@@ -4,7 +4,7 @@ import 'package:revisao_estudos/pages/calendario/calendario_page.dart';
 import 'package:revisao_estudos/pages/configuracoes/configuracoes.dart';
 import 'package:revisao_estudos/pages/disciplinas/disciplinas_page.dart';
 import 'package:revisao_estudos/pages/frequencias/frequencias_page.dart';
-import 'file:///C:/Users/mat_1/AndroidStudioProjects/revisao_estudos/lib/pages/revisoes/revisaoPage/revisoes_page.dart';
+import 'package:revisao_estudos/pages/revisoes/revisaoPage/revisoes_page.dart';
 
 Widget homeDrawer(BuildContext context){
   Color corPrimaria = Colors.blue;
