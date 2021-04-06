@@ -22,6 +22,22 @@ class DisciplinaController{
     return map;
   }
 
+  // CONVERÕES DE / PARA JSON
+  static Disciplina fromJson(Map<String, dynamic> json) {
+    Disciplina disciplina = Disciplina(
+        json['id'],
+        json['nome'],
+    );
+    return disciplina;
+  }
+
+  Map<String, dynamic> toJson(Disciplina disciplina) {
+    Map<String, dynamic> json = {
+      'id': disciplina.id,
+      'nome': disciplina.nome,
+    };
+    return json;
+  }
 
   static obterTodasDisciplinas() async {
     List<Disciplina> disciplinas = await RepositoryServiceDisciplina.getAllDisciplinas();

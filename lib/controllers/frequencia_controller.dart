@@ -18,6 +18,23 @@ class FrequenciaController {
     return map;
   }
 
+  // CONVERÕES DE / PARA JSON
+  static Frequencia fromJson(Map<String, dynamic> json) {
+    Frequencia frequencia = Frequencia(
+      json['id'],
+      json['frequencia'],
+    );
+    return frequencia;
+  }
+
+  Map<String, dynamic> toJson(Frequencia frequencia) {
+    Map<String, dynamic> json = {
+      'id': frequencia.id,
+      'frequencia': frequencia.frequencia,
+    };
+    return json;
+  }
+
   static obterTodasFrequencias() async {
     List<Frequencia> frequencias =
         await RepositoryServiceFrequencia.getAllFrequencias();

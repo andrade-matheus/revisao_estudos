@@ -28,7 +28,7 @@ class DatabaseCreator {
   Future<void> createDisciplinaTable(Database db) async {
     final disciplinaSql = '''CREATE TABLE $disciplinaTable
     (
-      $id INTEGER PRIMARY KEY AUTOINCREMENT,
+      $id INTEGER PRIMARY KEY,
       $nome TEXT
     )''';
 
@@ -38,7 +38,7 @@ class DatabaseCreator {
   Future<void> createFrequenciaTable(Database db) async {
     final frequenciaSql = '''CREATE TABLE $frequenciaTable
     (
-      $id INTEGER PRIMARY KEY AUTOINCREMENT,
+      $id INTEGER PRIMARY KEY,
       $valorFrequencia TEXT
     )''';
 
@@ -48,7 +48,7 @@ class DatabaseCreator {
   Future<void> createRevisaoTable(Database db) async {
     final revisaoSql = '''CREATE TABLE $revisaoTable
     (
-      $id INTEGER PRIMARY KEY AUTOINCREMENT,
+      $id INTEGER PRIMARY KEY,
       $idDisciplina INTEGER,
       $idFrequencia INTEGER,
       $nome TEXT,
@@ -66,7 +66,7 @@ class DatabaseCreator {
   Future<void> createLogRevisaoTable(Database db) async {
     final logRevisaoSql = '''CREATE TABLE $logRevisaoTable
     (
-      $id INTEGER PRIMARY KEY AUTOINCREMENT,
+      $id INTEGER PRIMARY KEY,
       $idRevisao INTEGER,
       $dataRevisao TEXT,
       FOREIGN KEY ($idRevisao) REFERENCES $revisaoTable($id) ON DELETE CASCADE
