@@ -33,7 +33,6 @@ class Backup {
 
       List backups = [tables, data];
       String json = convert.jsonEncode(backups);
-
       String path = await FilePicker.platform.getDirectoryPath();
       if(path != null){
         final file = File('$path/revisao_backup.txt');
@@ -75,7 +74,7 @@ class Backup {
         return 'A restauração do backup foi cancelada, ou um nenhum arquivo foi selecionado.';
       }
     }catch(e){
-      print(e.message);
+      await clearAllTables();
       return 'Error: ${e.message}';
     }
   }
