@@ -1,4 +1,6 @@
 import 'package:revisao_estudos/models/classes/disciplina.dart';
+import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
+import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 
 import 'frequencia.dart';
 
@@ -12,7 +14,7 @@ class Revisao {
   int vezesRevisadas;
   bool isArchived;
 
-  Revisao(
+  Revisao({
     this.id,
     this.nome,
     this.disciplina,
@@ -21,30 +23,35 @@ class Revisao {
     this.proxRevisao,
     this.vezesRevisadas,
     this.isArchived,
-  );
+  });
 
-  // Map<String, dynamic> toMap() {
-  //   var map = <String, dynamic>{
-  //     DatabaseController.nome: nome,
-  //     DatabaseController.idDisciplina: this.disciplina.id,
-  //     DatabaseController.idFrequencia: this.frequencia.id,
-  //     DatabaseController.dataCadastro: DatabaseController.formatarData(this.dataCadastro),
-  //     DatabaseController.proxRevisao: DatabaseController.formatarData(this.proxRevisao),
-  //     DatabaseController.vezesRevisadas: this.vezesRevisadas,
-  //     DatabaseController.isArchived: isArchived ? 1 : 0,
-  //   };
-  //   return map;
-  // }
-  //
-  // Revisao.fromMap(Map<String, dynamic> map) {
-  //   this.id = map[DatabaseController.id];
-  //   this.nome = map[DatabaseController.nome];
-  //   this.disciplina = DisciplinaController.obterDisciplina(map[DatabaseController.idDisciplina]);
-  //   this.frequencia = FrequenciaController.obterFrequencia(map[DatabaseController.idFrequencia]);
-  //   this.dataCadastro = DateTime.parse(map[DatabaseController.dataCadastro]);
-  //   this.proxRevisao = DateTime.parse(map[DatabaseController.proxRevisao]);
-  //   this.isArchived = (map[DatabaseController.isArchived] == 0) ? false : true;
-  // }
+  factory Revisao.fromMap(Map<String, dynamic> json) {
+    RepositoryDisciplina discRepository = RepositoryDisciplina();
+    RepositoryFrequencia freqRepository = RepositoryFrequencia();
+    return Revisao(
+      id: json['id'],
+      nome: json['nome'],
+      disciplina: discRepository.getByIdSync(int.parse(json['disciplina'])),
+      frequencia: freqRepository.getByIdSync(int.parse(json['frequencia'])),
+      dataCadastro: DateTime.parse(json['dataCadastro']),
+      proxRevisao: DateTime.parse(json['proxRevisao']),
+      vezesRevisadas: int.parse(json['vezesRevisadas']),
+      isArchived: json['isArchived'],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id ?? 0,
+      'nome': nome,
+      'disciplina': disciplina.id,
+      'frequencia': frequencia.id,
+      'dataCadastro': dataCadastro.toString(),
+      'proxRevisao': proxRevisao.toString(),
+      'vezesRevisadas': vezesRevisadas,
+      'isArchived': isArchived,
+    };
+  }
 
   @override
   String toString() {
