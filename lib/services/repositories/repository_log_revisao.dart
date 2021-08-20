@@ -1,5 +1,5 @@
 import 'package:revisao_estudos/models/classes/log_revisao.dart';
-import 'package:revisao_estudos/services/database/database_creator.dart';
+import 'package:revisao_estudos/services/database/database_config.dart';
 import 'package:sqflite/sqflite.dart';
 
 class RepositoryLogRevisao {
@@ -7,7 +7,7 @@ class RepositoryLogRevisao {
 
   Future<Database> get database async {
     if (_database != null) return _database;
-    _database = await DatabaseCreator.initBD();
+    _database = await DatabaseConfig.initDB();
     return _database;
   }
 

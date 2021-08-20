@@ -1,5 +1,5 @@
 import 'package:revisao_estudos/models/classes/frequencia.dart';
-import 'package:revisao_estudos/services/database/database_creator.dart';
+import 'package:revisao_estudos/services/database/database_config.dart';
 import 'package:sqflite/sqflite.dart';
 
 class RepositoryFrequencia {
@@ -7,7 +7,7 @@ class RepositoryFrequencia {
 
   Future<Database> get database async {
     if (_database != null) return _database;
-    _database = await DatabaseCreator.initBD();
+    _database = await DatabaseConfig.initDB()();
     return _database;
   }
 
@@ -89,6 +89,21 @@ class RepositoryFrequencia {
         whereArgs: [id],
       );
       return resultado.isNotEmpty ? true : false;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<void> delete(int id) async {
+    try {
+      final db = await database;
+      await db.transaction((txn) async {
+        await txn.delete(
+          'frequencia',
+          where: 'id = ?',
+          whereArgs: [id],
+        );
+      });
     } catch (e) {
       throw e;
     }

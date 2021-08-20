@@ -1,5 +1,7 @@
+import 'package:revisao_estudos/models/classes/disciplina.dart';
 import 'package:revisao_estudos/models/classes/revisao.dart';
-import 'package:revisao_estudos/services/database/database_creator.dart';
+import 'package:revisao_estudos/services/database/database_config.dart';
+import 'package:revisao_estudos/utils/date/date_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
 class RepositoryRevisao {
@@ -7,7 +9,7 @@ class RepositoryRevisao {
 
   Future<Database> get database async {
     if (_database != null) return _database;
-    _database = await DatabaseCreator.initBD();
+    _database = await DatabaseConfig.initDB();
     return _database;
   }
 
@@ -65,6 +67,57 @@ class RepositoryRevisao {
     }
   }
 
+  // Todas revisões para essa data incluindo as atrasadas.
+  Future<List<Revisao>> getAllPorData(DateTime data) async {
+    final bd = await database;
+    var resultado = await bd.query('Revisao');
+    var revisoes = resultado.isNotEmpty
+        ? resultado.map((i) => Revisao.fromMap(i)).toList()
+        : [];
+
+    for (var revisao in revisoes) {
+      if (revisao.proxRevisao.isAfter(DateHelper.amanha)) {
+        revisoes.removeWhere((element) => element.id == revisao.id);
+      }
+    }
+    return revisoes;
+  }
+
+  Future<List<Revisao>> getAllByDisciplina(Disciplina disciplina) async {
+    final bd = await database;
+    var resultado = await bd.query(
+      'Revisao',
+      where: 'idDisciplina = ?',
+      whereArgs: [disciplina.id],
+    );
+    return resultado.isNotEmpty
+        ? resultado.map((i) => Revisao.fromMap(i)).toList()
+        : [];
+  }
+
+  // Todas revisões de uma disciplina para essa data incluindo as atrasadas.
+  Future<List<Revisao>> getAllByDisciplinaPorData(
+    Disciplina disciplina,
+    DateTime data,
+  ) async {
+    final bd = await database;
+    var resultado = await bd.query(
+      'Revisao',
+      where: 'idDisciplina = ?',
+      whereArgs: [disciplina.id],
+    );
+    var revisoes = resultado.isNotEmpty
+        ? resultado.map((i) => Revisao.fromMap(i)).toList()
+        : [];
+
+    for (var revisao in revisoes) {
+      if (revisao.proxRevisao.isAfter(DateHelper.amanha)) {
+        revisoes.removeWhere((element) => element.id == revisao.id);
+      }
+    }
+    return revisoes;
+  }
+
   Future<Revisao> update(Revisao revisao) async {
     try {
       final db = await database;
@@ -89,6 +142,21 @@ class RepositoryRevisao {
         whereArgs: [id],
       );
       return resultado.isNotEmpty ? true : false;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<void> delete(int id) async {
+    try {
+      final db = await database;
+      await db.transaction((txn) async {
+        await txn.delete(
+          'revisao',
+          where: 'id = ?',
+          whereArgs: [id],
+        );
+      });
     } catch (e) {
       throw e;
     }

@@ -1,6 +1,9 @@
 import 'package:revisao_estudos/models/classes/disciplina.dart';
+import 'package:revisao_estudos/models/classes/log_revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
+import 'package:revisao_estudos/services/repositories/repository_log_revisao.dart';
+import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 
 import 'frequencia.dart';
 
@@ -51,6 +54,32 @@ class Revisao {
       'vezesRevisadas': vezesRevisadas,
       'isArchived': isArchived,
     };
+  }
+
+  void realizarRevisao() {
+    List<String> valoresFrequencia = frequencia.frequencia.split('-');
+    int quantidadeFrequencias = valoresFrequencia.length;
+    int diasProxRevisao;
+
+    vezesRevisadas += 1;
+
+    if (vezesRevisadas >= quantidadeFrequencias) {
+      diasProxRevisao = int.parse(valoresFrequencia[quantidadeFrequencias - 1]);
+    } else {
+      diasProxRevisao = int.parse(valoresFrequencia[vezesRevisadas]);
+    }
+
+    proxRevisao.add(Duration(days: diasProxRevisao));
+    RepositoryRevisao repositoryRevisao = RepositoryRevisao();
+    repositoryRevisao.update(this);
+
+    LogRevisao novoLog = LogRevisao(
+      id: 0,
+      revisao: this,
+      dataRevisao: DateTime.now(),
+    );
+    RepositoryLogRevisao repositoryLogRevisao = RepositoryLogRevisao();
+    repositoryLogRevisao.insert(novoLog);
   }
 
   @override
