@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/models/classes/revisao.dart';
+import 'package:revisao_estudos/models/entity/revisao.dart';
 
 class RevisaoTile extends StatefulWidget {
   final Revisao revisao;
@@ -28,7 +28,7 @@ class _RevisaoTileState extends State<RevisaoTile> {
       trailing: IconButton(
         icon: Icon(Icons.check_outlined),
         onPressed: () async {
-          bool resultado = await realizarRevisaoDialog(context);
+          await realizarRevisaoDialog(context);
         },
       ),
     );

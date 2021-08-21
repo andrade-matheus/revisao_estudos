@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/models/classes/disciplina.dart';
+import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/screens/calendario/lista_revisoes_widget/tiles_widgets/disciplina_tile.dart';
 
 class ListaDisciplinas extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/models/classes/revisao.dart';
+import 'package:revisao_estudos/models/entity/revisao.dart';
 
 class LogTile extends StatelessWidget {
   final Revisao revisao;

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
-import 'package:path/path.dart';
 import 'package:revisao_estudos/services/database/database_config.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:convert' as convert;

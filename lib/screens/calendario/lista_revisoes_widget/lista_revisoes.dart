@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:revisao_estudos/models/classes/disciplina.dart';
+import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
 import 'package:revisao_estudos/screens/calendario/lista_revisoes_widget/lista_disciplina_widget/lista_disciplinas.dart';
 import 'package:revisao_estudos/screens/calendario/lista_revisoes_widget/sem_revisoes/sem_revisoes.dart';

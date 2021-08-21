@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/screens/calendario/lista_revisoes_widget/lista_revisoes_widget/lista_revisoes.dart';
+import 'package:revisao_estudos/screens/calendario/lista_revisoes_widget/lista_revisoes_disciplina_widget/lista_revisoes_disciplina.dart';
 
 class DisciplinaTile extends StatelessWidget {
   final String title;
@@ -18,7 +18,7 @@ class DisciplinaTile extends StatelessWidget {
         ),
       ),
       children: [
-        ListaRevisoes(),
+        ListaRevisoesDisciplina(),
       ],
     );
   }
