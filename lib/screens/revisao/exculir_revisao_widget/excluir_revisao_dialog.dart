@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/models/classes/revisao.dart';
+import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 
 excluirRevisaoDialog(BuildContext context, Revisao revisao) async {
@@ -26,7 +26,7 @@ excluirRevisaoDialog(BuildContext context, Revisao revisao) async {
                 child: new Text('EXCLUIR'),
                 onPressed: () {
                   setState(() {
-                    repositoryRevisao.delete(revisao.id);
+                    repositoryRevisao.remover(revisao.id);
                   });
                   Navigator.pop(context);
                   resultado = true;

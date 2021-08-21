@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/models/classes/frequencia.dart';
+import 'package:revisao_estudos/models/entity/frequencia.dart';
 import 'package:revisao_estudos/screens/frequencias/adicionar_frequencia_widget/adicionar_frequencia_dialog.dart';
 import 'package:revisao_estudos/screens/frequencias/excluir_frequencia_widget/excluir_frequencia_dialog.dart';
 import 'package:revisao_estudos/screens/frequencias/info_frequencia_widget/info_frequencia.dart';
@@ -44,11 +44,12 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
       child: Padding(
         padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
         child: FutureBuilder(
-          future: repositoryFrequencia.getAll(),
+          future: repositoryFrequencia.obterTodos(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
+              List<Frequencia> frequencias = snapshot.data;
               return ListView.builder(
-                itemCount: snapshot.data.length,
+                itemCount: frequencias.length,
                 itemBuilder: (context, index) {
                   Frequencia frequencia = snapshot.data[index];
                   return Card(

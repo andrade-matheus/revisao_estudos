@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/models/classes/disciplina.dart';
-import 'package:revisao_estudos/models/classes/revisao.dart';
+import 'package:revisao_estudos/models/entity/disciplina.dart';
+import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/screens/revisao/adicionar_revisao/adicinar_revisao_page.dart';
 import 'package:revisao_estudos/screens/revisao/detalhes_revisao/detalhes_revisao_page.dart';
 import 'package:revisao_estudos/screens/revisao/exculir_revisao_widget/excluir_revisao_dialog.dart';
@@ -46,7 +46,7 @@ class _RevisoesPageState extends State<RevisoesPage> {
       child: Padding(
         padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
         child: FutureBuilder(
-          future: repositoryDisciplina.getAll(),
+          future: repositoryDisciplina.obterTodos(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return ListView.builder(

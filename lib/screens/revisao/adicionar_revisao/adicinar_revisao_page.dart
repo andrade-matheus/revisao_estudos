@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:revisao_estudos/models/classes/disciplina.dart';
-import 'package:revisao_estudos/models/classes/frequencia.dart';
-import 'package:revisao_estudos/models/classes/revisao.dart';
+import 'package:revisao_estudos/models/entity/disciplina.dart';
+import 'package:revisao_estudos/models/entity/frequencia.dart';
+import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
@@ -205,7 +205,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
                           if (_formKey.currentState.validate()) {
                             setState(() {
                               Revisao novaRevisao = gerarNovaRevisao();
-                              repositoryRevisao.insert(novaRevisao);
+                              repositoryRevisao.adicionar(novaRevisao);
                             });
                             Navigator.pop(context, true);
                           }
@@ -228,7 +228,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
         return AlertDialog(
           title: Text('Escolher Disciplina'),
           content: FutureBuilder(
-            future: repositoryDisciplina.getAll(),
+            future: repositoryDisciplina.obterTodos(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Container(
@@ -273,7 +273,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
         return AlertDialog(
           title: Text('Escolher Frequência'),
           content: FutureBuilder(
-            future: repositoryFrequencia.getAll(),
+            future: repositoryFrequencia.obterTodos(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Container(

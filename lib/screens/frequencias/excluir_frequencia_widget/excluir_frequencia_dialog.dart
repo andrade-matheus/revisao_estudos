@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/models/classes/frequencia.dart';
+import 'package:revisao_estudos/models/entity/frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 
 excluirFrequenciaDialog(BuildContext context, Frequencia frequencia) async {
@@ -20,7 +20,7 @@ excluirFrequenciaDialog(BuildContext context, Frequencia frequencia) async {
             onPressed: () {
               RepositoryFrequencia repositoryFrequencia =
                   RepositoryFrequencia();
-              repositoryFrequencia.delete(frequencia.id);
+              repositoryFrequencia.remover(frequencia.id);
               Navigator.pop(context);
             },
           )

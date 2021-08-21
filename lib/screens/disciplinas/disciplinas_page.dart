@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/models/classes/disciplina.dart';
+import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/screens/disciplinas/adicionar_disciplina_widget/adicionar_disciplina_dialog.dart';
 import 'package:revisao_estudos/screens/disciplinas/excluir_disciplina_widget/excluir_disciplina_dialog.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
@@ -32,7 +32,7 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
       child: Padding(
         padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
         child: FutureBuilder(
-          future: repositoryDisciplina.getAll(),
+          future: repositoryDisciplina.obterTodos(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return ListView.builder(

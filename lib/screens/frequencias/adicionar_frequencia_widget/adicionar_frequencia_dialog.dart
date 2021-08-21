@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/models/classes/frequencia.dart';
+import 'package:revisao_estudos/models/entity/frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 
 adicionarFrequenciaDialog(BuildContext context) async {
@@ -53,7 +53,7 @@ adicionarFrequenciaDialog(BuildContext context) async {
                 );
                 RepositoryFrequencia repositoryFrequencia =
                     RepositoryFrequencia();
-                repositoryFrequencia.insert(novaFrequencia);
+                repositoryFrequencia.adicionar(novaFrequencia);
                 Navigator.pop(context, true);
                 _textFieldController.clear();
               }

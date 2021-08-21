@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:revisao_estudos/models/classes/disciplina.dart';
-import 'package:revisao_estudos/models/classes/frequencia.dart';
-import 'package:revisao_estudos/models/classes/log_revisao.dart';
-import 'package:revisao_estudos/models/classes/revisao.dart';
 import 'package:revisao_estudos/screens/calendario/calendario_page.dart';
 import 'package:revisao_estudos/services/database/database_config.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
@@ -14,7 +10,7 @@ import 'package:revisao_estudos/utils/notificacoes/controle_de_notificacoes.dart
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  var db = await DatabaseConfig.initDB();
+  await DatabaseConfig.initDB();
   runApp(MyApp());
   //  F56D11 launcher icon hex collor
   //  FFC68D adaptive icon background hex collor
@@ -60,10 +56,10 @@ class _MyAppState extends State<MyApp> {
     RepositoryRevisao repositoryRevisao = RepositoryRevisao();
     RepositoryLogRevisao repositoryLogRevisao = RepositoryLogRevisao();
 
-    var frequencias = await repositoryFrequencia.getAll();
-    var disciplinas = await repositoryDisciplina.getAll();
-    var revisoes = await repositoryRevisao.getAll();
-    var logRevisoes = await repositoryLogRevisao.getAll();
+    var frequencias = await repositoryFrequencia.obterTodos();
+    var disciplinas = await repositoryDisciplina.obterTodos();
+    var revisoes = await repositoryRevisao.obterTodos();
+    var logRevisoes = await repositoryLogRevisao.obterTodos();
 
     var item;
     print('\nFREQUENCIAS');

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/models/classes/disciplina.dart';
+import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 
 excluirDisciplinaDialog(BuildContext context, Disciplina disciplina) async {
@@ -20,7 +20,7 @@ excluirDisciplinaDialog(BuildContext context, Disciplina disciplina) async {
             onPressed: () {
               RepositoryDisciplina repositoryDisciplina =
                   RepositoryDisciplina();
-              repositoryDisciplina.delete(disciplina.id);
+              repositoryDisciplina.remover(disciplina.id);
               Navigator.pop(context);
             },
           )
