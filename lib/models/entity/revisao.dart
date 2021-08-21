@@ -1,13 +1,13 @@
-import 'package:revisao_estudos/models/classes/disciplina.dart';
-import 'package:revisao_estudos/models/classes/log_revisao.dart';
+import 'package:revisao_estudos/models/entity/disciplina.dart';
+import 'package:revisao_estudos/models/entity/frequencia.dart';
+import 'package:revisao_estudos/models/entity/log_revisao.dart';
+import 'package:revisao_estudos/models/interface/entity_common.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_log_revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 
-import 'frequencia.dart';
-
-class Revisao {
+class Revisao extends EntityCommon {
   int id;
   String nome;
   Disciplina disciplina;
@@ -34,8 +34,8 @@ class Revisao {
     return Revisao(
       id: json['id'],
       nome: json['nome'],
-      disciplina: discRepository.getByIdSync(int.parse(json['disciplina'])),
-      frequencia: freqRepository.getByIdSync(int.parse(json['frequencia'])),
+      disciplina: discRepository.obterPorIdSync(int.parse(json['disciplina'])),
+      frequencia: freqRepository.obterPorIdSync(int.parse(json['frequencia'])),
       dataCadastro: DateTime.parse(json['dataCadastro']),
       proxRevisao: DateTime.parse(json['proxRevisao']),
       vezesRevisadas: int.parse(json['vezesRevisadas']),
@@ -43,6 +43,7 @@ class Revisao {
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       'id': id ?? 0,
@@ -71,7 +72,7 @@ class Revisao {
 
     proxRevisao.add(Duration(days: diasProxRevisao));
     RepositoryRevisao repositoryRevisao = RepositoryRevisao();
-    repositoryRevisao.update(this);
+    repositoryRevisao.atualizar(this);
 
     LogRevisao novoLog = LogRevisao(
       id: 0,
@@ -79,7 +80,7 @@ class Revisao {
       dataRevisao: DateTime.now(),
     );
     RepositoryLogRevisao repositoryLogRevisao = RepositoryLogRevisao();
-    repositoryLogRevisao.insert(novoLog);
+    repositoryLogRevisao.adicionar(novoLog);
   }
 
   @override

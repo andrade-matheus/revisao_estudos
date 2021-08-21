@@ -1,4 +1,6 @@
-class Disciplina {
+import 'package:revisao_estudos/models/interface/entity_common.dart';
+
+class Disciplina extends EntityCommon {
   int id;
   String nome;
 
@@ -14,6 +16,7 @@ class Disciplina {
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       'id': id ?? 0,

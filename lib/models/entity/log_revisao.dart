@@ -1,8 +1,8 @@
-import 'package:dart_date/dart_date.dart';
-import 'package:revisao_estudos/models/classes/revisao.dart';
+import 'package:revisao_estudos/models/entity/revisao.dart';
+import 'package:revisao_estudos/models/interface/entity_common.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 
-class LogRevisao {
+class LogRevisao extends EntityCommon {
   int id;
   Revisao revisao;
   DateTime dataRevisao;
@@ -17,11 +17,12 @@ class LogRevisao {
     RepositoryRevisao revisaoRepository = RepositoryRevisao();
     return LogRevisao(
       id: json['id'],
-      revisao: revisaoRepository.getByIdSync(int.parse(json['revisao'])),
+      revisao: revisaoRepository.obterPorIdSync(int.parse(json['revisao'])),
       dataRevisao: DateTime.parse(json['dataRevisao']),
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       'id': id ?? 0,

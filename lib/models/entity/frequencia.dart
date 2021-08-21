@@ -1,4 +1,6 @@
-class Frequencia {
+import 'package:revisao_estudos/models/interface/entity_common.dart';
+
+class Frequencia extends EntityCommon {
   int id;
   String frequencia;
 
@@ -14,6 +16,7 @@ class Frequencia {
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       'id': id ?? 0,
