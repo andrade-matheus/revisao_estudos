@@ -14,11 +14,12 @@ class ListaRevisoes extends StatefulWidget {
 class _ListaRevisoesState extends State<ListaRevisoes> {
   @override
   Widget build(BuildContext context) {
+    DateTime dataSelecionada = context.watch<DataSelecionada>().dataSelecionada;
     RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
     List<Disciplina> disciplinas = [];
     return FutureBuilder(
-      future: repositoryDisciplina.obterTodosComRevisoesPorData(
-          context.read<DataSelecionada>().dataSelecionada),
+      future:
+          repositoryDisciplina.obterTodosComRevisoesPorData(dataSelecionada),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           disciplinas = snapshot.data;

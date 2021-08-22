@@ -12,6 +12,7 @@ class SeletorData extends StatefulWidget {
 class _SeletorDataState extends State<SeletorData> {
   @override
   Widget build(BuildContext context) {
+    DateTime dataSelecionada = context.watch<DataSelecionada>().dataSelecionada;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Row(
@@ -23,18 +24,13 @@ class _SeletorDataState extends State<SeletorData> {
           ),
           ElevatedButton(
             onPressed: () async {
-              var data = await escolherDataDialog(
-                  context, context.read<DataSelecionada>().dataSelecionada);
+              var data = await escolherDataDialog(context, dataSelecionada);
               context.read<DataSelecionada>().defineData(data);
             },
-            child: Text(
-              DateHelper.botaoDataToString(
-                context.watch<DataSelecionada>().dataSelecionada,
-              ),
-            ),
+            child: Text(DateHelper.botaoDataToString(dataSelecionada)),
           ),
           ElevatedButton(
-            onPressed: () => context.read<DataSelecionada>().reduzirUmDia(),
+            onPressed: () => context.read<DataSelecionada>().aumentarUmDia(),
             child: Icon(Icons.arrow_forward_outlined),
           ),
         ],

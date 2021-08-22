@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
-Future<DateTime> escolherDataDialog(BuildContext context, DateTime dataSelecionada) async {
-  final DateTime dataEscolhida = await showDatePicker(
+Future<DateTime> escolherDataDialog(
+  BuildContext context,
+  DateTime dataSelecionada,
+) async {
+  DateTime dataEscolhida = await showDatePicker(
     locale: const Locale("pt"),
     context: context,
     initialDate: dataSelecionada,

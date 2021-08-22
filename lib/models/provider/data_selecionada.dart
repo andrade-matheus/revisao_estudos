@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DataSelecionada extends ChangeNotifier {
-  DateTime _dataSelecionada = DateTime.now();
+class DataSelecionada with ChangeNotifier {
+  DateTime _dataSelecionada = DateTime.now().add(Duration(days: 30));
 
   DateTime get dataSelecionada => _dataSelecionada;
 
@@ -11,12 +11,12 @@ class DataSelecionada extends ChangeNotifier {
   }
 
   reduzirUmDia() {
-    _dataSelecionada.subtract(Duration(days: 1));
+    _dataSelecionada = _dataSelecionada.subtract(Duration(days: 1));
     notifyListeners();
   }
 
   aumentarUmDia() {
-    _dataSelecionada.add(Duration(days: 1));
+    _dataSelecionada = _dataSelecionada.add(Duration(days: 1));
     notifyListeners();
   }
 
