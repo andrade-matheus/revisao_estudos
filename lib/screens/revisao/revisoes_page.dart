@@ -62,7 +62,7 @@ class _RevisoesPageState extends State<RevisoesPage> {
                           children: [
                             FutureBuilder(
                               future: repositoryRevisao
-                                  .getAllByDisciplina(disciplina),
+                                  .obterTodosPorDisciplina(disciplina),
                               builder: (context, snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.done) {

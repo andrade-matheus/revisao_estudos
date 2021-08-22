@@ -17,7 +17,7 @@ class _ListaRevisoesState extends State<ListaRevisoes> {
     RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
     List<Disciplina> disciplinas = [];
     return FutureBuilder(
-      future: repositoryDisciplina.getAllComRevisoesPorData(
+      future: repositoryDisciplina.obterTodosComRevisoesPorData(
           context.read<DataSelecionada>().dataSelecionada),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {

@@ -16,7 +16,7 @@ class ListaRevisoesDisciplina extends StatelessWidget {
     RepositoryRevisao repositoryRevisao = RepositoryRevisao();
     List<Revisao> revisoes = [];
     return FutureBuilder(
-      future: repositoryRevisao.getAllByDisciplinaPorData(
+      future: repositoryRevisao.obterTodosPorDisciplinaPorData(
         disciplina,
         context.read<DataSelecionada>().dataSelecionada,
       ),
