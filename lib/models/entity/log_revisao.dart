@@ -13,11 +13,11 @@ class LogRevisao extends EntityCommon {
     this.dataRevisao,
   });
 
-  factory LogRevisao.fromMap(Map<String, dynamic> json) {
+  static Future<LogRevisao> fromMap(Map<String, dynamic> json) async {
     RepositoryRevisao revisaoRepository = RepositoryRevisao();
     return LogRevisao(
       id: json['id'],
-      revisao: revisaoRepository.obterPorIdSync(int.parse(json['revisao'])),
+      revisao: await revisaoRepository.obterPorId(json['revisao']),
       dataRevisao: DateTime.parse(json['dataRevisao']),
     );
   }

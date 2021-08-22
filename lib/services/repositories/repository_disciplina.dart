@@ -5,11 +5,14 @@ import 'package:revisao_estudos/services/repositories/repository_common.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 import 'package:sqflite/sqflite.dart';
 
-class RepositoryDisciplina extends RepositoryCommon {
+class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
   static Database _database;
 
   @override
   String get nomeTabela => "disciplina";
+
+  @override
+  Function get fromMap => Disciplina.fromMap;
 
   Future<Database> get database async {
     if (_database != null) return _database;
@@ -17,12 +20,12 @@ class RepositoryDisciplina extends RepositoryCommon {
     return _database;
   }
 
-  Future<List<Disciplina>> getAllComRevisoesPorData(DateTime data) async {
+  Future<List<Disciplina>> obterTodosComRevisoesPorData(DateTime data) async {
     List<Disciplina> disciplinas = [];
     List<Revisao> revisoes = [];
 
     RepositoryRevisao repositoryRevisao = RepositoryRevisao();
-    revisoes = await repositoryRevisao.getAllPorData(data);
+    revisoes = await repositoryRevisao.obterTodosPorData(data);
     revisoes.forEach((element) => disciplinas.add(element.disciplina));
 
     return disciplinas;

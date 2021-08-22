@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:revisao_estudos/services/database/comandos_sql.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'databe_migrator.dart';
@@ -57,6 +58,9 @@ class DatabaseConfig {
           });
 
         _upgradeDbVersion(db, maxMigratedDbVersion);
+      },
+      onConfigure: (db) async {
+        await db.execute(ComandosSQL.foreignKeys);
       },
     );
   }

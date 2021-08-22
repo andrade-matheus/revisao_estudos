@@ -9,18 +9,18 @@ class Frequencia extends EntityCommon {
     this.frequencia,
   });
 
-  factory Frequencia.fromMap(Map<String, dynamic> json) {
+  static Frequencia fromMap(Map<String, dynamic> json) {
     return Frequencia(
       id: json['id'],
-      frequencia: json['nome'],
+      frequencia: json['valorFrequencia'],
     );
   }
 
   @override
   Map<String, dynamic> toMap() {
     return {
-      'id': id ?? 0,
-      'frequencia': frequencia,
+      'id': id,
+      'valorFrequencia': frequencia,
     };
   }
 

@@ -28,32 +28,32 @@ class Revisao extends EntityCommon {
     this.isArchived,
   });
 
-  factory Revisao.fromMap(Map<String, dynamic> json) {
+  static Future<Revisao> fromMap(Map<String, dynamic> json) async {
     RepositoryDisciplina discRepository = RepositoryDisciplina();
     RepositoryFrequencia freqRepository = RepositoryFrequencia();
     return Revisao(
       id: json['id'],
+      disciplina: await discRepository.obterPorId(json['idDisciplina']),
+      frequencia: await freqRepository.obterPorId(json['idFrequencia']),
       nome: json['nome'],
-      disciplina: discRepository.obterPorIdSync(int.parse(json['disciplina'])),
-      frequencia: freqRepository.obterPorIdSync(int.parse(json['frequencia'])),
       dataCadastro: DateTime.parse(json['dataCadastro']),
       proxRevisao: DateTime.parse(json['proxRevisao']),
-      vezesRevisadas: int.parse(json['vezesRevisadas']),
-      isArchived: json['isArchived'],
+      vezesRevisadas: json['vezesRevisadas'],
+      isArchived: json['isArchived'] != 0,
     );
   }
 
   @override
   Map<String, dynamic> toMap() {
     return {
-      'id': id ?? 0,
+      'id': id,
+      'idDisciplina': disciplina.id,
+      'idFrequencia': frequencia.id,
       'nome': nome,
-      'disciplina': disciplina.id,
-      'frequencia': frequencia.id,
       'dataCadastro': dataCadastro.toString(),
       'proxRevisao': proxRevisao.toString(),
       'vezesRevisadas': vezesRevisadas,
-      'isArchived': isArchived,
+      'isArchived': isArchived ? 1 : 0,
     };
   }
 

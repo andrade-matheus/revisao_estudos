@@ -9,7 +9,7 @@ class Disciplina extends EntityCommon {
     this.nome,
   });
 
-  factory Disciplina.fromMap(Map<String, dynamic> json) {
+  static Disciplina fromMap(Map<String, dynamic> json) {
     return Disciplina(
       id: json['id'],
       nome: json['nome'],
@@ -19,7 +19,7 @@ class Disciplina extends EntityCommon {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'id': id ?? 0,
+      'id': id,
       'nome': nome,
     };
   }

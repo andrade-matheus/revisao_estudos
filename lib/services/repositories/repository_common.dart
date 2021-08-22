@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:revisao_estudos/models/interface/entity_common.dart';
 import 'package:revisao_estudos/services/database/database_config.dart';
 import 'package:sqflite/sqflite.dart';
@@ -6,6 +7,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
   static Database _database;
 
   String get nomeTabela;
+  Function get fromMap;
 
   Future<Database> get database async {
     if (_database != null) return _database;
@@ -14,9 +16,15 @@ abstract class RepositoryCommon<T extends EntityCommon> {
   }
 
   Future<T> adicionar(T param) async {
+    Map<String, dynamic> map = param.toMap();
+    map.remove('id');
+
     final bd = await database;
     await bd.transaction((txn) async {
-      param.id = await txn.insert(nomeTabela, param.toMap());
+      param.id = await txn.insert(
+        nomeTabela,
+        map,
+      );
     });
     return param;
   }
@@ -28,86 +36,65 @@ abstract class RepositoryCommon<T extends EntityCommon> {
       where: 'id = ?',
       whereArgs: [id],
     );
-    return resultado.isNotEmpty ? EntityCommon.fromMap(resultado.first) : Null;
+    return resultado.isNotEmpty ? await fromMap(resultado.first) as T : null;
   }
 
-  T obterPorIdSync(int id) {
-    List<Map<String, Object>> resultado = [];
-    database.then((db) async {
-      resultado = await db.query(
+  Future<List<T>> obterTodos() async {
+    final bd = await database;
+    var resultado = await bd.query(nomeTabela);
+    return await fromMapList(resultado);
+  }
+
+  Future<List<T>> obterTodosPor({
+    @required String where,
+    @required List<Object> whereArgs,
+  }) async {
+    final bd = await database;
+    var resultado = await bd.query(
+      nomeTabela,
+      where: where,
+      whereArgs: whereArgs,
+    );
+    return await fromMapList(resultado);
+  }
+
+  Future<T> atualizar(T param) async {
+    final db = await database;
+    await db.update(
+      nomeTabela,
+      param.toMap(),
+      where: 'id = ?',
+      whereArgs: [param.id],
+    );
+    return param;
+  }
+
+  Future<bool> existe(int id) async {
+    final bd = await database;
+    var resultado = await bd.query(
+      nomeTabela,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return resultado.isNotEmpty ? true : false;
+  }
+
+  Future<void> remover(int id) async {
+    final db = await database;
+    await db.transaction((txn) async {
+      await txn.delete(
         nomeTabela,
         where: 'id = ?',
         whereArgs: [id],
       );
     });
-    return resultado.isNotEmpty ? EntityCommon.fromMap(resultado.first) : Null;
-  }
-
-  Future<List<T>> obterTodos() async {
-    try {
-      final bd = await database;
-      var resultado = await bd.query(nomeTabela);
-      return resultado.isNotEmpty
-          ? resultado.map((i) => EntityCommon.fromMap(i)).toList()
-          : [];
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  Future<T> atualizar(T param) async {
-    try {
-      final db = await database;
-      await db.update(
-        nomeTabela,
-        param.toMap(),
-        where: 'id = ?',
-        whereArgs: [param.id],
-      );
-      return param;
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  Future<bool> existe(int id) async {
-    try {
-      final bd = await database;
-      var resultado = await bd.query(
-        nomeTabela,
-        where: 'id = ?',
-        whereArgs: [id],
-      );
-      return resultado.isNotEmpty ? true : false;
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  Future<void> remover(int id) async {
-    try {
-      final db = await database;
-      await db.transaction((txn) async {
-        await txn.delete(
-          nomeTabela,
-          where: 'id = ?',
-          whereArgs: [id],
-        );
-      });
-    } catch (e) {
-      throw e;
-    }
   }
 
   Future<void> remoterTodos() async {
-    try {
-      final db = await database;
-      await db.transaction((txn) async {
-        await txn.rawDelete('DELETE FROM $nomeTabela');
-      });
-    } catch (e) {
-      throw e;
-    }
+    final db = await database;
+    await db.transaction((txn) async {
+      await txn.rawDelete('DELETE FROM $nomeTabela');
+    });
   }
 
   Future<List<T>> adicionarVarios(List<T> param) async {
@@ -133,5 +120,17 @@ abstract class RepositoryCommon<T extends EntityCommon> {
       });
     });
     return param;
+  }
+
+  Future<List<T>> fromMapList(List<Map> param) async {
+    List<T> lista = [];
+    if (param.isNotEmpty) {
+      for (var item in param) {
+        lista.add(await fromMap(item) as T);
+      }
+    } else {
+      lista = new List<T>.from([]);
+    }
+    return lista;
   }
 }
