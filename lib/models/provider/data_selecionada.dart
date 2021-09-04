@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DataSelecionada with ChangeNotifier {
-  DateTime _dataSelecionada = DateTime.now().add(Duration(days: 30));
+  DateTime _dataSelecionada = DateTime.now();
 
   DateTime get dataSelecionada => _dataSelecionada;
 

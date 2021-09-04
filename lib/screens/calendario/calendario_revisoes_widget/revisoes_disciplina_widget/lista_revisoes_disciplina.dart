@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
-import 'package:revisao_estudos/screens/calendario/lista_revisoes_widget/tiles_widgets/revisao_tile.dart';
+import 'package:revisao_estudos/screens/calendario/calendario_revisoes_widget/tiles_widgets/revisao_tile.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 
 class ListaRevisoesDisciplina extends StatelessWidget {
@@ -30,8 +30,7 @@ class ListaRevisoesDisciplina extends StatelessWidget {
             physics: ClampingScrollPhysics(),
             shrinkWrap: true,
             itemCount: revisoes.length,
-            itemBuilder: (context, index) =>
-                RevisaoTile(revisao: revisoes[index]),
+            itemBuilder: (context, index) => RevisaoTile(revisao: revisoes[index]),
           );
         } else {
           return CircularProgressIndicator();

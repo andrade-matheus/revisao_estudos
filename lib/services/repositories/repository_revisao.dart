@@ -20,12 +20,22 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
     return revisoes;
   }
 
-  // Todas revisões para essa data incluindo as atrasadas.
+  // // Todas revisões para essa data incluindo as atrasadas.
+  // Future<List<Revisao>> obterTodosPorData(DateTime data) async {
+  //   List<Revisao> revisoes = await obterTodos();
+  //   revisoes.removeWhere((element) => element.proxRevisao.isAfter(DateHelper.amanha));
+  //   return revisoes;
+  // }
+
   Future<List<Revisao>> obterTodosPorData(DateTime data) async {
-    List<Revisao> revisoes = await obterTodos();
-    revisoes.removeWhere(
-        (element) => element.proxRevisao.isAfter(DateHelper.amanha));
-    return revisoes;
+    final bd = await database;
+    var dataSql = DateHelper.formatarParaSql(data);
+    var resultado = await bd.query(
+      nomeTabela,
+      where: 'date(proxRevisao) < ?',
+      whereArgs: ["$dataSql%"],
+    );
+    return await fromMapList(resultado);
   }
 
   // Todas revisões de uma disciplina para essa data incluindo as atrasadas.
@@ -38,8 +48,7 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
       whereArgs: [disciplina.id],
     );
 
-    revisoes.removeWhere(
-        (element) => element.proxRevisao.isAfter(DateHelper.amanha));
+    revisoes.removeWhere((element) => element.proxRevisao.isAfter(DateHelper.amanha));
     return revisoes;
   }
 }

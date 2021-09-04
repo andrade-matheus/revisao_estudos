@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
-import 'package:revisao_estudos/screens/calendario/lista_revisoes_widget/lista_revisoes.dart';
+import 'package:revisao_estudos/screens/calendario/calendario_revisoes_widget/lista_disciplina_widget/lista_disciplina.dart';
 import 'package:revisao_estudos/screens/calendario/seletor_data_widget/seletor_data.dart';
 import 'package:revisao_estudos/screens/revisao/adicionar_revisao/adicinar_revisao_page.dart';
 import 'package:revisao_estudos/widgets/plano_de_fundo_widget/plano_de_fundo.dart';
@@ -41,7 +41,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
           children: [
             SeletorData(),
             Expanded(
-              child: ListaRevisoes(),
+              child: ListaDisciplina(),
             ),
           ],
         ),

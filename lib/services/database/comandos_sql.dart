@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class ComandosSQL {
   static String foreignKeys = 'PRAGMA foreign_keys = ON;';
 

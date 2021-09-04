@@ -1,4 +1,3 @@
-import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/models/entity/frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_common.dart';
 

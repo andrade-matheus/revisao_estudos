@@ -1,8 +1,9 @@
 import 'package:revisao_estudos/models/entity/disciplina.dart';
-import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/database/database_config.dart';
 import 'package:revisao_estudos/services/repositories/repository_common.dart';
+import 'package:revisao_estudos/services/repositories/repository_log_revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
+import 'package:revisao_estudos/utils/date/date_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
 class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
@@ -22,13 +23,22 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
 
   Future<List<Disciplina>> obterTodosComRevisoesPorData(DateTime data) async {
     List<Disciplina> disciplinas = [];
-    List<Revisao> revisoes = [];
 
-    RepositoryRevisao repositoryRevisao = RepositoryRevisao();
-    revisoes = await repositoryRevisao.obterTodosPorData(data);
-    for (var rev in revisoes) {
-      if (!disciplinas.contains(rev.disciplina)) {
-        disciplinas.add(rev.disciplina);
+    if (DateHelper.isLog(data)) {
+      var repository = RepositoryLogRevisao();
+      var logRevisoes = await repository.obterTodosPorData(data);
+      for (var logRev in logRevisoes) {
+        if (!disciplinas.contains(logRev.revisao.disciplina)) {
+          disciplinas.add(logRev.revisao.disciplina);
+        }
+      }
+    } else {
+      var repository = RepositoryRevisao();
+      var revisoes = await repository.obterTodosPorData(data);
+      for (var rev in revisoes) {
+        if (!disciplinas.contains(rev.disciplina)) {
+          disciplinas.add(rev.disciplina);
+        }
       }
     }
 

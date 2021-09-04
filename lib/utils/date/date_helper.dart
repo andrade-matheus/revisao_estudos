@@ -13,6 +13,10 @@ class DateHelper {
     return DateFormat.MMMMEEEEd('pt_BR').format(data);
   }
 
+  static String formatarParaSql(DateTime data) {
+    return DateFormat("yyyy-MM-dd").format(data);
+  }
+
   static bool isLog(DateTime data) {
     if (data.isBefore(hoje)) {
       return true;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/models/entity/disciplina.dart';
-import 'package:revisao_estudos/screens/calendario/lista_revisoes_widget/revisoes_disciplina_widget/lista_revisoes_disciplina.dart';
+import 'package:revisao_estudos/screens/calendario/calendario_revisoes_widget/revisoes_disciplina_widget/lista_revisoes_disciplina.dart';
 
 class DisciplinaTile extends StatelessWidget {
   final Disciplina disciplina;

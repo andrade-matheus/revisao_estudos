@@ -50,8 +50,8 @@ class Revisao extends EntityCommon {
       'idDisciplina': disciplina.id,
       'idFrequencia': frequencia.id,
       'nome': nome,
-      'dataCadastro': dataCadastro.toString(),
-      'proxRevisao': proxRevisao.toString(),
+      'dataCadastro': dataCadastro.toIso8601String(),
+      'proxRevisao': proxRevisao.toIso8601String(),
       'vezesRevisadas': vezesRevisadas,
       'isArchived': isArchived ? 1 : 0,
     };

@@ -45,10 +45,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
     return await fromMapList(resultado);
   }
 
-  Future<List<T>> obterTodosPor({
-    @required String where,
-    @required List<Object> whereArgs,
-  }) async {
+  Future<List<T>> obterTodosPor({@required String where, @required List<Object> whereArgs}) async {
     final bd = await database;
     var resultado = await bd.query(
       nomeTabela,
