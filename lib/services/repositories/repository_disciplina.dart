@@ -26,7 +26,11 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
 
     RepositoryRevisao repositoryRevisao = RepositoryRevisao();
     revisoes = await repositoryRevisao.obterTodosPorData(data);
-    revisoes.forEach((element) => disciplinas.add(element.disciplina));
+    for (var rev in revisoes) {
+      if (!disciplinas.contains(rev.disciplina)) {
+        disciplinas.add(rev.disciplina);
+      }
+    }
 
     return disciplinas;
   }

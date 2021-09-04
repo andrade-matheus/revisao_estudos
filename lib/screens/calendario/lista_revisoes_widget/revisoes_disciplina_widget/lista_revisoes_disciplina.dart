@@ -9,7 +9,10 @@ import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 class ListaRevisoesDisciplina extends StatelessWidget {
   final Disciplina disciplina;
 
-  const ListaRevisoesDisciplina({Key key, this.disciplina}) : super(key: key);
+  const ListaRevisoesDisciplina({
+    Key key,
+    @required this.disciplina,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

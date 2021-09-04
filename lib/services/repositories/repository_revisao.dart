@@ -38,11 +38,8 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
       whereArgs: [disciplina.id],
     );
 
-    for (var revisao in revisoes) {
-      if (revisao.proxRevisao.isAfter(DateHelper.amanha)) {
-        revisoes.removeWhere((element) => element.id == revisao.id);
-      }
-    }
+    revisoes.removeWhere(
+        (element) => element.proxRevisao.isAfter(DateHelper.amanha));
     return revisoes;
   }
 }

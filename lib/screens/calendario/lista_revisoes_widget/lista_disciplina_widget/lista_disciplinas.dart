@@ -15,7 +15,7 @@ class ListaDisciplinas extends StatelessWidget {
       itemCount: disciplinas.length,
       itemBuilder: (context, index) {
         Disciplina disciplina = disciplinas[index];
-        return DisciplinaTile(title: disciplina.nome);
+        return DisciplinaTile(disciplina: disciplina);
       },
     );
   }
