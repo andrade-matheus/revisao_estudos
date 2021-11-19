@@ -26,4 +26,10 @@ class DateHelper {
       return true;
     }
   }
+
+  static bool isSameDay(DateTime primeira, DateTime segunda){
+    var primeiraHoje = DateTime(primeira.year, primeira.month, primeira.day);
+    var primeiraAmanha = primeiraHoje.add(Duration(days: 1));
+    return segunda.isAtSameMomentAs(primeiraHoje) || (segunda.isAfter(primeiraHoje) && segunda.isBefore(primeiraAmanha));
+  }
 }

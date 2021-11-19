@@ -33,13 +33,10 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
 
   Future<List<Revisao>> obterPorDataParaCalendario(DateTime data) async {
     final bd = await database;
-    var dataSql = DateHelper.formatarParaSql(data);
-    var resultado = await bd.query(
-      nomeTabela,
-      where: 'date(proxRevisao) == ?',
-      whereArgs: ["date($dataSql)"],
-    );
-    return await fromMapList(resultado);
+    var resultado = await bd.query(nomeTabela);
+    var revisoes = await fromMapList(resultado);
+    revisoes.removeWhere((element) => !DateHelper.isSameDay(data, element.proxRevisao));
+    return revisoes;
   }
 
   Future<List<Revisao>> obterEmLogPorDisciplinaPorData(Disciplina disciplina, DateTime data) async {
