@@ -6,6 +6,7 @@ import 'package:revisao_estudos/services/repositories/repository_disciplina.dart
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_log_revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
+import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 class Revisao extends EntityCommon {
   int id;
@@ -70,7 +71,7 @@ class Revisao extends EntityCommon {
       diasProxRevisao = int.parse(valoresFrequencia[vezesRevisadas]);
     }
 
-    proxRevisao = proxRevisao.add(Duration(days: diasProxRevisao));
+    proxRevisao = DateHelper.hoje.add(Duration(days: diasProxRevisao));
     RepositoryRevisao repositoryRevisao = RepositoryRevisao();
     repositoryRevisao.atualizar(this);
 
