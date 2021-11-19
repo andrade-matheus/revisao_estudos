@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
+import 'package:revisao_estudos/models/provider/data_selecionada.dart';
 
 class RevisaoTile extends StatefulWidget {
   final Revisao revisao;
@@ -29,6 +31,7 @@ class _RevisaoTileState extends State<RevisaoTile> {
         icon: Icon(Icons.check_outlined),
         onPressed: () async {
           await realizarRevisaoDialog(context);
+          context.read<DataSelecionada>().updateState();
         },
       ),
     );

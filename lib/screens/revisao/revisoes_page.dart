@@ -22,6 +22,7 @@ class _RevisoesPageState extends State<RevisoesPage> {
   RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
   RepositoryRevisao repositoryRevisao = RepositoryRevisao();
 
+  //TODO: REFATORAR TUDO
   @override
   Widget build(BuildContext context) {
     return PlanoDeFundo(
@@ -61,11 +62,9 @@ class _RevisoesPageState extends State<RevisoesPage> {
                           title: Text(disciplina.nome),
                           children: [
                             FutureBuilder(
-                              future: repositoryRevisao
-                                  .obterTodosPorDisciplina(disciplina),
+                              future: repositoryRevisao.obterPorDisciplina(disciplina),
                               builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.done) {
+                                if (snapshot.connectionState == ConnectionState.done) {
                                   return ListView.builder(
                                     physics: ClampingScrollPhysics(),
                                     shrinkWrap: true,
@@ -73,24 +72,20 @@ class _RevisoesPageState extends State<RevisoesPage> {
                                     itemBuilder: (context, index) {
                                       Revisao revisao = snapshot.data[index];
                                       return ListTile(
-                                        contentPadding:
-                                            EdgeInsets.fromLTRB(30, 0, 0, 0),
+                                        contentPadding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                                         title: Text(revisao.nome),
                                         onTap: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetalhesRevisaoPage(revisao),
+                                              builder: (context) => DetalhesRevisaoPage(revisao),
                                             ),
                                           );
                                         },
                                         trailing: IconButton(
                                             icon: Icon(Icons.delete_outline),
                                             onPressed: () async {
-                                              bool resultado =
-                                                  await excluirRevisaoDialog(
-                                                      context, revisao);
+                                              bool resultado = await excluirRevisaoDialog(context, revisao);
                                               if (resultado) {
                                                 setState(() {});
                                               }

@@ -26,8 +26,8 @@ class LogRevisao extends EntityCommon {
   Map<String, dynamic> toMap() {
     return {
       'id': id ?? 0,
-      'revisao': revisao,
-      'dataRevisao': dataRevisao.toString(),
+      'idRevisao': revisao.id,
+      'dataRevisao': dataRevisao.toIso8601String(),
     };
   }
 

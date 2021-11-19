@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
 Future<tz.TZDateTime> horarioNotificacao() async {
-  final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
   int horaNotificacao = sharedPreferences.getInt('HORA_NOTIFICACAO') ?? 9;
-  int minutosNotificacao = sharedPreferences.getInt('MINUTOS_NOTIFICACAO') ?? 30;
+  int minutosNotificacao =
+      sharedPreferences.getInt('MINUTOS_NOTIFICACAO') ?? 30;
 
   final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-  tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, horaNotificacao, minutosNotificacao);
+  tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month,
+      now.day, horaNotificacao, minutosNotificacao);
 
   if (scheduledDate.isBefore(now)) {
     scheduledDate = scheduledDate.add(const Duration(days: 1));
@@ -37,8 +40,10 @@ iniciarNotificacoes() async {
 }
 
 agendarNotificacao() async {
-  final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  bool notificacaoDiaria = sharedPreferences.getBool('NOTIFICACAO_DIARIA') ?? true;
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  bool notificacaoDiaria =
+      sharedPreferences.getBool('NOTIFICACAO_DIARIA') ?? true;
 
   if (!notificacaoDiaria) {
     flutterLocalNotificationsPlugin.cancelAll();
@@ -61,7 +66,8 @@ agendarNotificacao() async {
   var generalDetails = NotificationDetails(android: androidDetails);
 
   tz.initializeTimeZones();
-  tz.setLocalLocation(tz.getLocation(await FlutterNativeTimezone.getLocalTimezone()));
+  tz.setLocalLocation(
+      tz.getLocation(await FlutterNativeTimezone.getLocalTimezone()));
 
   var scheduleTime = await horarioNotificacao();
 

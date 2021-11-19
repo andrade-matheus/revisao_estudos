@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // imprimeBancoDeDados();
+    imprimeBancoDeDados();
     return MaterialApp(
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
@@ -61,24 +61,23 @@ class _MyAppState extends State<MyApp> {
     var revisoes = await repositoryRevisao.obterTodos();
     var logRevisoes = await repositoryLogRevisao.obterTodos();
 
-    var item;
     print('\nFREQUENCIAS');
-    for (item in frequencias) {
+    for (var item in frequencias) {
       print(item.toString());
     }
 
     print('\nDISCIPLINAS');
-    for (item in disciplinas) {
+    for (var item in disciplinas) {
       print(item.toString());
     }
 
     print('\nREVISOES');
-    for (item in revisoes) {
+    for (var item in revisoes) {
       print(item.toString());
     }
 
     print('\nLOG-REVISOES');
-    for (item in logRevisoes) {
+    for (var item in logRevisoes) {
       print(item.toString());
     }
   }

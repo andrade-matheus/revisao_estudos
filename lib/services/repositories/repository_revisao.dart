@@ -11,8 +11,8 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
   Function get fromMap => Revisao.fromMap;
 
   // Todas revisões de um disciplina
-  Future<List<Revisao>> obterTodosPorDisciplina(Disciplina disciplina) async {
-    List<Revisao> revisoes = await obterTodosPor(
+  Future<List<Revisao>> obterPorDisciplina(Disciplina disciplina) async {
+    List<Revisao> revisoes = await obterPor(
       where: 'idDisciplina = ?',
       whereArgs: [disciplina.id],
     );
@@ -20,35 +20,57 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
     return revisoes;
   }
 
-  // // Todas revisões para essa data incluindo as atrasadas.
-  // Future<List<Revisao>> obterTodosPorData(DateTime data) async {
-  //   List<Revisao> revisoes = await obterTodos();
-  //   revisoes.removeWhere((element) => element.proxRevisao.isAfter(DateHelper.amanha));
-  //   return revisoes;
-  // }
-
-  Future<List<Revisao>> obterTodosPorData(DateTime data) async {
+  Future<List<Revisao>> obterPorData(DateTime data) async {
     final bd = await database;
     var dataSql = DateHelper.formatarParaSql(data);
     var resultado = await bd.query(
       nomeTabela,
       where: 'date(proxRevisao) < ?',
-      whereArgs: ["$dataSql%"],
+      whereArgs: ["date($dataSql)"],
     );
     return await fromMapList(resultado);
   }
 
+  Future<List<Revisao>> obterPorDataParaCalendario(DateTime data) async {
+    final bd = await database;
+    var dataSql = DateHelper.formatarParaSql(data);
+    var resultado = await bd.query(
+      nomeTabela,
+      where: 'date(proxRevisao) == ?',
+      whereArgs: ["date($dataSql)"],
+    );
+    return await fromMapList(resultado);
+  }
+
+  Future<List<Revisao>> obterEmLogPorDisciplinaPorData(Disciplina disciplina, DateTime data) async {
+    final bd = await database;
+    var dataSql = DateHelper.formatarParaSql(data);
+    String sql = """ 
+      SELECT revisao.id, idDisciplina, idFrequencia, nome, dataCadastro, proxRevisao, vezesRevisadas, isArchived
+      FROM logRevisao
+      INNER JOIN revisao on revisao.id = logRevisao.idRevisao
+      WHERE date(proxRevisao) == date($dataSql) AND idDisciplina == ${disciplina.id}
+    """;
+    var resultado = await bd.rawQuery(sql);
+    return await fromMapList(resultado);
+  }
+
   // Todas revisões de uma disciplina para essa data incluindo as atrasadas.
-  Future<List<Revisao>> obterTodosPorDisciplinaPorData(
-    Disciplina disciplina,
-    DateTime data,
-  ) async {
-    List<Revisao> revisoes = await obterTodosPor(
-      where: 'idDisciplina = ?',
+  Future<List<Revisao>> obterPorDisciplinaPorData(Disciplina disciplina, DateTime data) async {
+    List<Revisao> revisoes = await obterPor(
+      where: 'idDisciplina = ? AND date(proxRevisao)',
       whereArgs: [disciplina.id],
     );
 
     revisoes.removeWhere((element) => element.proxRevisao.isAfter(DateHelper.amanha));
     return revisoes;
+  }
+
+  Future<List<Revisao>> obterParaCaledario(Disciplina disciplina, DateTime data) async {
+    if (data.isBefore(DateHelper.hoje)) {
+      return await obterEmLogPorDisciplinaPorData(disciplina, data);
+    } else {
+      return await obterPorDisciplinaPorData(disciplina, data);
+    }
   }
 }

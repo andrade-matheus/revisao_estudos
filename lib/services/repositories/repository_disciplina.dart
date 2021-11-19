@@ -24,7 +24,7 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
   Future<List<Disciplina>> obterTodosComRevisoesPorData(DateTime data) async {
     List<Disciplina> disciplinas = [];
 
-    if (DateHelper.isLog(data)) {
+    if (data.isBefore(DateHelper.hoje)) {
       var repository = RepositoryLogRevisao();
       var logRevisoes = await repository.obterTodosPorData(data);
       for (var logRev in logRevisoes) {
@@ -34,7 +34,7 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
       }
     } else {
       var repository = RepositoryRevisao();
-      var revisoes = await repository.obterTodosPorData(data);
+      var revisoes = await repository.obterPorDataParaCalendario(data);
       for (var rev in revisoes) {
         if (!disciplinas.contains(rev.disciplina)) {
           disciplinas.add(rev.disciplina);

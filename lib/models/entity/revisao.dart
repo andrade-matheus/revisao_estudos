@@ -70,7 +70,7 @@ class Revisao extends EntityCommon {
       diasProxRevisao = int.parse(valoresFrequencia[vezesRevisadas]);
     }
 
-    proxRevisao.add(Duration(days: diasProxRevisao));
+    proxRevisao = proxRevisao.add(Duration(days: diasProxRevisao));
     RepositoryRevisao repositoryRevisao = RepositoryRevisao();
     repositoryRevisao.atualizar(this);
 
