@@ -17,7 +17,7 @@ class LogRevisao extends EntityCommon {
     RepositoryRevisao revisaoRepository = RepositoryRevisao();
     return LogRevisao(
       id: json['id'],
-      revisao: await revisaoRepository.obterPorId(json['revisao']),
+      revisao: await revisaoRepository.obterPorId(json['idRevisao']),
       dataRevisao: DateTime.parse(json['dataRevisao']),
     );
   }
