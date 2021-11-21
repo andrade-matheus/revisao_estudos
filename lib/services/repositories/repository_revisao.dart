@@ -52,20 +52,27 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
     return await fromMapList(resultado);
   }
 
-  // Todas revisões de uma disciplina para essa data incluindo as atrasadas.
+  // Todas revisões de uma disciplina para essa data.
   Future<List<Revisao>> obterPorDisciplinaPorData(Disciplina disciplina, DateTime data) async {
-    List<Revisao> revisoes = await obterPor(
-      where: 'idDisciplina = ? AND date(proxRevisao)',
-      whereArgs: [disciplina.id],
-    );
+    List<Revisao> revisoes = await obterPorDisciplina(disciplina);
+    revisoes.removeWhere((revisao) => !DateHelper.isSameDay(revisao.proxRevisao, data));
 
-    revisoes.removeWhere((element) => element.proxRevisao.isAfter(DateHelper.amanha));
+    return revisoes;
+  }
+
+  // Todas revisões de uma disciplina para essa data incluindo atrasadas.
+  Future<List<Revisao>> obterPorDisciplinaPorDataComAtrasadas(Disciplina disciplina, DateTime data) async {
+    List<Revisao> revisoes = await obterPorDisciplina(disciplina);
+    revisoes.removeWhere((revisao) => !revisao.proxRevisao.isBefore(data.add(Duration(days: 1))));
+
     return revisoes;
   }
 
   Future<List<Revisao>> obterParaCaledario(Disciplina disciplina, DateTime data) async {
     if (data.isBefore(DateHelper.hoje)) {
       return await obterEmLogPorDisciplinaPorData(disciplina, data);
+    } else if(data.isBefore(DateHelper.amanha)) {
+      return await obterPorDisciplinaPorDataComAtrasadas(disciplina, data);
     } else {
       return await obterPorDisciplinaPorData(disciplina, data);
     }
