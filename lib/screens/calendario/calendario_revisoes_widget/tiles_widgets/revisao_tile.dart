@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
+import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 class RevisaoTile extends StatefulWidget {
   final Revisao revisao;
@@ -108,10 +109,7 @@ class _RevisaoTileState extends State<RevisaoTile> {
   }
 
   int _diasDeAtraso(Revisao revisao) {
-    DateTime now = new DateTime.now();
-    DateTime hoje = new DateTime(now.year, now.month, now.day);
-
-    return hoje.difference(revisao.proxRevisao).inDays;
+    return DateHelper.hoje.difference(revisao.proxRevisao).inDays;
   }
 
   Future<bool> realizarRevisaoDialog(BuildContext context) async {

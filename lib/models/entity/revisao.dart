@@ -78,7 +78,7 @@ class Revisao extends EntityCommon {
     LogRevisao novoLog = LogRevisao(
       id: 0,
       revisao: this,
-      dataRevisao: DateTime.now(),
+      dataRevisao: DateHelper.hoje,
     );
     RepositoryLogRevisao repositoryLogRevisao = RepositoryLogRevisao();
     repositoryLogRevisao.adicionar(novoLog);

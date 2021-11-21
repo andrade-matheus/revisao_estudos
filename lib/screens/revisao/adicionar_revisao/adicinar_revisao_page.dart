@@ -6,6 +6,7 @@ import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
+import 'package:revisao_estudos/utils/date/date_helper.dart';
 import 'package:revisao_estudos/widgets/date_picker/date_picker.dart';
 import 'package:revisao_estudos/widgets/plano_de_fundo_widget/plano_de_fundo.dart';
 
@@ -23,7 +24,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
   TextEditingController _vezesRevisadasTextField = TextEditingController();
   TextEditingController _dataTextField = TextEditingController();
 
-  DateTime dataSelecionada = DateTime.now();
+  DateTime dataSelecionada = DateHelper.hoje;
   Disciplina disciplinaSelecinada;
   Frequencia frequenciaSelecionada;
 
@@ -37,7 +38,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
 
   @override
   void initState() {
-    dataSelecionada = DateTime.now();
+    dataSelecionada = DateHelper.hoje;
 
     _vezesRevisadasTextField.value = TextEditingValue(
         text: "0",
@@ -184,7 +185,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
                             border: OutlineInputBorder(),
                             labelText: "Data",
                             hintText: DateFormat('dd / MM / yyyy')
-                                .format(DateTime.now())),
+                                .format(DateHelper.hoje)),
                         validator: (text) {
                           if (text == null || text.isEmpty) {
                             return 'Obrigatório.';
