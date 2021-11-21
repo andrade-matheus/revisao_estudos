@@ -35,7 +35,7 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
     final bd = await database;
     var resultado = await bd.query(nomeTabela);
     var revisoes = await fromMapList(resultado);
-    revisoes.removeWhere((element) => !DateHelper.isSameDay(data, element.proxRevisao));
+    revisoes.removeWhere((revisao) => !revisao.proxRevisao.isBefore(data.add(Duration(days: 1))));
     return revisoes;
   }
 
