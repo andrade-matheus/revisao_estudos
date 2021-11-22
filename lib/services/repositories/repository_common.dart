@@ -55,6 +55,12 @@ abstract class RepositoryCommon<T extends EntityCommon> {
     return await fromMapList(resultado);
   }
 
+  Future<List<T>> obterPorRawQuery(String query, List<Object> arguments) async {
+    final bd = await database;
+    var resultado = await bd.rawQuery(query, arguments);
+    return await fromMapList(resultado);
+  }
+
   Future<T> atualizar(T param) async {
     final db = await database;
     await db.update(
