@@ -13,7 +13,7 @@ class CalendarioPage extends StatefulWidget {
 }
 
 class _CalendarioPageState extends State<CalendarioPage> {
-  DateTime dataSelecionada = DateHelper.hoje;
+  DateTime dataSelecionada = DateHelper.hoje();
   Color corPrimaria = Colors.blue;
 
   @override

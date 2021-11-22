@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 class DataSelecionada with ChangeNotifier {
-  DateTime _dataSelecionada = DateHelper.hoje;
+  DateTime _dataSelecionada = DateHelper.hoje();
 
   DateTime get dataSelecionada => _dataSelecionada;
 

@@ -71,14 +71,14 @@ class Revisao extends EntityCommon {
       diasProxRevisao = int.parse(valoresFrequencia[vezesRevisadas]);
     }
 
-    proxRevisao = DateHelper.hoje.add(Duration(days: diasProxRevisao));
+    proxRevisao = DateHelper.hoje().add(Duration(days: diasProxRevisao));
     RepositoryRevisao repositoryRevisao = RepositoryRevisao();
     repositoryRevisao.atualizar(this);
 
     LogRevisao novoLog = LogRevisao(
       id: 0,
       revisao: this,
-      dataRevisao: DateHelper.hoje,
+      dataRevisao: DateHelper.hoje(),
     );
     RepositoryLogRevisao repositoryLogRevisao = RepositoryLogRevisao();
     repositoryLogRevisao.adicionar(novoLog);

@@ -17,7 +17,7 @@ class ListaDisciplina extends StatelessWidget {
     RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
     List<Disciplina> disciplinas = [];
     return FutureBuilder(
-      future: repositoryDisciplina.obterTodosComRevisoesPorData(dataSelecionada),
+      future: repositoryDisciplina.obterTodasComRevisoesPorData(dataSelecionada),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           disciplinas = snapshot.data;

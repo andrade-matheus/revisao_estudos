@@ -16,7 +16,6 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
       where: 'idDisciplina = ?',
       whereArgs: [disciplina.id],
     );
-
     return revisoes;
   }
 
@@ -29,14 +28,6 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
       whereArgs: ["date($dataSql)"],
     );
     return await fromMapList(resultado);
-  }
-
-  Future<List<Revisao>> obterPorDataParaCalendario(DateTime data) async {
-    final bd = await database;
-    var resultado = await bd.query(nomeTabela);
-    var revisoes = await fromMapList(resultado);
-    revisoes.removeWhere((revisao) => !revisao.proxRevisao.isBefore(data.add(Duration(days: 1))));
-    return revisoes;
   }
 
   Future<List<Revisao>> obterEmLogPorDisciplinaPorData(Disciplina disciplina, DateTime data) async {
@@ -69,9 +60,9 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
   }
 
   Future<List<Revisao>> obterParaCaledario(Disciplina disciplina, DateTime data) async {
-    if (data.isBefore(DateHelper.hoje)) {
+    if (data.isBefore(DateHelper.hoje())) {
       return await obterEmLogPorDisciplinaPorData(disciplina, data);
-    } else if(data.isBefore(DateHelper.amanha)) {
+    } else if(data.isBefore(DateHelper.amanha())) {
       return await obterPorDisciplinaPorDataComAtrasadas(disciplina, data);
     } else {
       return await obterPorDisciplinaPorData(disciplina, data);

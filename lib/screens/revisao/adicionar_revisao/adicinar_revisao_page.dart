@@ -24,7 +24,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
   TextEditingController _vezesRevisadasTextField = TextEditingController();
   TextEditingController _dataTextField = TextEditingController();
 
-  DateTime dataSelecionada = DateHelper.hoje;
+  DateTime dataSelecionada = DateHelper.hoje();
   Disciplina disciplinaSelecinada;
   Frequencia frequenciaSelecionada;
 
@@ -38,7 +38,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
 
   @override
   void initState() {
-    dataSelecionada = DateHelper.hoje;
+    dataSelecionada = DateHelper.hoje();
 
     _vezesRevisadasTextField.value = TextEditingValue(
         text: "0",
@@ -185,7 +185,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
                             border: OutlineInputBorder(),
                             labelText: "Data",
                             hintText: DateFormat('dd / MM / yyyy')
-                                .format(DateHelper.hoje)),
+                                .format(DateHelper.hoje())),
                         validator: (text) {
                           if (text == null || text.isEmpty) {
                             return 'Obrigatório.';

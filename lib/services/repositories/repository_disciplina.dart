@@ -20,9 +20,9 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
   }
 
   Future<List<Disciplina>> obterTodasComRevisoesPorData(DateTime data) async {
-    if (data.isBefore(DateHelper.hoje)) {
+    if (data.isBefore(DateHelper.hoje())) {
       return await obterTodasComLogRevisoesPorData(data);
-    } else if (data.isAfter(DateHelper.amanha) || data.isAtSameMomentAs(DateHelper.amanha)){
+    } else if (data.isAfter(DateHelper.amanha()) || data.isAtSameMomentAs(DateHelper.amanha())){
       return await _obterTodasComRevisoesPorData(data);
     } else {
       return await obterTodasComRevisoesParaHoje();
@@ -65,7 +65,7 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
     String query = """SELECT DISTINCT disciplina.id as id, disciplina.nome as nome
                       FROM disciplina INNER JOIN revisao ON disciplina.id = revisao.idDisciplina
                       WHERE date(revisao.proxRevisao) < date(?);""";
-    List<Object> arguments = [DateHelper.formatarParaSql(DateHelper.hoje)];
+    List<Object> arguments = [DateHelper.formatarParaSql(DateHelper.hoje())];
     disciplinas = await obterPorRawQuery(query, arguments);
 
     return disciplinas;

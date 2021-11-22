@@ -1,9 +1,9 @@
 import 'package:intl/intl.dart';
 
 class DateHelper {
-  static DateTime now = DateTime.now();
-  static DateTime hoje = DateTime(now.year, now.month, now.day);
-  static DateTime amanha = hoje.add(Duration(days: 1));
+  static DateTime now () => DateTime.now();
+  static DateTime hoje () => DateTime(now().year, now().month, now().day);
+  static DateTime amanha () => hoje().add(Duration(days: 1));
 
   static String formatarData(DateTime data) {
     return DateFormat('yyyy-MM-dd').format(data);
@@ -18,9 +18,9 @@ class DateHelper {
   }
 
   static bool isLog(DateTime data) {
-    if (data.isBefore(hoje)) {
+    if (data.isBefore(hoje())) {
       return true;
-    } else if (data.isBefore(amanha)) {
+    } else if (data.isBefore(amanha())) {
       return false;
     } else {
       return true;
@@ -31,5 +31,9 @@ class DateHelper {
     var primeiraHoje = DateTime(primeira.year, primeira.month, primeira.day);
     var primeiraAmanha = primeiraHoje.add(Duration(days: 1));
     return segunda.isAtSameMomentAs(primeiraHoje) || (segunda.isAfter(primeiraHoje) && segunda.isBefore(primeiraAmanha));
+  }
+
+  static DateTime removeHora(DateTime data){
+    return DateTime(data.year, data.month, data.day);
   }
 }

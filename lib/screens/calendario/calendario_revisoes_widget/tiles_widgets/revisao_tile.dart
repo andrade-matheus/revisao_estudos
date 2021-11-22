@@ -109,7 +109,7 @@ class _RevisaoTileState extends State<RevisaoTile> {
   }
 
   int _diasDeAtraso(Revisao revisao) {
-    return DateHelper.hoje.difference(revisao.proxRevisao).inDays;
+    return DateHelper.hoje().difference(revisao.proxRevisao).inDays;
   }
 
   Future<bool> realizarRevisaoDialog(BuildContext context) async {
