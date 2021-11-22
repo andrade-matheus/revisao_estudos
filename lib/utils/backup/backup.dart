@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:revisao_estudos/services/database/database_config.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:convert' as convert;
@@ -67,7 +66,7 @@ class Backup {
 
         // Apagando os dados do Banco de Dados.
         for (String table in tables) {
-          await batch.delete(table);
+          batch.delete(table);
           print('------ DELETE $table');
         }
 
