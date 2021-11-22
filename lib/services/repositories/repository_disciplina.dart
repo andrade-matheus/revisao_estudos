@@ -31,7 +31,6 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
 
   // Retorna as disciplinas que tem Logs de Revisão para esse determinado dia.
   Future<List<Disciplina>> obterTodasComLogRevisoesPorData(DateTime data) async {
-    List<Disciplina> disciplinas = [];
     String query = """SELECT DISTINCT disciplina.id, disciplina.nome
                       FROM logRevisao 
                       INNER JOIN revisao ON logRevisao.idRevisao = revisao.id
@@ -39,35 +38,27 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
                       WHERE date(logRevisao.dataRevisao) = date(?);
                       """;
     List<Object> arguments = [DateHelper.formatarParaSql(data)];
-    disciplinas = await obterPorRawQuery(query, arguments);
-
-    return disciplinas;
+    return await obterPorRawQuery(query, arguments);
   }
 
 
   // Retorna as disciplinas que tem revisões para esse determinado dia e NÃO incluí as revisões atrasadas.
   Future<List<Disciplina>> _obterTodasComRevisoesPorData(DateTime data) async {
-    List<Disciplina> disciplinas = [];
     String query = """SELECT DISTINCT disciplina.id as id, disciplina.nome as nome
                       FROM disciplina INNER JOIN revisao ON disciplina.id = revisao.idDisciplina
                       WHERE date(revisao.proxRevisao) = date(?);
                       """;
 
     List<Object> arguments = [DateHelper.formatarParaSql(data)];
-    disciplinas = await obterPorRawQuery(query, arguments);
-
-    return disciplinas;
+    return await obterPorRawQuery(query, arguments);
   }
 
   // Retorna disciplinas que tem revisões para hoje incluindo as atrasadas.
   Future<List<Disciplina>> obterTodasComRevisoesParaHoje() async {
-    List<Disciplina> disciplinas = [];
     String query = """SELECT DISTINCT disciplina.id as id, disciplina.nome as nome
                       FROM disciplina INNER JOIN revisao ON disciplina.id = revisao.idDisciplina
                       WHERE date(revisao.proxRevisao) < date(?);""";
     List<Object> arguments = [DateHelper.formatarParaSql(DateHelper.hoje())];
-    disciplinas = await obterPorRawQuery(query, arguments);
-
-    return disciplinas;
+    return await obterPorRawQuery(query, arguments);
   }
 }
