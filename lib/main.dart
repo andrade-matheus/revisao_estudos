@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:revisao_estudos/controllers/disciplina_controller.dart';
-import 'package:revisao_estudos/controllers/frequencia_controller.dart';
-import 'package:revisao_estudos/controllers/log_revisao_controller.dart';
-import 'package:revisao_estudos/controllers/revisao_controller.dart';
-import 'package:revisao_estudos/models/classes/disciplina.dart';
-import 'package:revisao_estudos/models/classes/frequencia.dart';
-import 'package:revisao_estudos/models/classes/log_revisao.dart';
-import 'package:revisao_estudos/models/classes/revisao.dart';
-import 'package:revisao_estudos/notificacoes/controle_de_notificacoes.dart';
-import 'package:revisao_estudos/pages/calendario/calendario_page.dart';
-import 'database/database_creator.dart';
+import 'package:revisao_estudos/screens/calendario/calendario_page.dart';
+import 'package:revisao_estudos/services/database/database_config.dart';
+import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
+import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
+import 'package:revisao_estudos/services/repositories/repository_log_revisao.dart';
+import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
+import 'package:revisao_estudos/utils/notificacoes/controle_de_notificacoes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await DatabaseCreator().initDatabase();
+  await DatabaseConfig.initDB();
   runApp(MyApp());
   //  F56D11 launcher icon hex collor
   //  FFC68D adaptive icon background hex collor
@@ -26,7 +22,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
@@ -36,7 +31,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // imprimeBancoDeDados();
+    imprimeBancoDeDados();
     return MaterialApp(
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
@@ -56,32 +51,33 @@ class _MyAppState extends State<MyApp> {
   }
 
   imprimeBancoDeDados() async {
-    List<Frequencia> frequencias =
-        await FrequenciaController.obterTodasFrequencias();
-    List<Disciplina> disciplinas =
-        await DisciplinaController.obterTodasDisciplinas();
-    List<Revisao> revisoes = await RevisaoController.obterTodasRevisoes();
-    List<LogRevisao> logRevisoes =
-        await LogRevisaoController.obterTodosLogRevisoes();
+    RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
+    RepositoryFrequencia repositoryFrequencia = RepositoryFrequencia();
+    RepositoryRevisao repositoryRevisao = RepositoryRevisao();
+    RepositoryLogRevisao repositoryLogRevisao = RepositoryLogRevisao();
 
-    var item;
+    var frequencias = await repositoryFrequencia.obterTodos();
+    var disciplinas = await repositoryDisciplina.obterTodos();
+    var revisoes = await repositoryRevisao.obterTodos();
+    var logRevisoes = await repositoryLogRevisao.obterTodos();
+
     print('\nFREQUENCIAS');
-    for (item in frequencias) {
+    for (var item in frequencias) {
       print(item.toString());
     }
 
     print('\nDISCIPLINAS');
-    for (item in disciplinas) {
+    for (var item in disciplinas) {
       print(item.toString());
     }
 
     print('\nREVISOES');
-    for (item in revisoes) {
+    for (var item in revisoes) {
       print(item.toString());
     }
 
     print('\nLOG-REVISOES');
-    for (item in logRevisoes) {
+    for (var item in logRevisoes) {
       print(item.toString());
     }
   }
