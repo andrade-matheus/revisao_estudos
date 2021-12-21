@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:revisao_estudos/screens/calendario/calendario_page.dart';
 import 'package:revisao_estudos/services/database/database_config.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_log_revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
+import 'package:revisao_estudos/ui/screens/calendario/calendario_page.dart';
 import 'package:revisao_estudos/utils/notificacoes/controle_de_notificacoes.dart';
 
 void main() async {
