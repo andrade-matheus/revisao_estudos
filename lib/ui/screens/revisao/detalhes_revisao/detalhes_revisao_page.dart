@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/ui/screens/revisao/detalhes_revisao/detalhes_card_widget/detalhes_card.dart';
-import 'package:revisao_estudos/ui/widgets/plano_de_fundo_widget/plano_de_fundo.dart';
+import 'package:revisao_estudos/ui/widgets/plano_de_fundo/plano_de_fundo.dart';
 
 class DetalhesRevisaoPage extends StatefulWidget {
   final Revisao revisao;

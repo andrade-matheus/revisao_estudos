@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/ui/widgets/plano_de_fundo_widget/plano_de_fundo.dart';
+import 'package:revisao_estudos/ui/widgets/plano_de_fundo/plano_de_fundo.dart';
 
 class InfoFrequencia extends StatelessWidget {
   @override

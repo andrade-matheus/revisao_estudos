@@ -4,7 +4,7 @@ import 'package:revisao_estudos/models/provider/data_selecionada.dart';
 import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/lista_disciplina_widget/lista_disciplina.dart';
 import 'package:revisao_estudos/ui/screens/calendario/seletor_data_widget/seletor_data.dart';
 import 'package:revisao_estudos/ui/screens/revisao/adicionar_revisao/adicinar_revisao_page.dart';
-import 'package:revisao_estudos/ui/widgets/plano_de_fundo_widget/plano_de_fundo.dart';
+import 'package:revisao_estudos/ui/widgets/plano_de_fundo/plano_de_fundo.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 

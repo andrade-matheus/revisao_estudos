@@ -3,7 +3,7 @@ import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/ui/screens/disciplinas/adicionar_disciplina_widget/adicionar_disciplina_dialog.dart';
 import 'package:revisao_estudos/ui/screens/disciplinas/excluir_disciplina_widget/excluir_disciplina_dialog.dart';
-import 'package:revisao_estudos/ui/widgets/plano_de_fundo_widget/plano_de_fundo.dart';
+import 'package:revisao_estudos/ui/widgets/plano_de_fundo/plano_de_fundo.dart';
 
 class DisciplinasPage extends StatefulWidget {
   @override

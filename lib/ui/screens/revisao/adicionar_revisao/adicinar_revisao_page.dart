@@ -7,7 +7,7 @@ import 'package:revisao_estudos/services/repositories/repository_disciplina.dart
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 import 'package:revisao_estudos/ui/widgets/date_picker/date_picker.dart';
-import 'package:revisao_estudos/ui/widgets/plano_de_fundo_widget/plano_de_fundo.dart';
+import 'package:revisao_estudos/ui/widgets/plano_de_fundo/plano_de_fundo.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 // TODO : Refatorar esse classe, ta muito grande.

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/ui/widgets/drawer_widget/drawer.dart';
+import 'package:revisao_estudos/ui/widgets/drawer/drawer.dart';
 
 class PlanoDeFundo extends StatelessWidget {
   final String title;

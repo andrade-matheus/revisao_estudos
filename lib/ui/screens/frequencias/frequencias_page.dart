@@ -4,7 +4,7 @@ import 'package:revisao_estudos/services/repositories/repository_frequencia.dart
 import 'package:revisao_estudos/ui/screens/frequencias/adicionar_frequencia_widget/adicionar_frequencia_dialog.dart';
 import 'package:revisao_estudos/ui/screens/frequencias/excluir_frequencia_widget/excluir_frequencia_dialog.dart';
 import 'package:revisao_estudos/ui/screens/frequencias/info_frequencia_widget/info_frequencia.dart';
-import 'package:revisao_estudos/ui/widgets/plano_de_fundo_widget/plano_de_fundo.dart';
+import 'package:revisao_estudos/ui/widgets/plano_de_fundo/plano_de_fundo.dart';
 
 class FrequenciasPage extends StatefulWidget {
   @override

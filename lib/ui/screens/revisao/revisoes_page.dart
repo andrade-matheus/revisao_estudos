@@ -6,7 +6,7 @@ import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 import 'package:revisao_estudos/ui/screens/revisao/adicionar_revisao/adicinar_revisao_page.dart';
 import 'package:revisao_estudos/ui/screens/revisao/detalhes_revisao/detalhes_revisao_page.dart';
 import 'package:revisao_estudos/ui/screens/revisao/exculir_revisao_widget/excluir_revisao_dialog.dart';
-import 'package:revisao_estudos/ui/widgets/plano_de_fundo_widget/plano_de_fundo.dart';
+import 'package:revisao_estudos/ui/widgets/plano_de_fundo/plano_de_fundo.dart';
 
 class RevisoesPage extends StatefulWidget {
   @override
