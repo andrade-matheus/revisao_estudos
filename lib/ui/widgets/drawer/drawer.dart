@@ -61,7 +61,7 @@ Widget homeDrawer(BuildContext context) {
           leading: Icon(Icons.settings),
           onTap: () {
             Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => Configuracoes()));
+                MaterialPageRoute(builder: (context) => ConfiguracoesPage()));
           },
         ),
       ],
