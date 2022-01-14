@@ -5,16 +5,15 @@ Civil
 Constitucional
 Consumidor
 Criminologia
-Direitos Humanos
 Direitos Coletivos
+Direitos Humanos
 ECA
-Eleitoral
-Informativos
 PCD
 Penal
 Português
 Processo Civil
 Processo Penal
+TJDFT
 Tributário
 Frequencias
 1-7-15-30-60
@@ -26,38 +25,88 @@ Administrativo;30-60;Serviços públicos;1;2021-01-27;2021-04-27
 Administrativo;30-60;Responsabilidade Civil do Estado;0;2021-03-21;2021-04-20
 Administrativo;30-60;Atos administrativos;0;2021-03-23;2021-04-22
 Administrativo;30-60;Controle administrativo;1;2021-02-24;2021-05-25
+Administrativo;30-60;Organização da Administração Pública;1;2021-02-24;2021-05-25
+Administrativo;30-60;Agentes Públicos;1;2021-02-24;2021-05-25
+Administrativo;30-60;Contratos Administrativos;1;2021-02-24;2021-05-25
+Administrativo;30-60;Improbidade Administrativa;1;2021-02-24;2021-05-25
+Administrativo;30-60;Licitações;1;2021-02-24;2021-05-25
+Administrativo;30-60;Poderes da Administração;1;2021-02-24;2021-05-25
+Administrativo;30-60;Intervenção do Estado na propriedade;1;2021-02-24;2021-05-25
+Administrativo;30-60;Lei de acesso à informação;1;2021-02-24;2021-05-25
 Civil;30-60;Sucessões;1;2021-01-05;2021-04-05
 Civil;30-60;Princípios;1;2021-01-05;2021-04-05
 Civil;30-60;Contratos (parte geral);1;2021-01-05;2021-04-05
-Civil;30-60;Coisas;1;2021-03-03;2021-06-01
+Civil;30-60;Domicílio;1;2021-03-03;2021-06-01
+Civil;30-60;Bens;1;2021-03-03;2021-06-01
+Civil;30-60;Fatos jurídicos;1;2021-03-03;2021-06-01
+Civil;30-60;Negócios jurídicos;1;2021-03-03;2021-06-01
+Civil;30-60;Pessoas;1;2021-03-03;2021-06-01
+Civil;30-60;Prescrição e decadência;1;2021-03-03;2021-06-01
+Civil;30-60;Posse;1;2021-03-03;2021-06-01
+Civil;30-60;Propriedade;1;2021-03-03;2021-06-01
+Civil;30-60;Casamento;1;2021-03-03;2021-06-01
+Civil;30-60;Parentesco;1;2021-03-03;2021-06-01
 Constitucional;1-7-15-30-60;Eficácia das normas constitucionais;3;2021-02-26;2021-04-20
 Constitucional;30-60;Processo Legislativo;1;2021-03-03;2021-06-01
 Constitucional;30-60;Controle de constitucionalidade;0;2021-03-19;2021-04-18
 Constitucional;30-60;Imunidade parlamentares;0;2021-03-29;2021-04-28
 Constitucional;30-60;Foro especial;0;2021-03-29;2021-04-28
 Constitucional;30-60;CPI;0;2021-03-26;2021-04-25
+Constitucional;30-60;Direitos Políticos;0;2021-03-26;2021-04-25
+Constitucional;30-60;Intervenção;0;2021-03-26;2021-04-25
+Constitucional;30-60;Organização dos Poderes;0;2021-03-26;2021-04-25
+Constitucional;30-60;Repartição de competências;0;2021-03-26;2021-04-25
 Consumidor;30-60;Prescrição e decadência;1;2021-01-05;2021-04-05
 Consumidor;30-60;Práticas comerciais;1;2021-01-05;2021-04-05
 Consumidor;30-60;Responsabilidade civil;2;2021-01-05;2021-06-04
 Consumidor;1-7-15-30-60;Práticas abusivas;4;2021-01-18;2021-05-11
 Consumidor;1-7-15-30-60;Banco de dados e cadastro de consumidores;3;2021-03-11;2021-05-02
+Consumidor;1-7-15-30-60;Conceitos;4;2021-01-18;2021-05-11
+Consumidor;1-7-15-30-60;Princípios;4;2021-01-18;2021-05-11
+Consumidor;1-7-15-30-60;Sanções administrativas;4;2021-01-18;2021-05-11
+Consumidor;1-7-15-30-60;Proteção contratual;4;2021-01-18;2021-05-11
 Criminologia;1-7-15-30-60;Seletividade penal;4;2021-01-19;2021-05-12
 Criminologia;1-7-15-30-60;Escolas;4;2021-01-07;2021-04-22
 Criminologia;1-7-15-30-60;Teorias;4;2021-02-02;2021-05-26
+Criminologia;1-7-15-30-60;Prevenção, Finalidade e Modelos de Reação;4;2021-02-02;2021-05-26
+Direitos Humanos;1-7-15-30-60;Conceitos e características;4;2021-01-28;2021-05-21
 Direitos Humanos;1-7-15-30-60;Proteção internacional;4;2021-01-28;2021-05-21
 Direitos Humanos;1-7-15-30-60;Sistema Global de proteção (ONU);2;2021-03-22;2021-04-14
 Direitos Coletivos;1-7-15-30-60;Ação popular;4;2021-01-25;2021-05-18
 Direitos Coletivos;30-60;Ação civil pública;1;2021-01-25;2021-04-25
 Direitos Coletivos;30-60;Direitos coletivos;1;2021-03-05;2021-06-03
+Direitos Coletivos;30-60;Mandado de segurança;1;2021-03-05;2021-06-03
 ECA;30-60;Príncipios;1;2021-01-06;2021-04-06
 ECA;30-60;Responsabilidade;1;2021-01-06;2021-04-06
 ECA;30-60;Família natural e substituta;1;2021-01-06;2021-04-06
-Informativos;10;Informativos;6;2021-01-21;2021-04-01
+ECA;30-60;Atos infracionais;1;2021-01-06;2021-04-06
 PCD;30-60;Estatuto da PCD;1;2021-01-18;2021-04-18
 Penal;30-60;Concurso de pessoas;1;2021-01-08;2021-04-08
 Penal;1-7-15-30-60;Concurso de crimes;4;2021-01-28;2021-05-21
 Penal;1-7-15-30-60;Teoria da pena;2;2021-03-23;2021-04-15
-Penal;30-60;Crimes contra a Adm Pública;0;2021-03-01;2021-03-31
+Penal;30-60;Crimes Funcionais;0;2021-03-01;2021-03-31
+Penal;30-60;Crimes do particular contra a Adm;0;2021-03-01;2021-03-31
+Penal;30-60;Crimes contra a Adm Estrangeira;0;2021-03-01;2021-03-31
+Penal;30-60;Crimes contra a Adm da Justiça;0;2021-03-01;2021-03-31
+Penal;30-60;Crimes em Licitações;0;2021-03-01;2021-03-31
+Penal;30-60;Princípios;0;2021-03-01;2021-03-31
+Penal;30-60;Velocidades;0;2021-03-01;2021-03-31
+Penal;30-60;Lei penal no tempo e espaço;0;2021-03-01;2021-03-31
+Penal;30-60;Teoria do crime;0;2021-03-01;2021-03-31
+Penal;30-60;Tipicidade;0;2021-03-01;2021-03-31
+Penal;30-60;Antijuridicidade;0;2021-03-01;2021-03-31
+Penal;30-60;Culpabilidade;0;2021-03-01;2021-03-31
+Penal;30-60;Tentativa, desistência e arrependimento;0;2021-03-01;2021-03-31
+Penal;30-60;Crimes contra a vida;0;2021-03-01;2021-03-31
+Penal;30-60;Aplicação da pena;0;2021-03-01;2021-03-31
+Penal;30-60;Lei de abuso de autoridade;0;2021-03-01;2021-03-31
+Penal;30-60;Lei de crimes hediondos;0;2021-03-01;2021-03-31
+Penal;30-60;Sursis;0;2021-03-01;2021-03-31
+Penal;30-60;Lei de Drogas;0;2021-03-01;2021-03-31
+Penal;30-60;Efeitos da condenação;0;2021-03-01;2021-03-31
+Penal;30-60;Lesão corporal;0;2021-03-01;2021-03-31
+Penal;30-60;Crimes de periclitação da vida e da saúde;0;2021-03-01;2021-03-31
+Penal;30-60;Medidas de segurança;0;2021-03-01;2021-03-31
 Português;30-60;Morfosintaxe;2;2021-01-05;2021-06-04
 Português;1-7-15-30-60;Pontuação;4;2021-01-18;2021-05-11
 Português;10;Gramática;1;2021-04-01;2021-04-11
@@ -68,6 +117,13 @@ Processo Civil;30-60;Atos processuais;0;2021-03-14;2021-04-13
 Processo Civil;1-7-15-30-60;Competência;2;2021-03-23;2021-04-15
 Processo Civil;30-60;Formação, suspensão e extinção;0;2021-03-17;2021-04-16
 Processo Civil;1-7-15-30-60;Cumprimento de sentença;2;2021-03-22;2021-04-14
+Processo Civil;30-60;Tutelas provisórias;1;2021-03-01;2021-05-30
+Processo Civil;30-60;Execução;1;2021-03-01;2021-05-30
+Processo Civil;30-60;Ação provisória;1;2021-03-01;2021-05-30
+Processo Civil;30-60;IRDR;1;2021-03-01;2021-05-30
+Processo Civil;30-60;IAC e Homologação;1;2021-03-01;2021-05-30
+Processo Civil;30-60;Processos nos Tribunais;1;2021-03-01;2021-05-30
+Processo Civil;30-60;IAI e Reclamação;1;2021-03-01;2021-05-30
 Processo Penal;1-7-15-30-60;Competência;4;2021-01-14;2021-05-06
 Processo Penal;1-7-15-30-60;Ação civil ex delicto;4;2021-01-20;2021-05-13
 Processo Penal;1-7-15-30-60;Comunicação dos atos processuais;4;2021-02-05;2021-05-29
@@ -75,6 +131,20 @@ Processo Penal;1-7-15-30-60;Prisões;4;2021-02-04;2021-05-27
 Processo Penal;30-60;Princípios;1;2021-03-05;2021-06-03
 Processo Penal;1-7-15-30-60;Procedimento sumaríssimo (JECRIM);3;2021-03-11;2021-05-02
 Processo Penal;1-7-15-30-60;Prazos;2;2021-03-29;2021-04-20
+Processo Penal;1-7-15-30-60;IP;2;2021-03-29;2021-04-20
+Processo Penal;1-7-15-30-60;Ação Penal;2;2021-03-29;2021-04-20
+Processo Penal;1-7-15-30-60;Decadência, renúnica, perdão e perempção;2;2021-03-29;2021-04-20
+Processo Penal;1-7-15-30-60;Questões prejudiciais e processos incidentes;2;2021-03-29;2021-04-20
+Processo Penal;1-7-15-30-60;Lei processual penal;2;2021-03-29;2021-04-20
+Processo Penal;1-7-15-30-60;Provas;2;2021-03-29;2021-04-20
+Processo Penal;1-7-15-30-60;Relação jurídica processual;2;2021-03-29;2021-04-20
+Processo Penal;1-7-15-30-60;Nulidades;2;2021-03-29;2021-04-20
+Processo Penal;1-7-15-30-60;Recursos;2;2021-03-29;2021-04-20
+Processo Penal;1-7-15-30-60;ANPP;2;2021-03-29;2021-04-20
+TJDFT;1-7-15-30-60;Composição;2;2021-03-29;2021-04-20
+TJDFT;1-7-15-30-60;Conselho Especial;2;2021-03-29;2021-04-20
+TJDFT;1-7-15-30-60;Conselho da Magistratura;2;2021-03-29;2021-04-20
+TJDFT;1-7-15-30-60;Câmara de Uniformização;2;2021-03-29;2021-04-20
 Tributário;30-60;Responsabilidade tributária;1;2021-01-07;2021-04-07
 Tributário;1-7-15-30-60;Lançamento;4;2021-02-05;2021-05-29
 Tributário;1-7-15-30-60;Decadência;2;2021-03-30;2021-04-21

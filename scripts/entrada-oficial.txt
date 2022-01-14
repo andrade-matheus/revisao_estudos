@@ -5,14 +5,15 @@ Civil
 Constitucional
 Consumidor
 Criminologia
-Direitos Humanos
 Direitos Coletivos
+Direitos Humanos
 ECA
 PCD
 Penal
 Português
 Processo Civil
 Processo Penal
+TJDFT
 Tributário
 Frequencias
 1-7-15-30-60

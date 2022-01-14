@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:revisao_estudos/services/database/database_config.dart';
+import 'package:revisao_estudos/utils/date/date_helper.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:convert' as convert;
 
@@ -37,15 +39,18 @@ class Backup {
         backup[table] = result;
       }
 
+      Directory diretorio = await getExternalStorageDirectory();
+      print(diretorio.path);
+
       String json = convert.jsonEncode(backup);
-      String path = await FilePicker.platform.getDirectoryPath();
-      if (path != null) {
-        final file = File('$path/revisao_backup.txt');
+      if (diretorio != null) {
+        String path = diretorio.path;
+        final file = File('$path/revisao_backup_${DateHelper.formatarParaArquivo(DateTime.now())}.txt');
         file.writeAsString(json);
         return true;
-      } else {
-        return false;
       }
+
+      return false;
     } catch (e) {
       print(e.toString());
       return false;
@@ -62,7 +67,8 @@ class Backup {
 
         final db = await database;
         Batch batch = db.batch();
-        Map<String, dynamic> json = convert.jsonDecode(backup);
+        // Map<String, dynamic> json = convert.jsonDecode(backup);
+        var json = convert.jsonDecode(backup);
 
         // Apagando os dados do Banco de Dados.
         for (String table in tables) {
