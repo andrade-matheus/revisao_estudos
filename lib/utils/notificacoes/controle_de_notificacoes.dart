@@ -53,7 +53,7 @@ agendarNotificacao() async {
   var androidDetails = AndroidNotificationDetails(
     "revisoes_diarias",
     "Reviões diárias",
-    "Lembrete das reviões diárias",
+    channelDescription: "Lembrete das reviões diárias",
     color: Color(0xFFF56D11),
     ledColor: Color(0xFFF56D11),
     ledOnMs: 50,
