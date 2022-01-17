@@ -4,6 +4,7 @@ class DateHelper {
   static DateTime now () => DateTime.now();
   static DateTime hoje () => DateTime(now().year, now().month, now().day);
   static DateTime amanha () => hoje().add(Duration(days: 1));
+  static DateTime ontem () => hoje().subtract(Duration(days: 1));
 
   static String formatarData(DateTime data) {
     return DateFormat('yyyy-MM-dd').format(data);
@@ -19,6 +20,14 @@ class DateHelper {
 
   static String formatarParaArquivo(DateTime data) {
     return DateFormat("yyyy_MM_dd_ss").format(data);
+  }
+
+  static String formatarParaCalendario(DateTime data) {
+    String diaSemana = toBeginningOfSentenceCase(DateFormat("EEEE",'pt_BR').format(data)) ?? '';
+    String dia = DateFormat("d",'pt_BR').format(data);
+    String mes = toBeginningOfSentenceCase(DateFormat("MMMM",'pt_BR').format(data)) ?? '';
+
+    return '$diaSemana, $dia de $mes';
   }
 
   static bool isLog(DateTime data) {

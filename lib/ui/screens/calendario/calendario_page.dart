@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
 import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/lista_disciplina_widget/lista_disciplina.dart';
 import 'package:revisao_estudos/ui/screens/calendario/seletor_data_widget/seletor_data.dart';
+import 'package:revisao_estudos/ui/screens/calendario/texto_header_widget/texto_header.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 
@@ -22,7 +23,9 @@ class _CalendarioPageState extends State<CalendarioPage> {
         ChangeNotifierProvider(create: (_) => DataSelecionada()),
       ],
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          TextoHeader(),
           SeletorData(),
           Expanded(
             child: ListaDisciplina(),
