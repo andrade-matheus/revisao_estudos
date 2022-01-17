@@ -17,6 +17,10 @@ class DateHelper {
     return DateFormat("yyyy-MM-dd").format(data);
   }
 
+  static String formatarParaArquivo(DateTime data) {
+    return DateFormat("yyyy_MM_dd_ss").format(data);
+  }
+
   static bool isLog(DateTime data) {
     if (data.isBefore(hoje())) {
       return true;

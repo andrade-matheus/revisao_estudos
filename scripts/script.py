@@ -33,26 +33,26 @@ for linha in linhas:
         revisoes.append(linha.split(';'))
 
 
-json_tabelas = '[["disciplina","frequencia","revisao","logRevisao"],'
+json_tabelas = '"tables" : ["disciplina","frequencia","revisao","logRevisao"],'
 
 id = 1
-json_disciplinas = ''
+json_disciplinas = '"disciplina" : ['
 for disc in disciplinas:
     # print(json_disciplinas)
     json_disciplinas += '{"id": ' + str(id) + ',"nome":"' + disc + '"},'
     id += 1
-json_disciplinas = json_disciplinas[:-1]
+json_disciplinas = json_disciplinas[:-1] + "],"
 
 id = 1
-json_frequencias = ''
+json_frequencias = '"frequencia" : ['
 for freq in frequencias:
     # print(json_frequencias)
     json_frequencias += '{"id": ' + str(id) + ',"valorFrequencia":"' + freq + '"},'
     id += 1
-json_frequencias = json_frequencias[:-1]
+json_frequencias = json_frequencias[:-1] + "],"
 
 id = 1
-json_revisoes = ''
+json_revisoes = '"revisao" : ['
 for rev in revisoes :
     # print(json_revisoes)
     # print(rev)
@@ -60,7 +60,9 @@ for rev in revisoes :
     idFrequencia = frequencias.index(rev[1]) + 1
     json_revisoes += '{"id":' + str(id) + ',"idDisciplina":' + str(idDisciplina) + ',"idFrequencia":' + str(idFrequencia) + ',"nome":"' + rev[2] + '","vezesRevisadas":' + rev[3] + ',"dataCadastro":"' + rev[4] + '","proxRevisao":"' + rev[5] + '","isArchived":0},'
     id += 1
-json_revisoes = json_revisoes[:-1]
+json_revisoes = json_revisoes[:-1] + "],"
+
+json_logrevisoes = '"logRevisao" : []'
 
 
 # print(json_tabelas)
@@ -68,7 +70,7 @@ json_revisoes = json_revisoes[:-1]
 # print(json_frequencias)
 # print(json_revisoes)
 
-json_entradas = json_tabelas + '[[' + json_disciplinas + '],' + '[' + json_frequencias + '],' + '[' + json_revisoes + '],[]]]'
+json_entradas = "{" + json_tabelas + json_disciplinas + json_frequencias + json_revisoes + json_logrevisoes + '}'
 
 
 with open("saida.txt","w") as arquivo:
