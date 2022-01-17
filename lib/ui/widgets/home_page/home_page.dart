@@ -5,7 +5,7 @@ import 'package:revisao_estudos/ui/screens/configuracoes/configuracoes.dart';
 import 'package:revisao_estudos/ui/screens/disciplinas/disciplinas_page.dart';
 import 'package:revisao_estudos/ui/screens/frequencias/frequencias_page.dart';
 import 'package:revisao_estudos/ui/screens/revisao/revisoes_page.dart';
-import 'package:revisao_estudos/ui/widgets/nav_bar/nav_bar.dart';
+import 'package:revisao_estudos/ui/widgets/bottom_nav_bar/bottom_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: widget.floatingActionButton,
         backgroundColor: AppColors.branco,
         extendBody: true,
-        bottomNavigationBar: NavBar(atualizaIndex: atualizaIndex),
+        bottomNavigationBar: BottomNavBar(atualizaIndex: atualizaIndex),
         body: _widgetOptions.elementAt(_index),
       ),
     );

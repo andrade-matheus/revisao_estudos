@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/constants/app_colors.dart';
+import 'package:revisao_estudos/constants/app_icons.dart';
 import 'package:revisao_estudos/models/typedef/typedef.dart';
 
-class NavBar extends StatefulWidget {
+class BottomNavBar extends StatefulWidget {
   final AtualizarIndexCallBack atualizaIndex;
 
-  const NavBar({
+  const BottomNavBar({
     Key key,
     @required this.atualizaIndex,
   }) : super(key: key);
 
   @override
-  _NavBarState createState() => _NavBarState();
+  _BottomNavBarState createState() => _BottomNavBarState();
 }
 
-class _NavBarState extends State<NavBar> {
+class _BottomNavBarState extends State<BottomNavBar> {
   int _index;
 
   @override
@@ -41,23 +42,23 @@ class _NavBarState extends State<NavBar> {
         currentIndex: _index,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
+            icon: Icon(AppIcons.calendario),
             label: 'Calendário',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark_border_outlined),
+            icon: Icon(AppIcons.revisoes),
             label: 'Revisões',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.book_outlined),
+            icon: Icon(AppIcons.disciplinas),
             label: 'Disciplinas',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.repeat),
+            icon: Icon(AppIcons.frequencias),
             label: 'Frequências',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
+            icon: Icon(AppIcons.configuracoes),
             label: 'Configurações',
           ),
         ],
