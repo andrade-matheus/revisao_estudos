@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/constants/app_colors.dart';
 import 'package:revisao_estudos/ui/screens/calendario/calendario_page.dart';
-import 'package:revisao_estudos/ui/screens/configuracoes/configuracoes.dart';
+import 'package:revisao_estudos/ui/screens/configuracoes/configuracoes_page.dart';
 import 'package:revisao_estudos/ui/screens/disciplinas/disciplinas_page.dart';
 import 'package:revisao_estudos/ui/screens/frequencias/frequencias_page.dart';
 import 'package:revisao_estudos/ui/screens/revisao/revisoes_page.dart';

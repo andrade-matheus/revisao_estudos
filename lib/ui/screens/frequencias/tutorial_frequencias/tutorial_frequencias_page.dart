@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class InfoFrequencia extends StatelessWidget {
+class TutorialFrequenciasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
