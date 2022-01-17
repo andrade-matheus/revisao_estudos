@@ -18,12 +18,12 @@ import 'package:revisao_estudos/ui/widgets/home_page/home_page.dart';
       children: [
         AutoRoute(
           path: 'calendario',
-          name: 'Calendario',
+          name: 'CalendarioRouter',
           page: CalendarioPage,
         ),
         AutoRoute(
           path: 'revisoes',
-          name: 'Revisoes',
+          name: 'RevisoesRouter',
           page: EmptyRouterPage,
           children: [
             AutoRoute(path: '', page: RevisoesPage),
@@ -33,12 +33,12 @@ import 'package:revisao_estudos/ui/widgets/home_page/home_page.dart';
         ),
         AutoRoute(
           path: 'disciplinas',
-          name: 'Disciplinas',
+          name: 'DisciplinasRouter',
           page: DisciplinasPage,
         ),
         AutoRoute(
           path: 'frequencia',
-          name: 'Frequencia',
+          name: 'FrequenciaRouter',
           page: EmptyRouterPage,
           children: [
             AutoRoute(path: '', page: FrequenciasPage),
@@ -47,7 +47,7 @@ import 'package:revisao_estudos/ui/widgets/home_page/home_page.dart';
         ),
         AutoRoute(
           path: 'configuracoes',
-          name: 'Configuracoes',
+          name: 'ConfiguracoesRouter',
           page: ConfiguracoesPage,
         ),
       ],
