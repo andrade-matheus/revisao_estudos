@@ -1,14 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/constants/app_colors.dart';
 import 'package:revisao_estudos/constants/app_icons.dart';
-import 'package:revisao_estudos/models/typedef/typedef.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class BottomNavBar extends StatefulWidget {
-  final AtualizarIndexCallBack atualizaIndex;
+  final TabsRouter tabsRouter;
 
   const BottomNavBar({
     Key? key,
-    required this.atualizaIndex,
+    required this.tabsRouter,
   }) : super(key: key);
 
   @override
@@ -16,60 +17,58 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  late int _index;
-
-  @override
-  void initState() {
-    _index = 0;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 4.0),
       decoration: BoxDecoration(
         color: AppColors.branco,
         border: Border(
           top: BorderSide(color: AppColors.navBarDivisorCinza),
         ),
       ),
-      child: BottomNavigationBar(
-        backgroundColor: AppColors.branco,
+      child: SalomonBottomBar(
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        currentIndex: widget.tabsRouter.activeIndex,
+        onTap: widget.tabsRouter.setActiveIndex,
         selectedItemColor: AppColors.navBarItemLaranja,
         unselectedItemColor: AppColors.navBarItemCinza,
-        elevation: 0.0,
-        currentIndex: _index,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(AppIcons.calendario),
-            label: 'Calendário',
+        items: [
+          SalomonBottomBarItem(
+            icon: Icon(
+              AppIcons.calendario,
+              size: 30,
+            ),
+            title: const Text('Calendário'),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(AppIcons.revisoes),
-            label: 'Revisões',
+          SalomonBottomBarItem(
+            icon: Icon(
+              AppIcons.revisoes,
+              size: 30,
+            ),
+            title: const Text('Revisões'),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(AppIcons.disciplinas),
-            label: 'Disciplinas',
+          SalomonBottomBarItem(
+            icon: Icon(
+              AppIcons.disciplinas,
+              size: 30,
+            ),
+            title: const Text('Disciplinas'),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(AppIcons.frequencias),
-            label: 'Frequências',
+          SalomonBottomBarItem(
+            icon: Icon(
+              AppIcons.frequencias,
+              size: 30,
+            ),
+            title: const Text('Frequências'),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(AppIcons.configuracoes),
-            label: 'Configurações',
+          SalomonBottomBarItem(
+            icon: Icon(
+              AppIcons.configuracoes,
+              size: 30,
+            ),
+            title: const Text('Configurações'),
           ),
         ],
-        onTap: (index) {
-          if (_index != index) {
-            widget.atualizaIndex(index);
-            setState(() {
-              _index = index;
-            });
-          }
-        },
       ),
     );
   }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:revisao_estudos/constants/app_colors.dart';
+import 'package:revisao_estudos/routes/router.gr.dart';
 import 'package:revisao_estudos/services/database/database_config.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_log_revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
-import 'package:revisao_estudos/ui/widgets/home_page/home_page.dart';
 import 'package:revisao_estudos/utils/notificacoes/controle_de_notificacoes.dart';
 
 void main() async {
@@ -23,6 +23,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final AppRouter _appRouter = AppRouter();
+
   @override
   void initState() {
     super.initState();
@@ -33,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // imprimeBancoDeDados();
-    return MaterialApp(
+    return MaterialApp.router(
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate
@@ -41,14 +43,15 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: [
         const Locale('pt'),
       ],
-      title: 'Revisão de Estudos',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         canvasColor: AppColors.branco,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      title: 'RevisAí',
+      routeInformationParser: _appRouter.defaultRouteParser(),
+      routerDelegate: _appRouter.delegate(),
     );
   }
 
