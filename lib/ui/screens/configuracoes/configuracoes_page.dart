@@ -17,7 +17,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
       future: SharedPreferences.getInstance(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          final SharedPreferences sharedPreferences = snapshot.data;
+          final SharedPreferences sharedPreferences = snapshot.data as SharedPreferences;
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: ListView(

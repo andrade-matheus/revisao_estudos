@@ -5,8 +5,8 @@ class Disciplina extends EntityCommon {
   String nome;
 
   Disciplina({
-    this.id,
-    this.nome,
+    required this.id,
+    required this.nome,
   });
 
   static Disciplina fromMap(Map<String, dynamic> json) {
@@ -29,12 +29,9 @@ class Disciplina extends EntityCommon {
     return this.nome;
   }
 
-  bool operator ==(other) {
-    if (this.nome == other.nome) {
-      return true;
-    } else {
-      return false;
-    }
+  @override
+  bool operator == (other) {
+    return other is Disciplina && other.id == this.id;
   }
 
   @override

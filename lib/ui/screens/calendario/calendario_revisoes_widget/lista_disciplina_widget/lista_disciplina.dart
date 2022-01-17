@@ -7,10 +7,6 @@ import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget
 import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/tiles_widgets/disciplina_tile.dart';
 
 class ListaDisciplina extends StatelessWidget {
-  final List<Disciplina> disciplinas;
-
-  const ListaDisciplina({Key key, this.disciplinas}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     DateTime dataSelecionada = context.watch<DataSelecionada>().dataSelecionada;
@@ -20,7 +16,7 @@ class ListaDisciplina extends StatelessWidget {
       future: repositoryDisciplina.obterTodasComRevisoesPorData(dataSelecionada),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          disciplinas = snapshot.data;
+          disciplinas = (snapshot.data ?? []) as List<Disciplina>? ?? [];
           if (disciplinas.isEmpty) {
             return SemRevisoes();
           } else {

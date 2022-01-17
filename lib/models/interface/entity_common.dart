@@ -1,5 +1,5 @@
 abstract class EntityCommon {
-  int id;
+  late int id;
 
   Map<String, dynamic> toMap();
 }

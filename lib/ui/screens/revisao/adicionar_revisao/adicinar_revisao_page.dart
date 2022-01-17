@@ -24,8 +24,8 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
   TextEditingController _dataTextField = TextEditingController();
 
   DateTime dataSelecionada = DateHelper.hoje();
-  Disciplina disciplinaSelecinada;
-  Frequencia frequenciaSelecionada;
+  late Disciplina disciplinaSelecinada;
+  late Frequencia frequenciaSelecionada;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -196,7 +196,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
                 Expanded(
                   child: ElevatedButton(
                       onPressed: () {
-                        if (_formKey.currentState.validate()) {
+                        if (_formKey.currentState?.validate() ?? false) {
                           setState(() {
                             Revisao novaRevisao = gerarNovaRevisao();
                             repositoryRevisao.adicionar(novaRevisao);
@@ -224,31 +224,37 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
             future: repositoryDisciplina.obterTodos(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return Container(
-                  height: 300,
-                  width: double.maxFinite,
-                  child: ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      Disciplina disciplina = snapshot.data[index];
-                      return ListTile(
-                        title: Text(disciplina.nome),
-                        onTap: () {
-                          setState(() {
-                            disciplinaSelecinada = disciplina;
-                            _disciplinaTextField.value = TextEditingValue(
-                              text: disciplina.nome,
-                              selection: TextSelection.fromPosition(
-                                TextPosition(offset: disciplina.nome.length),
-                              ),
-                            );
-                          });
-                          Navigator.pop(context);
-                        },
-                      );
-                    },
-                  ),
-                );
+                if (snapshot.hasData) {
+                  List<Disciplina> disciplinas =
+                      snapshot.data as List<Disciplina>;
+                  return Container(
+                    height: 300,
+                    width: double.maxFinite,
+                    child: ListView.builder(
+                      itemCount: disciplinas.length,
+                      itemBuilder: (context, index) {
+                        Disciplina disciplina = disciplinas[index];
+                        return ListTile(
+                          title: Text(disciplina.nome),
+                          onTap: () {
+                            setState(() {
+                              disciplinaSelecinada = disciplina;
+                              _disciplinaTextField.value = TextEditingValue(
+                                text: disciplina.nome,
+                                selection: TextSelection.fromPosition(
+                                  TextPosition(offset: disciplina.nome.length),
+                                ),
+                              );
+                            });
+                            Navigator.pop(context);
+                          },
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
               } else {
                 return CircularProgressIndicator();
               }
@@ -269,34 +275,39 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
             future: repositoryFrequencia.obterTodos(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return Container(
-                  height: 300,
-                  width: double.maxFinite,
-                  child: ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      Frequencia frequencia = snapshot.data[index];
-                      return ListTile(
-                        title: Text(frequencia.frequencia),
-                        onTap: () {
-                          setState(() {
-                            frequenciaSelecionada = frequencia;
-                            _frequenciaTextField.value = TextEditingValue(
-                              text: frequencia.frequencia,
-                              selection: TextSelection.fromPosition(
-                                TextPosition(
-                                    offset: frequencia.frequencia.length),
-                              ),
-                            );
-                          });
-                          Navigator.pop(context);
-                        },
-                      );
-                    },
-                  ),
-                );
+                if (snapshot.hasData) {
+                  List<Frequencia> frequencias = snapshot.data as List<Frequencia>;
+                  return Container(
+                    height: 300,
+                    width: double.maxFinite,
+                    child: ListView.builder(
+                      itemCount: frequencias.length,
+                      itemBuilder: (context, index) {
+                        Frequencia frequencia = frequencias[index];
+                        return ListTile(
+                          title: Text(frequencia.frequencia),
+                          onTap: () {
+                            setState(() {
+                              frequenciaSelecionada = frequencia;
+                              _frequenciaTextField.value = TextEditingValue(
+                                text: frequencia.frequencia,
+                                selection: TextSelection.fromPosition(
+                                  TextPosition(
+                                      offset: frequencia.frequencia.length),
+                                ),
+                              );
+                            });
+                            Navigator.pop(context);
+                          },
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
               } else {
-                return Column();
+                return CircularProgressIndicator();
               }
             },
           ),
@@ -308,7 +319,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
   _escolherDataDialog(BuildContext context) async {
     DateTime dataEscolhida = await escolherDataDialog(context, dataSelecionada);
     setState(() {
-      dataSelecionada = dataEscolhida ?? dataSelecionada;
+      dataSelecionada = dataEscolhida;
     });
     String dataStr = DateFormat('dd / MM / yyyy').format(dataSelecionada);
     _dataTextField.value = TextEditingValue(

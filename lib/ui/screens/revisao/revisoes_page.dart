@@ -13,8 +13,8 @@ class RevisoesPage extends StatefulWidget {
 
 class _RevisoesPageState extends State<RevisoesPage> {
   Color corPrimaria = Colors.blue;
-  Revisao novaRevisao;
-  Future<List<Revisao>> futureRevisoes;
+  late Revisao novaRevisao;
+  late Future<List<Revisao>> futureRevisoes;
   List<Revisao> todasRevisoes = [];
 
   RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
@@ -29,61 +29,80 @@ class _RevisoesPageState extends State<RevisoesPage> {
         future: repositoryDisciplina.obterTodos(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return ListView.builder(
-              itemCount: snapshot.data.length,
-              itemBuilder: (context, index) {
-                Disciplina disciplina = snapshot.data[index];
-                return Column(
-                  children: [
-                    Card(
-                      child: ExpansionTile(
-                        initiallyExpanded: false,
-                        title: Text(disciplina.nome),
-                        children: [
-                          FutureBuilder(
-                            future: repositoryRevisao.obterPorDisciplina(disciplina),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.done) {
-                                return ListView.builder(
-                                  physics: ClampingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: snapshot.data.length,
-                                  itemBuilder: (context, index) {
-                                    Revisao revisao = snapshot.data[index];
-                                    return ListTile(
-                                      contentPadding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                                      title: Text(revisao.nome),
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => DetalhesRevisaoPage(revisao),
+            if (snapshot.hasData) {
+              List<Disciplina> disciplinas = snapshot.data as List<Disciplina>;
+              return ListView.builder(
+                itemCount: disciplinas.length,
+                itemBuilder: (context, index) {
+                  Disciplina disciplina = disciplinas[index];
+                  return Column(
+                    children: [
+                      Card(
+                        child: ExpansionTile(
+                          initiallyExpanded: false,
+                          title: Text(disciplina.nome),
+                          children: [
+                            FutureBuilder(
+                              future: repositoryRevisao
+                                  .obterPorDisciplina(disciplina),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  if (snapshot.hasData) {
+                                    List<Revisao> revisoes =
+                                        snapshot.data as List<Revisao>;
+                                    return ListView.builder(
+                                      physics: ClampingScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: revisoes.length,
+                                      itemBuilder: (context, index) {
+                                        Revisao revisao = revisoes[index];
+                                        return ListTile(
+                                          contentPadding:
+                                              EdgeInsets.fromLTRB(30, 0, 0, 0),
+                                          title: Text(revisao.nome),
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetalhesRevisaoPage(
+                                                        revisao: revisao),
+                                              ),
+                                            );
+                                          },
+                                          trailing: IconButton(
+                                            icon: Icon(Icons.delete_outline),
+                                            onPressed: () async {
+                                              bool resultado =
+                                                  await excluirRevisaoDialog(
+                                                      context, revisao);
+                                              if (resultado) {
+                                                setState(() {});
+                                              }
+                                            },
                                           ),
                                         );
                                       },
-                                      trailing: IconButton(
-                                          icon: Icon(Icons.delete_outline),
-                                          onPressed: () async {
-                                            bool resultado = await excluirRevisaoDialog(context, revisao);
-                                            if (resultado) {
-                                              setState(() {});
-                                            }
-                                          }),
                                     );
-                                  },
-                                );
-                              } else {
-                                return CircularProgressIndicator();
-                              }
-                            },
-                          )
-                        ],
+                                  } else {
+                                    return Container();
+                                  }
+                                } else {
+                                  return CircularProgressIndicator();
+                                }
+                              },
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                );
-              },
-            );
+                    ],
+                  );
+                },
+              );
+            } else {
+              return Container();
+            }
           } else {
             return CircularProgressIndicator();
           }

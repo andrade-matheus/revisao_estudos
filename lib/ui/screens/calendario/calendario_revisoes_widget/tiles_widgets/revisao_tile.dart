@@ -7,7 +7,7 @@ import 'package:revisao_estudos/utils/date/date_helper.dart';
 class RevisaoTile extends StatefulWidget {
   final Revisao revisao;
 
-  const RevisaoTile({Key key, this.revisao}) : super(key: key);
+  const RevisaoTile({Key? key, required this.revisao}) : super(key: key);
 
   @override
   _RevisaoTileState createState() => _RevisaoTileState();
@@ -40,7 +40,7 @@ class _RevisaoTileState extends State<RevisaoTile> {
 
   List<TextSpan> _criarLegendaFrequencias(Revisao revisao) {
     List<TextSpan> frequenciasWidgets = [];
-    List<String> frequencias = revisao.frequencia.frequencia.split('-');
+    List<String> frequencias = revisao.frequencia?.frequencia.split('-') ?? [];
     int numeroFreq = frequencias.length;
     int vezesRevisadas = revisao.vezesRevisadas;
     int diasAtraso = _diasDeAtraso(revisao);

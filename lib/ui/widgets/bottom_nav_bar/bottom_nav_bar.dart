@@ -7,8 +7,8 @@ class BottomNavBar extends StatefulWidget {
   final AtualizarIndexCallBack atualizaIndex;
 
   const BottomNavBar({
-    Key key,
-    @required this.atualizaIndex,
+    Key? key,
+    required this.atualizaIndex,
   }) : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _index;
+  late int _index;
 
   @override
   void initState() {

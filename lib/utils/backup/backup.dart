@@ -8,7 +8,7 @@ import 'package:sqflite/sqflite.dart';
 import 'dart:convert' as convert;
 
 class Backup {
-  static Database _database;
+  static Database? _database;
   List<String> tables = [
     'disciplina',
     'frequencia',
@@ -16,7 +16,7 @@ class Backup {
     'logRevisao',
   ];
 
-  Future<Database> get database async {
+  Future<Database?> get database async {
     if (_database != null) return _database;
     _database = await DatabaseConfig.initDB();
     return _database;
@@ -35,12 +35,12 @@ class Backup {
 
       // Adicionando os dados das tabelas no Backup
       for (var table in tables) {
-        var result = await db.query(table);
+        var result = await db?.query(table);
         backup[table] = result;
       }
 
-      Directory diretorio = await getExternalStorageDirectory();
-      print(diretorio.path);
+      Directory? diretorio = await getExternalStorageDirectory();
+      print(diretorio?.path);
 
       String json = convert.jsonEncode(backup);
       if (diretorio != null) {
@@ -60,30 +60,30 @@ class Backup {
   // RESTAURANDO O BACKUP
   Future<String> restoreBackup() async {
     try {
-      FilePickerResult result = await FilePicker.platform.pickFiles();
+      FilePickerResult? result = await FilePicker.platform.pickFiles();
       if (result != null) {
-        String path = result.files.single.path;
+        String path = result.files.single.path ?? '';
         String backup = await readFile(path);
 
         final db = await database;
-        Batch batch = db.batch();
+        Batch? batch = db?.batch();
         // Map<String, dynamic> json = convert.jsonDecode(backup);
         var json = convert.jsonDecode(backup);
 
         // Apagando os dados do Banco de Dados.
         for (String table in tables) {
-          batch.delete(table);
+          batch?.delete(table);
           print('------ DELETE $table');
         }
 
         for (String table in tables) {
           var dados = json[table];
           for (var dado in dados){
-            batch.insert(table, dado);
+            batch?.insert(table, dado);
           }
         }
 
-        await batch.commit(continueOnError: false, noResult: true);
+        await batch?.commit(continueOnError: false, noResult: true);
 
         return 'O backup foi restaurado com sucesso.';
       } else {

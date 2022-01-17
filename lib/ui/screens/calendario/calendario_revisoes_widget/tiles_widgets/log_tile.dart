@@ -4,7 +4,7 @@ import 'package:revisao_estudos/models/entity/revisao.dart';
 class LogTile extends StatelessWidget {
   final Revisao revisao;
 
-  const LogTile({Key key, this.revisao}) : super(key: key);
+  const LogTile({Key? key, required this.revisao}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

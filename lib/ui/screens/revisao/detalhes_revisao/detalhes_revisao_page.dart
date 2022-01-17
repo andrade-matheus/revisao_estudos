@@ -6,7 +6,10 @@ import 'package:revisao_estudos/ui/screens/revisao/detalhes_revisao/detalhes_car
 class DetalhesRevisaoPage extends StatefulWidget {
   final Revisao revisao;
 
-  const DetalhesRevisaoPage(this.revisao);
+  const DetalhesRevisaoPage({
+    Key? key,
+    required this.revisao,
+  }) : super(key: key);
 
   @override
   _DetalhesRevisaoPageState createState() => _DetalhesRevisaoPageState();
@@ -19,7 +22,7 @@ class _DetalhesRevisaoPageState extends State<DetalhesRevisaoPage> {
       children: [
         DetalhesCard(
           title: "Disciplina: ",
-          text: this.widget.revisao.disciplina.nome,
+          text: this.widget.revisao.disciplina?.nome ?? '',
         ),
         DetalhesCard(
           title: "Nome da revisão: ",
@@ -27,7 +30,7 @@ class _DetalhesRevisaoPageState extends State<DetalhesRevisaoPage> {
         ),
         DetalhesCard(
           title: "Frequência: ",
-          text: this.widget.revisao.frequencia.frequencia,
+          text: this.widget.revisao.frequencia?.frequencia ?? '',
         ),
         DetalhesCard(
           title: "Quantidade de revisões concluídas: ",

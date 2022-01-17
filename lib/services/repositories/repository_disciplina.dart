@@ -1,23 +1,13 @@
 import 'package:revisao_estudos/models/entity/disciplina.dart';
-import 'package:revisao_estudos/services/database/database_config.dart';
 import 'package:revisao_estudos/services/repositories/repository_common.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
-import 'package:sqflite/sqflite.dart';
 
 class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
-  static Database _database;
-
   @override
   String get nomeTabela => "disciplina";
 
   @override
   Function get fromMap => Disciplina.fromMap;
-
-  Future<Database> get database async {
-    if (_database != null) return _database;
-    _database = await DatabaseConfig.initDB();
-    return _database;
-  }
 
   Future<List<Disciplina>> obterTodasComRevisoesPorData(DateTime data) async {
     if (data.isBefore(DateHelper.hoje())) {

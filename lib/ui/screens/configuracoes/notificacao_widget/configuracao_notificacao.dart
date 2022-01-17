@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ConfiguracaoNotificacao extends StatefulWidget {
   final SharedPreferences sharedPreferences;
 
-  const ConfiguracaoNotificacao({Key key, this.sharedPreferences})
+  const ConfiguracaoNotificacao({Key? key, required this.sharedPreferences})
       : super(key: key);
 
   @override
@@ -45,7 +45,7 @@ class _ConfiguracaoNotificacaoState extends State<ConfiguracaoNotificacao> {
                 "${hora > 9 ? hora.toString() : '0' + hora.toString()} : ${minuto > 9 ? minuto.toString() : '0' + minuto.toString()}"),
           ),
           onTap: () async {
-            TimeOfDay novoHorario = await showTimePicker(
+            TimeOfDay? novoHorario = await showTimePicker(
               context: context,
               initialTime: TimeOfDay.now(),
             );

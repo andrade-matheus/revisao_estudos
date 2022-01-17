@@ -8,19 +8,8 @@ import 'package:revisao_estudos/ui/screens/revisao/revisoes_page.dart';
 import 'package:revisao_estudos/ui/widgets/bottom_nav_bar/bottom_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
-  final String title;
-  final Widget child;
-  final List<Widget> actions;
-  final Widget leading;
-  final FloatingActionButton floatingActionButton;
-
   const HomePage({
-    Key key,
-    this.child,
-    this.title,
-    this.actions,
-    this.leading,
-    this.floatingActionButton,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -28,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _index;
+  late int _index;
   final List<Widget> _widgetOptions = <Widget>[
     CalendarioPage(),
     RevisoesPage(),
@@ -48,7 +37,6 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        floatingActionButton: widget.floatingActionButton,
         backgroundColor: AppColors.branco,
         extendBody: true,
         bottomNavigationBar: BottomNavBar(atualizaIndex: atualizaIndex),

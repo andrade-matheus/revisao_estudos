@@ -5,7 +5,7 @@ class DetalhesCard extends StatelessWidget {
   final String title;
   final String text;
 
-  const DetalhesCard({Key key, this.title, this.text}) : super(key: key);
+  const DetalhesCard({Key? key, required this.title, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

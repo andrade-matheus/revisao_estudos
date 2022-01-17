@@ -20,28 +20,32 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
         future: repositoryFrequencia.obterTodos(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            List<Frequencia> frequencias = snapshot.data;
-            return ListView.builder(
-              itemCount: frequencias.length,
-              itemBuilder: (context, index) {
-                Frequencia frequencia = snapshot.data[index];
-                return Card(
-                  child: ListTile(
-                    title: Text(frequencia.frequencia),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete_outline),
-                      onPressed: () async {
-                        final result = await excluirFrequenciaDialog(
-                            context, frequencia);
-                        if (result) {
-                          setState(() {});
-                        }
-                      },
+            if(snapshot.hasData){
+              List<Frequencia> frequencias = snapshot.data as List<Frequencia>;
+              return ListView.builder(
+                itemCount: frequencias.length,
+                itemBuilder: (context, index) {
+                  Frequencia frequencia = frequencias[index];
+                  return Card(
+                    child: ListTile(
+                      title: Text(frequencia.frequencia),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete_outline),
+                        onPressed: () async {
+                          final result = await excluirFrequenciaDialog(
+                              context, frequencia);
+                          if (result) {
+                            setState(() {});
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                );
-              },
-            );
+                  );
+                },
+              );
+            } else {
+              return Container();
+            }
           } else {
             return Center(
               child: CircularProgressIndicator(),

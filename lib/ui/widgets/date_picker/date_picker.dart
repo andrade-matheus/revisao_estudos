@@ -4,7 +4,7 @@ Future<DateTime> escolherDataDialog(
   BuildContext context,
   DateTime dataSelecionada,
 ) async {
-  DateTime dataEscolhida = await showDatePicker(
+  DateTime? dataEscolhida = await showDatePicker(
     locale: const Locale("pt"),
     context: context,
     initialDate: dataSelecionada,

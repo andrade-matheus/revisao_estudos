@@ -11,22 +11,22 @@ import 'package:revisao_estudos/utils/date/date_helper.dart';
 class Revisao extends EntityCommon {
   int id;
   String nome;
-  Disciplina disciplina;
-  Frequencia frequencia;
+  Disciplina? disciplina;
+  Frequencia? frequencia;
   DateTime dataCadastro;
   DateTime proxRevisao;
   int vezesRevisadas;
   bool isArchived;
 
   Revisao({
-    this.id,
-    this.nome,
-    this.disciplina,
-    this.frequencia,
-    this.dataCadastro,
-    this.proxRevisao,
-    this.vezesRevisadas,
-    this.isArchived,
+    required this.id,
+    required this.nome,
+    required this.disciplina,
+    required this.frequencia,
+    required this.dataCadastro,
+    required this.proxRevisao,
+    required this.vezesRevisadas,
+    required this.isArchived,
   });
 
   static Future<Revisao> fromMap(Map<String, dynamic> json) async {
@@ -48,8 +48,8 @@ class Revisao extends EntityCommon {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'idDisciplina': disciplina.id,
-      'idFrequencia': frequencia.id,
+      'idDisciplina': disciplina?.id,
+      'idFrequencia': frequencia?.id,
       'nome': nome,
       'dataCadastro': dataCadastro.toIso8601String(),
       'proxRevisao': proxRevisao.toIso8601String(),
@@ -59,7 +59,7 @@ class Revisao extends EntityCommon {
   }
 
   void realizarRevisao() {
-    List<String> valoresFrequencia = frequencia.frequencia.split('-');
+    List<String> valoresFrequencia = frequencia?.frequencia.split('-') ?? [];
     int quantidadeFrequencias = valoresFrequencia.length;
     int diasProxRevisao;
 
@@ -88,8 +88,8 @@ class Revisao extends EntityCommon {
   String toString() {
     return '[${this.id}, ' +
         '${this.nome}, ' +
-        '${this.disciplina.nome}, ' +
-        '${this.frequencia.frequencia}, ' +
+        '${this.disciplina?.nome}, ' +
+        '${this.frequencia?.frequencia}, ' +
         '${this.dataCadastro}, ' +
         '${this.proxRevisao}, ' +
         '${this.vezesRevisadas}]';

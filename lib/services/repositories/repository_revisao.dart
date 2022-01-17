@@ -22,12 +22,12 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
   Future<List<Revisao>> obterPorData(DateTime data) async {
     final bd = await database;
     var dataSql = DateHelper.formatarParaSql(data);
-    var resultado = await bd.query(
+    var resultado = await bd?.query(
       nomeTabela,
       where: 'date(proxRevisao) < ?',
       whereArgs: ["date($dataSql)"],
     );
-    return await fromMapList(resultado);
+    return await fromMapList(resultado ?? []);
   }
 
   Future<List<Revisao>> obterParaCaledario(

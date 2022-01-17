@@ -34,7 +34,7 @@ class DatabaseConfig {
           ..sort()
           ..forEach((element) async {
             var script = DbMigrator.migrations[element];
-            await db.execute(script);
+            await db.execute(script!);
           });
       },
       onUpgrade: (db, _, __) async {
@@ -54,7 +54,7 @@ class DatabaseConfig {
           ..sort()
           ..forEach((element) async {
             var script = upgradeScripts[element];
-            await db.execute(script);
+            await db.execute(script!);
           });
 
         _upgradeDbVersion(db, maxMigratedDbVersion);

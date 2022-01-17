@@ -37,7 +37,7 @@ adicionarDisciplinaDialog(BuildContext context) async {
           new TextButton(
             child: new Text('ADICIONAR'),
             onPressed: () {
-              if (_formKey.currentState.validate()) {
+              if (_formKey.currentState?.validate() ?? false) {
                 updateState = true;
                 Disciplina novaDisciplina =
                     Disciplina(id: 0, nome: _textFieldController.text);

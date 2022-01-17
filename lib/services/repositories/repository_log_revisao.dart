@@ -12,11 +12,11 @@ class RepositoryLogRevisao extends RepositoryCommon<LogRevisao> {
   // Todas revisões para essa data incluindo as atrasadas.
   Future<List<LogRevisao>> obterTodosPorData(DateTime data) async {
     final bd = await database;
-    var resultado = await bd.query(
+    var resultado = await bd?.query(
       nomeTabela,
       where: 'dataRevisao = ?',
       whereArgs: ["${DateHelper.formatarParaSql(data)}"],
     );
-    return await fromMapList(resultado);
+    return await fromMapList(resultado ?? []);
   }
 }

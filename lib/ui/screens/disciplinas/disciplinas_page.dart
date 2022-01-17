@@ -20,27 +20,32 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
         future: repositoryDisciplina.obterTodos(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return ListView.builder(
-              itemCount: snapshot.data.length,
-              itemBuilder: (context, index) {
-                Disciplina disciplina = snapshot.data[index];
-                return Card(
-                  child: ListTile(
-                    title: Text(disciplina.nome),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete_outline),
-                      onPressed: () async {
-                        final result = await excluirDisciplinaDialog(
-                            context, disciplina);
-                        if (result) {
-                          setState(() {});
-                        }
-                      },
+            if(snapshot.hasData){
+              List<Disciplina> disciplinas = snapshot.data as List<Disciplina>;
+              return ListView.builder(
+                itemCount: disciplinas.length,
+                itemBuilder: (context, index) {
+                  Disciplina disciplina = disciplinas[index];
+                  return Card(
+                    child: ListTile(
+                      title: Text(disciplina.nome),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete_outline),
+                        onPressed: () async {
+                          final result = await excluirDisciplinaDialog(
+                              context, disciplina);
+                          if (result) {
+                            setState(() {});
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                );
-              },
-            );
+                  );
+                },
+              );
+            } else {
+              return Container();
+            }
           } else {
             return CircularProgressIndicator();
           }

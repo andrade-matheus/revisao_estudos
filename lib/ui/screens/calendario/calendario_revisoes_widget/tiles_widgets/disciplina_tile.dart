@@ -4,12 +4,10 @@ import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget
 
 class DisciplinaTile extends StatelessWidget {
   final Disciplina disciplina;
-  final Widget child;
 
   const DisciplinaTile({
-    Key key,
-    this.child,
-    @required this.disciplina,
+    Key? key,
+    required this.disciplina,
   }) : super(key: key);
 
   @override

@@ -5,8 +5,8 @@ class Frequencia extends EntityCommon {
   String frequencia;
 
   Frequencia({
-    this.id,
-    this.frequencia,
+    required this.id,
+    required this.frequencia,
   });
 
   static Frequencia fromMap(Map<String, dynamic> json) {

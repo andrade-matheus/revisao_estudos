@@ -4,13 +4,13 @@ import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 
 class LogRevisao extends EntityCommon {
   int id;
-  Revisao revisao;
+  Revisao? revisao;
   DateTime dataRevisao;
 
   LogRevisao({
-    this.id,
-    this.revisao,
-    this.dataRevisao,
+    required this.id,
+    required this.revisao,
+    required this.dataRevisao,
   });
 
   static Future<LogRevisao> fromMap(Map<String, dynamic> json) async {
@@ -25,14 +25,14 @@ class LogRevisao extends EntityCommon {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'id': id ?? 0,
-      'idRevisao': revisao.id,
+      'id': id,
+      'idRevisao': revisao?.id,
       'dataRevisao': dataRevisao.toIso8601String(),
     };
   }
 
   @override
   String toString() {
-    return '[${this.id}, ' + '${this.revisao.nome}, ' + '${this.dataRevisao}]';
+    return '[${this.id}, ' + '${this.revisao?.nome}, ' + '${this.dataRevisao}]';
   }
 }

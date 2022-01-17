@@ -12,8 +12,8 @@ class ListaRevisoes extends StatelessWidget {
   final Disciplina disciplina;
 
   const ListaRevisoes({
-    Key key,
-    @required this.disciplina,
+    Key? key,
+    required this.disciplina,
   }) : super(key: key);
 
   @override
@@ -25,7 +25,7 @@ class ListaRevisoes extends StatelessWidget {
       future: repositoryRevisao.obterParaCaledario(disciplina, data),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          revisoes = snapshot.data;
+          revisoes = snapshot.data as List<Revisao>? ?? [];
           return ListView.builder(
             physics: ClampingScrollPhysics(),
             shrinkWrap: true,

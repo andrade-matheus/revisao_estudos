@@ -19,7 +19,7 @@ adicionarFrequenciaDialog(BuildContext context) async {
             controller: _textFieldController,
             decoration: InputDecoration(hintText: "Exemplo: 0-5-15-30"),
             validator: (text) {
-              List<String> frequencias = text.split('-');
+              List<String> frequencias = text?.split('-') ?? [];
               RegExp formatoFrequencia = RegExp(r'^([0-9]+[-])*([1-9][0-9]*)$');
               if (text == null || text.isEmpty) {
                 return 'Campo obrigatório.';
@@ -45,7 +45,7 @@ adicionarFrequenciaDialog(BuildContext context) async {
           new TextButton(
             child: new Text('ADICIONAR'),
             onPressed: () {
-              if (_formKey.currentState.validate()) {
+              if (_formKey.currentState?.validate() ?? false) {
                 updateState = true;
                 Frequencia novaFrequencia = new Frequencia(
                   id: 0,
