@@ -22,6 +22,7 @@ class ListaDisciplina extends StatelessWidget {
               return SemRevisoes();
             } else {
               return ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: disciplinas.length,

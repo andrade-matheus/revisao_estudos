@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/lista_revisoes_widget/lista_revisoes.dart';
+import 'package:revisao_estudos/ui/widgets/expansion_card/expansion_card_widget.dart';
 
 class DisciplinaTile extends StatelessWidget {
   final Disciplina disciplina;
@@ -12,19 +13,12 @@ class DisciplinaTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
+    return ExpansionCard(
+      title: disciplina.nome,
       initiallyExpanded: true,
-      title: Text(
-        disciplina.nome,
-        style: TextStyle(
-          fontSize: 18,
-        ),
+      child: ListaRevisoes(
+        disciplina: disciplina,
       ),
-      children: [
-        ListaRevisoes(
-          disciplina: disciplina,
-        ),
-      ],
     );
   }
 }
