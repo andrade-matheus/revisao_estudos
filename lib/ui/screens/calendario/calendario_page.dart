@@ -6,7 +6,6 @@ import 'package:revisao_estudos/ui/screens/calendario/seletor_data_widget/seleto
 import 'package:revisao_estudos/ui/screens/calendario/texto_header_widget/texto_header.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
-
 class CalendarioPage extends StatefulWidget {
   @override
   _CalendarioPageState createState() => _CalendarioPageState();
@@ -22,16 +21,25 @@ class _CalendarioPageState extends State<CalendarioPage> {
       providers: [
         ChangeNotifierProvider(create: (_) => DataSelecionada()),
       ],
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextoHeader(),
-          SeletorData(),
-          Expanded(
-            child: ListaDisciplina(),
+      builder: (context, _) {
+        return GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onHorizontalDragEnd: (details) {
+            if ((details.primaryVelocity ?? 0) > 0) {
+              context.read<DataSelecionada>().reduzirUmDia();
+            } else if ((details.primaryVelocity ?? 0) < 0) {
+              context.read<DataSelecionada>().aumentarUmDia();
+            }
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextoHeader(),
+              ListaDisciplina(),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

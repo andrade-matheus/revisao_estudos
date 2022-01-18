@@ -12,28 +12,30 @@ class ListaDisciplina extends StatelessWidget {
     DateTime dataSelecionada = context.watch<DataSelecionada>().dataSelecionada;
     RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
     List<Disciplina> disciplinas = [];
-    return FutureBuilder(
-      future: repositoryDisciplina.obterTodasComRevisoesPorData(dataSelecionada),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          disciplinas = (snapshot.data ?? []) as List<Disciplina>? ?? [];
-          if (disciplinas.isEmpty) {
-            return SemRevisoes();
+    return Expanded(
+      child: FutureBuilder(
+        future: repositoryDisciplina.obterTodasComRevisoesPorData(dataSelecionada),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            disciplinas = (snapshot.data ?? []) as List<Disciplina>? ?? [];
+            if (disciplinas.isEmpty) {
+              return SemRevisoes();
+            } else {
+              return ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: disciplinas.length,
+                itemBuilder: (context, index) {
+                  Disciplina disciplina = disciplinas[index];
+                  return DisciplinaTile(disciplina: disciplina);
+                },
+              );
+            }
           } else {
-            return ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: disciplinas.length,
-              itemBuilder: (context, index) {
-                Disciplina disciplina = disciplinas[index];
-                return DisciplinaTile(disciplina: disciplina);
-              },
-            );
+            return CircularProgressIndicator();
           }
-        } else {
-          return CircularProgressIndicator();
-        }
-      },
+        },
+      ),
     );
   }
 }
