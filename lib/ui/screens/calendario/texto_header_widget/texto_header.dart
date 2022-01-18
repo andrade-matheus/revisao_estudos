@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:revisao_estudos/constants/app_fontes.dart';
+import 'package:revisao_estudos/constants/app_icons.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
+import 'package:revisao_estudos/ui/widgets/date_picker/date_picker.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 class TextoHeader extends StatelessWidget {
@@ -13,20 +15,41 @@ class TextoHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Suas Revisões',
-            style: TextStyle(
-              fontSize: 34,
-              fontWeight: FontWeight.bold,
-              fontFamily: AppFontes.robotoBold,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+            child: Text(
+              'Suas Revisões',
+              style: TextStyle(
+                fontSize: 34,
+                fontWeight: FontWeight.bold,
+                fontFamily: AppFontes.robotoBold,
+              ),
             ),
           ),
-          Text(
-            defineTexto(dataSelecionada),
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              fontFamily: AppFontes.robotoBold,
+          GestureDetector(
+            onTap: () async {
+              var data = await escolherDataDialog(context, dataSelecionada);
+              context.read<DataSelecionada>().defineData(data);
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  child: Icon(
+                    AppIcons.calendarioPicker,
+                    size: 20,
+                  ),
+                ),
+                Text(
+                  defineTexto(dataSelecionada),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: AppFontes.robotoBold,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

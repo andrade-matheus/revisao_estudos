@@ -6,4 +6,5 @@ class AppIcons {
   static const IconData disciplinas = Icons.book_outlined;
   static const IconData frequencias = Icons.repeat;
   static const IconData configuracoes = Icons.settings_outlined;
+  static const IconData calendarioPicker = Icons.today;
 }
