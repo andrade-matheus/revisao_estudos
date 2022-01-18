@@ -8,6 +8,7 @@ class ExpansionCard extends StatefulWidget {
   final String? title;
   final bool initiallyExpanded;
   final Widget? child;
+  final EdgeInsets? padding;
 
   const ExpansionCard({
     this.leading,
@@ -15,6 +16,7 @@ class ExpansionCard extends StatefulWidget {
     this.title,
     this.initiallyExpanded = false,
     required this.child,
+    this.padding,
   });
 
   @override
@@ -51,15 +53,22 @@ class _ExpansionCardState extends State<ExpansionCard>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        setState(() {
+          isExpanded = !isExpanded;
+          isExpanded
+              ? _expandController.forward()
+              : _expandController.reverse();
+        });
+      },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 8.0),
         decoration: ShapeDecoration(
           shadows: <BoxShadow>[
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 1,
               blurRadius: 4,
-              offset: Offset(0,3),
+              offset: Offset(0, 3),
             ),
           ],
           color: AppColors.branco,
@@ -79,24 +88,20 @@ class _ExpansionCardState extends State<ExpansionCard>
               title: widget.title,
               header: widget.header,
               isExpanded: isExpanded,
+              headerPadding: widget.padding,
             ),
             SizeTransition(
               sizeFactor: _exapandAnimation,
               axis: Axis.vertical,
               axisAlignment: -1,
-              child: widget.child,
+              child: Padding(
+                padding: widget.padding ?? EdgeInsets.symmetric(horizontal: 12.0),
+                child: widget.child,
+              ),
             ),
           ],
         ),
       ),
-      onTap: () {
-        setState(() {
-          isExpanded = !isExpanded;
-          isExpanded
-              ? _expandController.forward()
-              : _expandController.reverse();
-        });
-      },
     );
   }
 }

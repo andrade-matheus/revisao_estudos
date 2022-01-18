@@ -8,6 +8,7 @@ class CardHeader extends StatefulWidget {
   final Widget? header;
   final String? title;
   final bool isExpanded;
+  final EdgeInsets? headerPadding;
 
   const CardHeader({
     Key? key,
@@ -15,6 +16,7 @@ class CardHeader extends StatefulWidget {
     this.title,
     this.header,
     this.isExpanded = false,
+    this.headerPadding,
   }) : super(key: key);
 
   @override
@@ -59,7 +61,7 @@ class _CardHeaderState extends State<CardHeader> with TickerProviderStateMixin {
         ? _arowAnimationController.forward()
         : _arowAnimationController.reverse();
     return Padding(
-      padding: const EdgeInsets.all(18.0),
+      padding: widget.headerPadding ?? EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
       child: Row(
         children: [
           widget.leading ?? Container(),
@@ -68,8 +70,8 @@ class _CardHeaderState extends State<CardHeader> with TickerProviderStateMixin {
               widget.title ?? '',
               style: TextStyle(
                 color: AppColors.preto,
-                fontFamily: AppFontes.robotoBold,
-                fontWeight: FontWeight.w400,
+                fontFamily: AppFontes.robotoRegular,
+                fontWeight: FontWeight.w500,
                 fontSize: 18,
               ),
             ),

@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
+import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/lista_disciplina_widget/disciplina_tile/disciplina_tile.dart';
 import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/sem_revisoes/sem_revisoes.dart';
-import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/tiles_widgets/disciplina_tile.dart';
 
 class ListaDisciplina extends StatelessWidget {
   @override
@@ -22,13 +22,16 @@ class ListaDisciplina extends StatelessWidget {
               return SemRevisoes();
             } else {
               return ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 200),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: disciplinas.length,
                 itemBuilder: (context, index) {
                   Disciplina disciplina = disciplinas[index];
-                  return DisciplinaTile(disciplina: disciplina);
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
+                    child: DisciplinaTile(disciplina: disciplina),
+                  );
                 },
               );
             }

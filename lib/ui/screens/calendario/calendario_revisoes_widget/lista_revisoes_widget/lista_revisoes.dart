@@ -4,8 +4,8 @@ import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
-import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/tiles_widgets/log_tile.dart';
-import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/tiles_widgets/revisao_tile.dart';
+import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/lista_revisoes_widget/log_tile/log_tile.dart';
+import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/lista_revisoes_widget/revisao_tile/revisao_tile.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 class ListaRevisoes extends StatelessWidget {
@@ -34,7 +34,11 @@ class ListaRevisoes extends StatelessWidget {
               itemCount: revisoes.length,
               itemBuilder: (context, index) => DateHelper.isLog(data)
                   ? LogTile(revisao: revisoes[index])
-                  : RevisaoTile(revisao: revisoes[index]),
+                  : RevisaoTile(
+                      revisao: revisoes[index],
+                      last: revisoes.length - 1 == index,
+                      first: index == 0,
+                    ),
             );
           } else {
             return Container();

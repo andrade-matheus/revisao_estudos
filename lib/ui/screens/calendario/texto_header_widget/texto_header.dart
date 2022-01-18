@@ -18,7 +18,7 @@ class TextoHeader extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
             child: Text(
-              'Suas Revisões',
+              'Suas revisões',
               style: TextStyle(
                 fontSize: 34,
                 fontWeight: FontWeight.bold,

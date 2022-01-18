@@ -7,4 +7,5 @@ class AppIcons {
   static const IconData frequencias = Icons.repeat;
   static const IconData configuracoes = Icons.settings_outlined;
   static const IconData calendarioPicker = Icons.today;
+  static const IconData setaAtraso = Icons.keyboard_arrow_down_rounded;
 }

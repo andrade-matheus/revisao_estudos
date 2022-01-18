@@ -8,6 +8,8 @@ class AppColors {
   static Color navBarItemCinza = Color(0xFF737373);
   static Color navBarDivisorCinza = Color(0xFFC4C4C4);
   static Color laranjaBordaCard = Color(0xFFFFCB99);
+  static Color laranjaLegendaFrequencia = Color(0xFFFF9F41);
+  static Color vermelhoLegendaAtraso = Color(0xFFBE0000);
 
   static Map<int, Color> laranja =
   {
