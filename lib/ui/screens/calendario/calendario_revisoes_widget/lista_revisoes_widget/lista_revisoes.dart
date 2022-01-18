@@ -25,19 +25,20 @@ class ListaRevisoes extends StatelessWidget {
       future: repositoryRevisao.obterParaCaledario(disciplina, data),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          revisoes = snapshot.data as List<Revisao>? ?? [];
-          return ListView.builder(
-            physics: ClampingScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: revisoes.length,
-            itemBuilder: (context, index) => DateHelper.isLog(data)
-                ? LogTile(
-                    revisao: revisoes[index],
-                  )
-                : RevisaoTile(
-                    revisao: revisoes[index],
-                  ),
-          );
+          if (snapshot.hasData) {
+            revisoes = snapshot.data as List<Revisao>? ?? [];
+            return ListView.builder(
+              padding: EdgeInsets.zero,
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: revisoes.length,
+              itemBuilder: (context, index) => DateHelper.isLog(data)
+                  ? LogTile(revisao: revisoes[index])
+                  : RevisaoTile(revisao: revisoes[index]),
+            );
+          } else {
+            return Container();
+          }
         } else {
           return CircularProgressIndicator();
         }
