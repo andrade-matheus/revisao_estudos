@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:revisao_estudos/constants/app_colors.dart';
+import 'package:revisao_estudos/constants/app_fontes.dart';
 import 'package:revisao_estudos/routes/router.gr.dart';
 import 'package:revisao_estudos/services/database/database_config.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
@@ -44,8 +45,9 @@ class _MyAppState extends State<MyApp> {
         const Locale('pt'),
       ],
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: AppColors.primarySwatch,
         canvasColor: AppColors.branco,
+        fontFamily: AppFontes.roboto,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,

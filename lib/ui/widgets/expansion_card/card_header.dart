@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/constants/app_colors.dart';
-import 'package:revisao_estudos/constants/app_fontes.dart';
 
 class CardHeader extends StatefulWidget {
   final Widget? leading;
@@ -70,7 +69,6 @@ class _CardHeaderState extends State<CardHeader> with TickerProviderStateMixin {
               widget.title ?? '',
               style: TextStyle(
                 color: AppColors.preto,
-                fontFamily: AppFontes.robotoRegular,
                 fontWeight: FontWeight.w500,
                 fontSize: 18,
               ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:revisao_estudos/constants/app_fontes.dart';
 import 'package:revisao_estudos/constants/app_icons.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
 import 'package:revisao_estudos/ui/widgets/date_picker/date_picker.dart';
@@ -22,7 +21,6 @@ class TextoHeader extends StatelessWidget {
               style: TextStyle(
                 fontSize: 34,
                 fontWeight: FontWeight.bold,
-                fontFamily: AppFontes.robotoBold,
               ),
             ),
           ),
@@ -46,7 +44,6 @@ class TextoHeader extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    fontFamily: AppFontes.robotoBold,
                   ),
                 ),
               ],
