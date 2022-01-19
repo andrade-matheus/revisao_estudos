@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/constants/app_colors.dart';
-import 'package:revisao_estudos/constants/app_fontes.dart';
 import 'package:revisao_estudos/constants/app_icons.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 
 class LegendaFrequencia extends StatelessWidget {
   final Revisao revisao;
 
-  const LegendaFrequencia({Key? key, required this.revisao}) : super(key: key);
+  const LegendaFrequencia({
+    Key? key,
+    required this.revisao,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +40,16 @@ class LegendaFrequencia extends StatelessWidget {
     int vezesRevisadas = revisao.vezesRevisadas;
 
     TextStyle styleNormal = TextStyle(
-        shadows: [
-          Shadow(
-            color: AppColors.preto,
-            offset: Offset(0, -1),
-          ),
-        ],
-        color: Colors.transparent,
-        fontFamily: AppFontes.robotoThin,
-        fontWeight: FontWeight.w300);
+      shadows: [
+        Shadow(
+          color: AppColors.preto,
+          offset: Offset(0, -1),
+        ),
+      ],
+      color: Colors.transparent,
+      // fontFamily: AppFontes.robotoThin,
+      fontWeight: FontWeight.w300,
+    );
 
     TextStyle styleFreqAtual = TextStyle(
       shadows: [
@@ -57,7 +60,6 @@ class LegendaFrequencia extends StatelessWidget {
       decorationColor: AppColors.preto,
       decorationThickness: 1,
       decorationStyle: TextDecorationStyle.solid,
-      fontFamily: AppFontes.robotoThin,
       fontWeight: FontWeight.w300,
     );
 

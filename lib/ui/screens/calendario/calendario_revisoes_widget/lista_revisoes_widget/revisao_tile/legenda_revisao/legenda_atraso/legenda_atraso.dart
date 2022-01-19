@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/constants/app_colors.dart';
-import 'package:revisao_estudos/constants/app_fontes.dart';
 import 'package:revisao_estudos/constants/app_icons.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
@@ -28,10 +27,8 @@ class LegendaAtraso extends StatelessWidget {
           text: TextSpan(
             text: '$diasAtraso ${(diasAtraso > 1) ? 'dias' : 'dia'}',
             style: TextStyle(
-              color: AppColors.vermelhoLegendaAtraso,
-              fontFamily: AppFontes.robotoThin,
-              fontWeight: FontWeight.w300
-            ),
+                color: AppColors.vermelhoLegendaAtraso,
+                fontWeight: FontWeight.w300),
           ),
         ),
       ],
