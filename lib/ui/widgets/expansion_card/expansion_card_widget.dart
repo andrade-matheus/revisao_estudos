@@ -4,6 +4,7 @@ import 'card_header/card_header.dart';
 
 class ExpansionCard extends StatefulWidget {
   final String? title;
+  final TextStyle? titleStyle;
   final bool initiallyExpanded;
   final Widget? child;
   final EdgeInsets? padding;
@@ -13,6 +14,7 @@ class ExpansionCard extends StatefulWidget {
     this.initiallyExpanded = false,
     required this.child,
     this.padding,
+    this.titleStyle,
   });
 
   @override
@@ -81,6 +83,7 @@ class _ExpansionCardState extends State<ExpansionCard>
           children: [
             CardHeader(
               title: widget.title,
+              titleStyle: widget.titleStyle,
               isExpanded: isExpanded,
               titlePadding: widget.padding,
             ),
