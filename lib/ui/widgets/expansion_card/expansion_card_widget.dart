@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/constants/app_colors.dart';
-import 'package:revisao_estudos/ui/widgets/expansion_card/card_header.dart';
+import 'card_header/card_header.dart';
 
 class ExpansionCard extends StatefulWidget {
-  final Widget? leading;
-  final Widget? header;
   final String? title;
   final bool initiallyExpanded;
   final Widget? child;
   final EdgeInsets? padding;
 
   const ExpansionCard({
-    this.leading,
-    this.header,
     this.title,
     this.initiallyExpanded = false,
     required this.child,
@@ -84,11 +80,9 @@ class _ExpansionCardState extends State<ExpansionCard>
         child: Column(
           children: [
             CardHeader(
-              leading: widget.leading,
               title: widget.title,
-              header: widget.header,
               isExpanded: isExpanded,
-              headerPadding: widget.padding,
+              titlePadding: widget.padding,
             ),
             SizeTransition(
               sizeFactor: _exapandAnimation,
