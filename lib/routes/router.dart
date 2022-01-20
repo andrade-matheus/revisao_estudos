@@ -4,8 +4,8 @@ import 'package:revisao_estudos/ui/screens/configuracoes/configuracoes_page.dart
 import 'package:revisao_estudos/ui/screens/disciplinas/disciplinas_page.dart';
 import 'package:revisao_estudos/ui/screens/frequencias/frequencias_page.dart';
 import 'package:revisao_estudos/ui/screens/frequencias/tutorial_frequencias/tutorial_frequencias_page.dart';
-import 'package:revisao_estudos/ui/screens/revisao/adicionar_revisao/adicinar_revisao_page.dart';
-import 'package:revisao_estudos/ui/screens/revisao/detalhes_revisao/detalhes_revisao_page.dart';
+import 'package:revisao_estudos/ui/screens/revisao/adicionar_revisao_page/adicinar_revisao_page.dart';
+import 'package:revisao_estudos/ui/screens/revisao/detalhes_revisao_page/detalhes_revisao_page.dart';
 import 'package:revisao_estudos/ui/screens/revisao/revisoes_page.dart';
 import 'package:revisao_estudos/ui/widgets/home_page/home_page.dart';
 
