@@ -11,7 +11,7 @@ class TextoHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime dataSelecionada = context.watch<DataSelecionada>().dataSelecionada;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 30, 0, 20),
+      padding: const EdgeInsets.fromLTRB(10, 30, 0, 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

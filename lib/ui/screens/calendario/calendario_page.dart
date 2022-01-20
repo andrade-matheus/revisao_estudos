@@ -4,8 +4,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:revisao_estudos/models/provider/botao_concluir_revisao.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
 import 'package:revisao_estudos/routes/router.gr.dart';
-import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/lista_disciplina_widget/lista_disciplina.dart';
+import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/ui/screens/calendario/texto_header_widget/texto_header.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_disciplina.dart';
 import 'package:revisao_estudos/ui/widgets/revisai_floating_action_button/revisai_floating_action_button.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
@@ -15,8 +16,10 @@ class CalendarioPage extends StatefulWidget {
 }
 
 class _CalendarioPageState extends State<CalendarioPage> {
-  DateTime dataSelecionada = DateHelper.hoje();
+  DateTime _dataSelecionada = DateHelper.hoje();
   Color corPrimaria = Colors.blue;
+  RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
         ChangeNotifierProvider(create: (_) => BotaoConcluirRevisaoProvider()),
       ],
       builder: (context, _) {
+        _dataSelecionada = context.watch<DataSelecionada>().dataSelecionada;
         return GestureDetector(
           behavior: HitTestBehavior.translucent,
           onHorizontalDragEnd: (details) {
@@ -43,7 +47,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextoHeader(),
-                ListaDisciplina(),
+                ListaDisciplina(futureDisciplina: repositoryDisciplina.obterTodasComRevisoesPorData(_dataSelecionada), isCalendario: true),
               ],
             ),
           ),
