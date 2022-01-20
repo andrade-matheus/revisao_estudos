@@ -9,5 +9,6 @@ class AppIcons {
   static const IconData calendarioPicker = Icons.today;
   static const IconData setaAtraso = Icons.keyboard_arrow_down_rounded;
   static const IconData concluirRevisao = Icons.done_all;
+  static const IconData adicionarFloatingActionButton = Icons.add;
 
 }
