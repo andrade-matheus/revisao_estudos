@@ -20,7 +20,6 @@ class _HomePageState extends State<HomePage> {
       child: AutoTabsScaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.branco,
-        extendBody: true,
         routes: const [
           CalendarioRouter(),
           RevisoesRouter(),

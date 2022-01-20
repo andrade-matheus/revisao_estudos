@@ -21,13 +21,12 @@ class _RevisaiBottomNavigationBarState extends State<RevisaiBottomNavigationBar>
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.branco,
         border: Border(
           top: BorderSide(color: AppColors.navBarDivisorCinza),
         ),
       ),
       child: SalomonBottomBar(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         currentIndex: widget.tabsRouter.activeIndex,
         onTap: widget.tabsRouter.setActiveIndex,
         selectedItemColor: AppColors.navBarItemLaranja,
