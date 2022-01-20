@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:revisao_estudos/models/provider/botao_concluir_revisao.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
 import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/lista_disciplina_widget/lista_disciplina.dart';
 import 'package:revisao_estudos/ui/screens/calendario/texto_header_widget/texto_header.dart';
@@ -19,6 +20,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => DataSelecionada()),
+        ChangeNotifierProvider(create: (_) => BotaoConcluirRevisaoProvider()),
       ],
       builder: (context, _) {
         return GestureDetector(
