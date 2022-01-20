@@ -4,7 +4,7 @@ import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/lista_disciplina_widget/disciplina_tile/disciplina_tile.dart';
-import 'package:revisao_estudos/ui/screens/calendario/calendario_revisoes_widget/sem_revisoes/sem_revisoes.dart';
+import 'package:revisao_estudos/ui/widgets/sem_revisoes/sem_revisoes.dart';
 
 class ListaDisciplina extends StatelessWidget {
   @override
