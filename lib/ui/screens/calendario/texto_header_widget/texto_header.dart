@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:revisao_estudos/constants/app_icons.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
 import 'package:revisao_estudos/ui/widgets/date_picker/date_picker.dart';
+import 'package:revisao_estudos/ui/widgets/titulo_pagina/titulo_pagina.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 class TextoHeader extends StatelessWidget {
@@ -16,13 +17,7 @@ class TextoHeader extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-            child: Text(
-              'Suas revisões',
-              style: TextStyle(
-                fontSize: 34,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: TituloPagina(titulo: 'Suas revisões'),
           ),
           GestureDetector(
             onTap: () async {
