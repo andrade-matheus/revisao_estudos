@@ -19,7 +19,12 @@ import 'package:revisao_estudos/ui/widgets/home_page/home_page.dart';
         AutoRoute(
           path: 'calendario',
           name: 'CalendarioRouter',
-          page: CalendarioPage,
+          page: EmptyRouterPage,
+          children: [
+            AutoRoute(path: '', page: CalendarioPage),
+            AutoRoute(path: 'detalhesRevisao', page: DetalhesRevisaoPage),
+            AutoRoute(path: 'adicionarRevisao', page: AdicionarRevisaoPage),
+          ],
         ),
         AutoRoute(
           path: 'revisoes',
@@ -27,7 +32,7 @@ import 'package:revisao_estudos/ui/widgets/home_page/home_page.dart';
           page: EmptyRouterPage,
           children: [
             AutoRoute(path: '', page: RevisoesPage),
-            AutoRoute(path: 'revisao', page: DetalhesRevisaoPage),
+            AutoRoute(path: 'detalhesRevisao', page: DetalhesRevisaoPage),
             AutoRoute(path: 'adicionarRevisao', page: AdicionarRevisaoPage),
           ],
         ),
