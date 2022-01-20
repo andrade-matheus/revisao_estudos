@@ -4,19 +4,19 @@ import 'package:revisao_estudos/constants/app_colors.dart';
 import 'package:revisao_estudos/constants/app_icons.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-class BottomNavBar extends StatefulWidget {
+class RevisaiBottomNavigationBar extends StatefulWidget {
   final TabsRouter tabsRouter;
 
-  const BottomNavBar({
+  const RevisaiBottomNavigationBar({
     Key? key,
     required this.tabsRouter,
   }) : super(key: key);
 
   @override
-  _BottomNavBarState createState() => _BottomNavBarState();
+  _RevisaiBottomNavigationBarState createState() => _RevisaiBottomNavigationBarState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
+class _RevisaiBottomNavigationBarState extends State<RevisaiBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
