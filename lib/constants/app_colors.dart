@@ -3,17 +3,29 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class AppColors {
+
+  // Extra
   static Color branco = Color(0xFFFFFFFF);
   static Color preto = Color(0xFF000000);
-  static Color laranja = Color(0xFFFF7F00);
   static Color sombra = Colors.black12;
+
+  // Bottom Navigation Bar
   static Color navBarItemLaranja = Color(0xFFFF9F41);
   static Color navBarItemCinza = Color(0xFF737373);
   static Color navBarDivisorCinza = Color(0xFFC4C4C4);
-  static Color laranjaBordaCard = Color(0xFFFFCB99);
-  static Color laranjaLegendaFrequencia = Color(0xFFFF9F41);
-  static Color vermelhoLegendaAtraso = Color(0xFFBE0000);
 
+  // Laranjas
+  static Color laranja = Color(0xFFFF7F00);
+  static Color laranjaBordaCard = Color(0xFFFFCB99);
+
+  // Legenda das revisões
+  static Color vermelhoLegendaAtraso = Color(0xFFBE0000);
+  static Color laranjaLegendaFrequencia = Color(0xFFFF9F41);
+
+  // FloatingActionButton
+  static Color laranjaFloatingActionButton = Color(0xFFFF9F41);
+
+  // Primary Swatch
   static MaterialColor primarySwatch = MaterialColor(
     laranja.value,
     <int, Color>{
