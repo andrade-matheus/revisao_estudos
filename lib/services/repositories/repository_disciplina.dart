@@ -1,5 +1,7 @@
 import 'package:revisao_estudos/models/entity/disciplina.dart';
+import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_common.dart';
+import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
@@ -8,6 +10,24 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
 
   @override
   Function get fromMap => Disciplina.fromMap;
+
+  @override
+  Future<List<Disciplina>> obterTodos() async {
+    final bd = await database;
+    var resultado = await bd?.query(nomeTabela);
+
+    List<Disciplina> disciplinas = await fromMapList(resultado ?? []);
+
+    // Obtendo as revisões destas disciplinas.
+    RepositoryRevisao repositoryRevisao = new RepositoryRevisao();
+    List<Revisao> revisoes = await repositoryRevisao.obterTodos();
+
+    disciplinas.forEach((disciplina) {
+      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplina?.id).toList();
+    });
+
+    return disciplinas;
+  }
 
   Future<List<Disciplina>> obterTodasComRevisoesPorData(DateTime data) async {
     if (data.isBefore(DateHelper.hoje())) {
@@ -28,7 +48,17 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
                       WHERE date(logRevisao.dataRevisao) = date(?);
                       """;
     List<Object> arguments = [DateHelper.formatarParaSql(data)];
-    return await obterPorRawQuery(query, arguments);
+    List<Disciplina> disciplinas = await obterPorRawQuery(query, arguments);
+
+    // Obtendo as revisões destas disciplinas.
+    RepositoryRevisao repositoryRevisao = new RepositoryRevisao();
+    List<Revisao> revisoes = await repositoryRevisao.obterTodasComLogRevisoesPorData(data);
+
+    disciplinas.forEach((disciplina) {
+      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplina?.id).toList();
+    });
+
+    return disciplinas;
   }
 
 
@@ -38,9 +68,18 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
                       FROM disciplina INNER JOIN revisao ON disciplina.id = revisao.idDisciplina
                       WHERE date(revisao.proxRevisao) = date(?);
                       """;
-
     List<Object> arguments = [DateHelper.formatarParaSql(data)];
-    return await obterPorRawQuery(query, arguments);
+    List<Disciplina> disciplinas = await obterPorRawQuery(query, arguments);
+
+    // Obtendo as revisões destas disciplinas.
+    RepositoryRevisao repositoryRevisao = new RepositoryRevisao();
+    List<Revisao> revisoes = await repositoryRevisao.obterPorData(data);
+
+    disciplinas.forEach((disciplina) {
+      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplina?.id).toList();
+    });
+
+    return disciplinas;
   }
 
   // Retorna disciplinas que tem revisões para hoje incluindo as atrasadas.
@@ -49,6 +88,16 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
                       FROM disciplina INNER JOIN revisao ON disciplina.id = revisao.idDisciplina
                       WHERE date(revisao.proxRevisao) < date(?);""";
     List<Object> arguments = [DateHelper.formatarParaSql(DateHelper.hoje())];
-    return await obterPorRawQuery(query, arguments);
+    List<Disciplina> disciplinas = await obterPorRawQuery(query, arguments);
+
+    // Obtendo as revisões destas disciplinas.
+    RepositoryRevisao repositoryRevisao = new RepositoryRevisao();
+    List<Revisao> revisoes = await repositoryRevisao.obterPorData(DateHelper.hoje());
+
+    disciplinas.forEach((disciplina) {
+      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplina?.id).toList();
+    });
+
+    return disciplinas;
   }
 }

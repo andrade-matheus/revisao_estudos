@@ -19,6 +19,7 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
     return revisoes;
   }
 
+  // Retorna revisões para data selecionada, incluindo as atrasadas.
   Future<List<Revisao>> obterPorData(DateTime data) async {
     final bd = await database;
     var dataSql = DateHelper.formatarParaSql(data);
@@ -30,8 +31,7 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
     return await fromMapList(resultado ?? []);
   }
 
-  Future<List<Revisao>> obterParaCaledario(
-      Disciplina disciplina, DateTime data) async {
+  Future<List<Revisao>> obterParaCaledario(Disciplina disciplina, DateTime data) async {
     if (data.isBefore(DateHelper.hoje())) {
       return await obterEmLogPorDisciplinaPorData(disciplina, data);
     } else if (data.isBefore(DateHelper.amanha())) {
@@ -42,8 +42,7 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
   }
 
   // Retorna as revisões que foram concluídas de uma disciplina em determinada data.
-  Future<List<Revisao>> obterEmLogPorDisciplinaPorData(
-      Disciplina disciplina, DateTime data) async {
+  Future<List<Revisao>> obterEmLogPorDisciplinaPorData(Disciplina disciplina, DateTime data) async {
     String query = """SELECT revisao.id, 
                               idDisciplina, 
                               idFrequencia, 
@@ -77,6 +76,18 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
                       WHERE date(proxRevisao) <= date(?) AND idDisciplina == ?;""";
 
     List<Object> arguments = [DateHelper.formatarParaSql(data), disciplina.id];
+    return await obterPorRawQuery(query, arguments);
+  }
+
+  // Retorna as revisões que tem Logs de Revisão para esse determinada data.
+  Future<List<Revisao>> obterTodasComLogRevisoesPorData(DateTime data) async {
+    String query = """SELECT revisao.id, idDisciplina, idFrequencia, nome, dataCadastro, proxRevisao, vezesRevisadas, isArchived
+                      FROM logRevisao 
+                      INNER JOIN revisao ON logRevisao.idRevisao = revisao.id
+                      INNER JOIN disciplina ON revisao.idDisciplina = disciplina.id
+                      WHERE date(logRevisao.dataRevisao) = date(?);
+                      """;
+    List<Object> arguments = [DateHelper.formatarParaSql(data)];
     return await obterPorRawQuery(query, arguments);
   }
 }

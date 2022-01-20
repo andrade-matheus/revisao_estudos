@@ -33,10 +33,10 @@ class Revisao extends EntityCommon {
     RepositoryDisciplina discRepository = RepositoryDisciplina();
     RepositoryFrequencia freqRepository = RepositoryFrequencia();
     return Revisao(
-      id: json['id'],
+      id: json['id'] ?? json['idRevisao'],
       disciplina: await discRepository.obterPorId(json['idDisciplina']),
       frequencia: await freqRepository.obterPorId(json['idFrequencia']),
-      nome: json['nome'],
+      nome: json['nome'] ?? json['nomeRevisao'],
       dataCadastro: DateTime.parse(json['dataCadastro']),
       proxRevisao: DateTime.parse(json['proxRevisao']),
       vezesRevisadas: json['vezesRevisadas'],
