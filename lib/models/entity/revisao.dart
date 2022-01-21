@@ -10,7 +10,7 @@ class Revisao extends EntityCommon {
   int id;
   String nome;
   int disciplinaId;
-  int frequenciaId;
+  Frequencia frequencia;
   DateTime dataCadastro;
   DateTime proxRevisao;
   int vezesRevisadas;
@@ -20,18 +20,19 @@ class Revisao extends EntityCommon {
     required this.id,
     required this.nome,
     required this.disciplinaId,
-    required this.frequenciaId,
+    required this.frequencia,
     required this.dataCadastro,
     required this.proxRevisao,
     required this.vezesRevisadas,
     required this.isArchived,
   });
 
-  static Revisao fromMap(Map<String, dynamic> json) {
+  static Future<Revisao> fromMap(Map<String, dynamic> json) async {
+    RepositoryFrequencia repositoryFrequencia = RepositoryFrequencia();
     return Revisao(
       id: json['id'] ?? json['idRevisao'],
       disciplinaId: json['idDisciplina'],
-      frequenciaId: json['idFrequencia'],
+      frequencia: (await repositoryFrequencia.obterPorId(json['idFrequencia']))!,
       nome: json['nome'] ?? json['nomeRevisao'],
       dataCadastro: DateTime.parse(json['dataCadastro']),
       proxRevisao: DateTime.parse(json['proxRevisao']),
@@ -45,7 +46,7 @@ class Revisao extends EntityCommon {
     return {
       'id': id,
       'idDisciplina': disciplinaId,
-      'idFrequencia': frequenciaId,
+      'idFrequencia': frequencia.id,
       'nome': nome,
       'dataCadastro': dataCadastro.toIso8601String(),
       'proxRevisao': proxRevisao.toIso8601String(),
@@ -55,14 +56,6 @@ class Revisao extends EntityCommon {
   }
 
   Future<void> realizarRevisao() async {
-    RepositoryFrequencia repositoryFrequencia = new RepositoryFrequencia();
-    Frequencia? frequencia =
-        await repositoryFrequencia.obterPorId(this.frequenciaId);
-
-    if (frequencia == null) {
-      return;
-    }
-
     List<String> valoresFrequencia = frequencia.frequencia.split('-');
     int quantidadeFrequencias = valoresFrequencia.length;
     int diasProxRevisao;
@@ -93,7 +86,7 @@ class Revisao extends EntityCommon {
     return '[${this.id}, ' +
         '${this.nome}, ' +
         '${this.disciplinaId}, ' +
-        '${this.frequenciaId}, ' +
+        '${this.frequencia}, ' +
         '${this.dataCadastro}, ' +
         '${this.proxRevisao}, ' +
         '${this.vezesRevisadas}]';

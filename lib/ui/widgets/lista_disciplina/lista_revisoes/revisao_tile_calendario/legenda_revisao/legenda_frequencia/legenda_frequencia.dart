@@ -35,7 +35,7 @@ class LegendaFrequencia extends StatelessWidget {
 
   List<TextSpan> _criarLegendaFrequencias(Revisao revisao) {
     List<TextSpan> frequenciasWidgets = [];
-    List<String> frequencias = revisao.frequencia?.frequencia.split('-') ?? [];
+    List<String> frequencias = revisao.frequencia.frequencia.split('-');
     int numeroFreq = frequencias.length;
     int vezesRevisadas = revisao.vezesRevisadas;
 
