@@ -33,30 +33,20 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
     return revisoes;
   }
 
-  // Retorna revisões para data selecionada, incluindo as atrasadas.
-  Future<List<Revisao>> obterPorData(DateTime data) async {
-    final bd = await database;
-    var dataSql = DateHelper.formatarParaSql(data);
-    var resultado = await bd?.query(
-      nomeTabela,
-      where: 'date(proxRevisao) < ?',
-      whereArgs: ["date($dataSql)"],
-    );
-    return await fromMapList(resultado ?? []);
-  }
-
-  Future<List<Revisao>> obterParaCaledario(Disciplina disciplina, DateTime data) async {
+  Future<List<Revisao>> obterParaCaledario(
+      Disciplina disciplina, DateTime data) async {
     if (data.isBefore(DateHelper.hoje())) {
       return await obterEmLogPorDisciplinaPorData(disciplina, data);
     } else if (data.isBefore(DateHelper.amanha())) {
-      return await obterPorDisciplinaPorDataComAtrasadas(disciplina, data);
+      return await obterPorDisciplinaPorDataComAtrasadas(disciplina.id, data);
     } else {
-      return await obterPorDisciplinaPorData(disciplina, data);
+      return await obterPorDisciplinaPorData(disciplina.id, data);
     }
   }
 
   // Retorna as revisões que foram concluídas de uma disciplina em determinada data.
-  Future<List<Revisao>> obterEmLogPorDisciplinaPorData(Disciplina disciplina, DateTime data) async {
+  Future<List<Revisao>> obterEmLogPorDisciplinaPorData(
+      Disciplina disciplina, DateTime data) async {
     String query = """SELECT revisao.id, 
                               idDisciplina, 
                               idFrequencia, 
@@ -74,34 +64,51 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
   }
 
   // Retorna as revisões de uma disciplina em determinada data.
-  Future<List<Revisao>> obterPorDisciplinaPorData(Disciplina disciplina, DateTime data) async {
+  Future<List<Revisao>> obterPorDisciplinaPorData(
+      int disciplinaId, DateTime data) async {
     String query = """SELECT *
                       FROM revisao
                       WHERE date(proxRevisao) = date(?) AND idDisciplina == ?;""";
 
-    List<Object> arguments = [DateHelper.formatarParaSql(data), disciplina.id];
+    List<Object> arguments = [DateHelper.formatarParaSql(data), disciplinaId];
     return await obterPorRawQuery(query, arguments);
   }
 
   // Retorna as revisões de uma disciplina para determinada data, mais as revisões atrasadas (de datas anteriores).
-  Future<List<Revisao>> obterPorDisciplinaPorDataComAtrasadas(Disciplina disciplina, DateTime data) async {
+  Future<List<Revisao>> obterPorDisciplinaPorDataComAtrasadas(
+      int disciplinaId, DateTime data) async {
     String query = """SELECT *
                       FROM revisao
                       WHERE date(proxRevisao) <= date(?) AND idDisciplina == ?;""";
 
-    List<Object> arguments = [DateHelper.formatarParaSql(data), disciplina.id];
+    List<Object> arguments = [DateHelper.formatarParaSql(data), disciplinaId];
     return await obterPorRawQuery(query, arguments);
   }
 
-  // Retorna as revisões que tem Logs de Revisão para esse determinada data.
-  Future<List<Revisao>> obterTodasComLogRevisoesPorData(DateTime data) async {
-    String query = """SELECT revisao.id, idDisciplina, idFrequencia, nome, dataCadastro, proxRevisao, vezesRevisadas, isArchived
-                      FROM logRevisao 
-                      INNER JOIN revisao ON logRevisao.idRevisao = revisao.id
-                      INNER JOIN disciplina ON revisao.idDisciplina = disciplina.id
-                      WHERE date(logRevisao.dataRevisao) = date(?);
-                      """;
-    List<Object> arguments = [DateHelper.formatarParaSql(data)];
+  // ##################################################################################
+  // Método que retorna uma lista de revisões para composição dos objetos de disciplina
+  // ##################################################################################
+
+  Future<List<Revisao>> obterParaDisciplina(int disciplinaId, DateTime? data, bool? atrasadas, bool? isLog) async {
+    String query = 'SELECT revisao.id, idDisciplina, idFrequencia, nome, dataCadastro, proxRevisao, vezesRevisadas, isArchived FROM revisao';
+    List<Object> arguments = [];
+
+    if (data != null) {
+      if (isLog ?? false) {
+        query += ' INNER JOIN logRevisao ON logRevisao.idRevisao = revisao.id';
+        query += ' WHERE date(logRevisao.dataRevisao) = date(?) AND idDisciplina == ?';
+      } else if (atrasadas ?? false) {
+        query += ' WHERE date(proxRevisao) < ? AND idDisciplina = ?';
+      } else {
+        query += ' WHERE date(proxRevisao) = ? AND idDisciplina = ?';
+      }
+      arguments.add(DateHelper.formatarParaSql(data));
+      arguments.add(disciplinaId);
+    } else {
+      query += ' WHERE idDisciplina == ?';
+      arguments.add(disciplinaId);
+    }
+
     return await obterPorRawQuery(query, arguments);
   }
 }

@@ -47,7 +47,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextoHeader(),
-                ListaDisciplina(futureDisciplina: repositoryDisciplina.obterTodasComRevisoesPorData(_dataSelecionada), isCalendario: true),
+                ListaDisciplina(futureDisciplina: repositoryDisciplina.obterTodasParaCalendario(_dataSelecionada), isCalendario: true),
               ],
             ),
           ),

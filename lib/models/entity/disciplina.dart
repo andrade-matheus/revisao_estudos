@@ -12,7 +12,14 @@ class Disciplina extends EntityCommon {
     this.revisoes,
   });
 
-  static Disciplina fromMap(Map<String, dynamic> json, List<Revisao>? revisoes) {
+  static Disciplina fromMap(Map<String, dynamic> json) {
+    return Disciplina(
+      id: json['id'],
+      nome: json['nome'],
+    );
+  }
+
+  static Disciplina fromMapComRevisoes(Map<String, dynamic> json, List<Revisao> revisoes) {
     return Disciplina(
       id: json['id'],
       nome: json['nome'],

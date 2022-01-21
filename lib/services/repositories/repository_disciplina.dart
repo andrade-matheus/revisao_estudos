@@ -12,34 +12,44 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
   Function get fromMap => Disciplina.fromMap;
 
   @override
-  Future<bool> utilizado(int id) async{
+  Future<bool> utilizado(int id) async {
     RepositoryRevisao repositoryRevisao = new RepositoryRevisao();
     List<Revisao> revisoes = await repositoryRevisao.obterPorDisciplina(id);
     return revisoes.isNotEmpty;
   }
-  
+
+  Future<List<Disciplina>> fromMapListComRevisoes(List<Map<String, dynamic>>? param, DateTime? data, bool? atrasadas, bool? isLog) async {
+    List<Disciplina> lista = [];
+    RepositoryRevisao repositoryRevisao = new RepositoryRevisao();
+
+    if (param != null && param.isNotEmpty) {
+      for (var item in param) {
+        lista.add(Disciplina.fromMapComRevisoes(
+            item,
+            await repositoryRevisao.obterParaDisciplina(
+                item['id'], data, atrasadas, isLog)));
+      }
+    } else {
+      lista = new List<Disciplina>.from([]);
+    }
+    return lista;
+  }
+
   @override
   Future<List<Disciplina>> obterTodos() async {
     final bd = await database;
     var resultado = await bd?.query(nomeTabela);
 
-    List<Disciplina> disciplinas = await fromMapList(resultado ?? []);
-
-    // Obtendo as revisões destas disciplinas.
-    RepositoryRevisao repositoryRevisao = new RepositoryRevisao();
-    List<Revisao> revisoes = await repositoryRevisao.obterTodos();
-
-    disciplinas.forEach((disciplina) {
-      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplinaId).toList();
-    });
-
+    List<Disciplina> disciplinas = await fromMapListComRevisoes(resultado, null, null, null);
     return disciplinas;
   }
 
-  Future<List<Disciplina>> obterTodasComRevisoesPorData(DateTime data) async {
+  // Define qual método vai utilizar para enviar as disciplinas (com as suas devidas revisões) para o calendário.
+  Future<List<Disciplina>> obterTodasParaCalendario(DateTime data) async {
     if (data.isBefore(DateHelper.hoje())) {
       return await obterTodasComLogRevisoesPorData(data);
-    } else if (data.isAfter(DateHelper.amanha()) || data.isAtSameMomentAs(DateHelper.amanha())){
+    } else if (data.isAfter(DateHelper.amanha()) ||
+        data.isAtSameMomentAs(DateHelper.amanha())) {
       return await _obterTodasComRevisoesPorData(data);
     } else {
       return await obterTodasComRevisoesParaHoje();
@@ -55,55 +65,41 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
                       WHERE date(logRevisao.dataRevisao) = date(?);
                       """;
     List<Object> arguments = [DateHelper.formatarParaSql(data)];
-    List<Disciplina> disciplinas = await obterPorRawQuery(query, arguments);
 
-    // Obtendo as revisões destas disciplinas.
-    RepositoryRevisao repositoryRevisao = new RepositoryRevisao();
-    List<Revisao> revisoes = await repositoryRevisao.obterTodasComLogRevisoesPorData(data);
-
-    disciplinas.forEach((disciplina) {
-      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplinaId).toList();
-    });
+    final bd = await database;
+    var resultado = await bd?.rawQuery(query, arguments);
+    List<Disciplina> disciplinas = await fromMapListComRevisoes(resultado, data, false, true);
 
     return disciplinas;
   }
 
-
   // Retorna as disciplinas que tem revisões para esse determinado dia e NÃO incluí as revisões atrasadas.
   Future<List<Disciplina>> _obterTodasComRevisoesPorData(DateTime data) async {
-    String query = """SELECT DISTINCT disciplina.id as id, disciplina.nome as nome
+    String query =
+        """SELECT DISTINCT disciplina.id as id, disciplina.nome as nome
                       FROM disciplina INNER JOIN revisao ON disciplina.id = revisao.idDisciplina
                       WHERE date(revisao.proxRevisao) = date(?);
                       """;
     List<Object> arguments = [DateHelper.formatarParaSql(data)];
-    List<Disciplina> disciplinas = await obterPorRawQuery(query, arguments);
 
-    // Obtendo as revisões destas disciplinas.
-    RepositoryRevisao repositoryRevisao = new RepositoryRevisao();
-    List<Revisao> revisoes = await repositoryRevisao.obterPorData(data);
-
-    disciplinas.forEach((disciplina) {
-      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplinaId).toList();
-    });
+    final bd = await database;
+    var resultado = await bd?.rawQuery(query, arguments);
+    List<Disciplina> disciplinas = await fromMapListComRevisoes(resultado, data, false, false);
 
     return disciplinas;
   }
 
   // Retorna disciplinas que tem revisões para hoje incluindo as atrasadas.
   Future<List<Disciplina>> obterTodasComRevisoesParaHoje() async {
-    String query = """SELECT DISTINCT disciplina.id as id, disciplina.nome as nome
+    String query =
+        """SELECT DISTINCT disciplina.id as id, disciplina.nome as nome
                       FROM disciplina INNER JOIN revisao ON disciplina.id = revisao.idDisciplina
                       WHERE date(revisao.proxRevisao) < date(?);""";
     List<Object> arguments = [DateHelper.formatarParaSql(DateHelper.hoje())];
-    List<Disciplina> disciplinas = await obterPorRawQuery(query, arguments);
 
-    // Obtendo as revisões destas disciplinas.
-    RepositoryRevisao repositoryRevisao = new RepositoryRevisao();
-    List<Revisao> revisoes = await repositoryRevisao.obterPorData(DateHelper.hoje());
-
-    disciplinas.forEach((disciplina) {
-      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplinaId).toList();
-    });
+    final bd = await database;
+    var resultado = await bd?.rawQuery(query, arguments);
+    List<Disciplina> disciplinas = await fromMapListComRevisoes(resultado, DateHelper.hoje(), true, false);
 
     return disciplinas;
   }
