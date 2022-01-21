@@ -1,4 +1,3 @@
-import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_common.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
@@ -33,62 +32,7 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
     return revisoes;
   }
 
-  Future<List<Revisao>> obterParaCaledario(
-      Disciplina disciplina, DateTime data) async {
-    if (data.isBefore(DateHelper.hoje())) {
-      return await obterEmLogPorDisciplinaPorData(disciplina, data);
-    } else if (data.isBefore(DateHelper.amanha())) {
-      return await obterPorDisciplinaPorDataComAtrasadas(disciplina.id, data);
-    } else {
-      return await obterPorDisciplinaPorData(disciplina.id, data);
-    }
-  }
-
-  // Retorna as revisões que foram concluídas de uma disciplina em determinada data.
-  Future<List<Revisao>> obterEmLogPorDisciplinaPorData(
-      Disciplina disciplina, DateTime data) async {
-    String query = """SELECT revisao.id, 
-                              idDisciplina, 
-                              idFrequencia, 
-                              nome, 
-                              dataCadastro, 
-                              proxRevisao, 
-                              vezesRevisadas, 
-                              isArchived
-                      FROM logRevisao
-                      INNER JOIN revisao on revisao.id = logRevisao.idRevisao
-                      WHERE date(dataRevisao) = date(?) AND idDisciplina = ?;""";
-
-    List<Object> arguments = [DateHelper.formatarParaSql(data), disciplina.id];
-    return await obterPorRawQuery(query, arguments);
-  }
-
-  // Retorna as revisões de uma disciplina em determinada data.
-  Future<List<Revisao>> obterPorDisciplinaPorData(
-      int disciplinaId, DateTime data) async {
-    String query = """SELECT *
-                      FROM revisao
-                      WHERE date(proxRevisao) = date(?) AND idDisciplina == ?;""";
-
-    List<Object> arguments = [DateHelper.formatarParaSql(data), disciplinaId];
-    return await obterPorRawQuery(query, arguments);
-  }
-
-  // Retorna as revisões de uma disciplina para determinada data, mais as revisões atrasadas (de datas anteriores).
-  Future<List<Revisao>> obterPorDisciplinaPorDataComAtrasadas(
-      int disciplinaId, DateTime data) async {
-    String query = """SELECT *
-                      FROM revisao
-                      WHERE date(proxRevisao) <= date(?) AND idDisciplina == ?;""";
-
-    List<Object> arguments = [DateHelper.formatarParaSql(data), disciplinaId];
-    return await obterPorRawQuery(query, arguments);
-  }
-
-  // ##################################################################################
   // Método que retorna uma lista de revisões para composição dos objetos de disciplina
-  // ##################################################################################
-
   Future<List<Revisao>> obterParaDisciplina(int disciplinaId, DateTime? data, bool? atrasadas, bool? isLog) async {
     String query = 'SELECT revisao.id, idDisciplina, idFrequencia, nome, dataCadastro, proxRevisao, vezesRevisadas, isArchived FROM revisao';
     List<Object> arguments = [];

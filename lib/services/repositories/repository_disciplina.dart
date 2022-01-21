@@ -35,17 +35,16 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
     return lista;
   }
 
-  @override
-  Future<List<Disciplina>> obterTodos() async {
+  Future<List<Disciplina>> obterTodasInculindoRevisoes() async {
     final bd = await database;
     var resultado = await bd?.query(nomeTabela);
-
     List<Disciplina> disciplinas = await fromMapListComRevisoes(resultado, null, null, null);
+
     return disciplinas;
   }
 
   // Define qual método vai utilizar para enviar as disciplinas (com as suas devidas revisões) para o calendário.
-  Future<List<Disciplina>> obterTodasParaCalendario(DateTime data) async {
+  Future<List<Disciplina>> obterParaCalendario(DateTime data) async {
     if (data.isBefore(DateHelper.hoje())) {
       return await obterTodasComLogRevisoesPorData(data);
     } else if (data.isAfter(DateHelper.amanha()) ||
@@ -75,8 +74,7 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
 
   // Retorna as disciplinas que tem revisões para esse determinado dia e NÃO incluí as revisões atrasadas.
   Future<List<Disciplina>> _obterTodasComRevisoesPorData(DateTime data) async {
-    String query =
-        """SELECT DISTINCT disciplina.id as id, disciplina.nome as nome
+    String query = """SELECT DISTINCT disciplina.id as id, disciplina.nome as nome
                       FROM disciplina INNER JOIN revisao ON disciplina.id = revisao.idDisciplina
                       WHERE date(revisao.proxRevisao) = date(?);
                       """;
@@ -91,8 +89,7 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
 
   // Retorna disciplinas que tem revisões para hoje incluindo as atrasadas.
   Future<List<Disciplina>> obterTodasComRevisoesParaHoje() async {
-    String query =
-        """SELECT DISTINCT disciplina.id as id, disciplina.nome as nome
+    String query = """SELECT DISTINCT disciplina.id as id, disciplina.nome as nome
                       FROM disciplina INNER JOIN revisao ON disciplina.id = revisao.idDisciplina
                       WHERE date(revisao.proxRevisao) < date(?);""";
     List<Object> arguments = [DateHelper.formatarParaSql(DateHelper.hoje())];
