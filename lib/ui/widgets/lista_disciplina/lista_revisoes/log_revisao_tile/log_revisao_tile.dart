@@ -4,10 +4,10 @@ import 'package:revisao_estudos/constants/app_colors.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/routes/router.gr.dart';
 
-class RevisaoTileRevisoes extends StatelessWidget {
+class LogRevisaoTile extends StatelessWidget {
   final Revisao revisao;
 
-  const RevisaoTileRevisoes({
+  const LogRevisaoTile({
     Key? key,
     required this.revisao,
   }) : super(key: key);

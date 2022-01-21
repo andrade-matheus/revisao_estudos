@@ -5,16 +5,16 @@ import 'package:revisao_estudos/constants/app_colors.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/models/provider/botao_concluir_revisao.dart';
 import 'package:revisao_estudos/routes/router.gr.dart';
-import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/revisao_tile_calendario/botao_concluir_revisao/botao_concluir_revisao.dart';
-import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/revisao_tile_calendario/legenda_revisao/legenda_revisao.dart';
-import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/revisao_tile_calendario/titulo_revisao/titulo_revisao.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/calendario_revisao_tile/botao_concluir_revisao/botao_concluir_revisao.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/calendario_revisao_tile/legenda_revisao/legenda_revisao.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/calendario_revisao_tile/titulo_revisao/titulo_revisao.dart';
 
-class RevisaoTileCalendario extends StatefulWidget {
+class CalendarioRevisaoTile extends StatefulWidget {
   final Revisao revisao;
   final bool last;
   final bool first;
 
-  const RevisaoTileCalendario(
+  const CalendarioRevisaoTile(
       {Key? key,
       required this.revisao,
       required this.last,
@@ -22,10 +22,10 @@ class RevisaoTileCalendario extends StatefulWidget {
       : super(key: key);
 
   @override
-  _RevisaoTileCalendarioState createState() => _RevisaoTileCalendarioState();
+  _CalendarioRevisaoTileState createState() => _CalendarioRevisaoTileState();
 }
 
-class _RevisaoTileCalendarioState extends State<RevisaoTileCalendario> {
+class _CalendarioRevisaoTileState extends State<CalendarioRevisaoTile> {
   bool _showButton = false;
 
   @override

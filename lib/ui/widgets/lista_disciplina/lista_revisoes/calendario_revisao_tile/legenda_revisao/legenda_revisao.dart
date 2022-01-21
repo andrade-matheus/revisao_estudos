@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
-import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/revisao_tile_calendario/legenda_revisao/legenda_atraso/legenda_atraso.dart';
-import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/revisao_tile_calendario/legenda_revisao/legenda_frequencia/legenda_frequencia.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/calendario_revisao_tile/legenda_revisao/legenda_atraso/legenda_atraso.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/calendario_revisao_tile/legenda_revisao/legenda_frequencia/legenda_frequencia.dart';
 
 class LegendaRevisao extends StatelessWidget {
   final Revisao revisao;
