@@ -34,7 +34,7 @@ class _RevisoesPageState extends State<RevisoesPage> {
             child: TituloPagina(titulo: 'Todas revisões'),
           ),
           ListaDisciplina(
-            futureDisciplina: repositoryDisciplina.obterTodos(),
+            futureDisciplina: repositoryDisciplina.obterTodasInculindoRevisoes(),
             isCalendario: false,
           ),
         ],
