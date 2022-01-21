@@ -19,4 +19,9 @@ class RepositoryLogRevisao extends RepositoryCommon<LogRevisao> {
     );
     return await fromMapList(resultado ?? []);
   }
+
+  @override
+  Future<bool> utilizado(int id) async {
+    return true;
+  }
 }
