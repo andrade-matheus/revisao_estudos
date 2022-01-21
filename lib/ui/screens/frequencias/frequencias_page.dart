@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:revisao_estudos/models/entity/frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/ui/screens/frequencias/excluir_frequencia_widget/excluir_frequencia_dialog.dart';
+import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
 
 class FrequenciasPage extends StatefulWidget {
   @override
@@ -47,9 +48,7 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
               return Container();
             }
           } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Carregando();
           }
         },
       ),

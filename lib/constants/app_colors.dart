@@ -25,6 +25,9 @@ class AppColors {
   // FloatingActionButton
   static Color laranjaFloatingActionButton = Color(0xFFFF9F41);
 
+  // Carregando - ProgressIndicator
+  static Color laranjaCarregando = Color(0xFFFF9F41);
+
   // Primary Swatch
   static MaterialColor primarySwatch = MaterialColor(
     laranja.value,

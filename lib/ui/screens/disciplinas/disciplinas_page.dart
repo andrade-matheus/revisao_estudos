@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/ui/screens/disciplinas/excluir_disciplina_widget/excluir_disciplina_dialog.dart';
+import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
 
 class DisciplinasPage extends StatefulWidget {
   @override
@@ -47,7 +48,7 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
               return Container();
             }
           } else {
-            return CircularProgressIndicator();
+            return Carregando();
           }
         },
       ),

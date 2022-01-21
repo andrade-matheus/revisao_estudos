@@ -6,6 +6,7 @@ import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
+import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
 import 'package:revisao_estudos/ui/widgets/date_picker/date_picker.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
@@ -256,7 +257,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
                   return Container();
                 }
               } else {
-                return CircularProgressIndicator();
+                return Carregando();
               }
             },
           ),
@@ -307,7 +308,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
                   return Container();
                 }
               } else {
-                return CircularProgressIndicator();
+                return Carregando();
               }
             },
           ),
