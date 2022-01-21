@@ -1,8 +1,6 @@
-import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/models/entity/frequencia.dart';
 import 'package:revisao_estudos/models/entity/log_revisao.dart';
 import 'package:revisao_estudos/models/interface/entity_common.dart';
-import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_log_revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
@@ -11,8 +9,8 @@ import 'package:revisao_estudos/utils/date/date_helper.dart';
 class Revisao extends EntityCommon {
   int id;
   String nome;
-  Disciplina? disciplina;
-  Frequencia? frequencia;
+  int disciplinaId;
+  int frequenciaId;
   DateTime dataCadastro;
   DateTime proxRevisao;
   int vezesRevisadas;
@@ -21,21 +19,19 @@ class Revisao extends EntityCommon {
   Revisao({
     required this.id,
     required this.nome,
-    required this.disciplina,
-    required this.frequencia,
+    required this.disciplinaId,
+    required this.frequenciaId,
     required this.dataCadastro,
     required this.proxRevisao,
     required this.vezesRevisadas,
     required this.isArchived,
   });
 
-  static Future<Revisao> fromMap(Map<String, dynamic> json) async {
-    RepositoryDisciplina discRepository = RepositoryDisciplina();
-    RepositoryFrequencia freqRepository = RepositoryFrequencia();
+  static Revisao fromMap(Map<String, dynamic> json) {
     return Revisao(
       id: json['id'] ?? json['idRevisao'],
-      disciplina: await discRepository.obterPorId(json['idDisciplina']),
-      frequencia: await freqRepository.obterPorId(json['idFrequencia']),
+      disciplinaId: json['idDisciplina'],
+      frequenciaId: json['idFrequencia'],
       nome: json['nome'] ?? json['nomeRevisao'],
       dataCadastro: DateTime.parse(json['dataCadastro']),
       proxRevisao: DateTime.parse(json['proxRevisao']),
@@ -48,8 +44,8 @@ class Revisao extends EntityCommon {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'idDisciplina': disciplina?.id,
-      'idFrequencia': frequencia?.id,
+      'idDisciplina': disciplinaId,
+      'idFrequencia': frequenciaId,
       'nome': nome,
       'dataCadastro': dataCadastro.toIso8601String(),
       'proxRevisao': proxRevisao.toIso8601String(),
@@ -58,8 +54,16 @@ class Revisao extends EntityCommon {
     };
   }
 
-  void realizarRevisao() {
-    List<String> valoresFrequencia = frequencia?.frequencia.split('-') ?? [];
+  Future<void> realizarRevisao() async {
+    RepositoryFrequencia repositoryFrequencia = new RepositoryFrequencia();
+    Frequencia? frequencia =
+        await repositoryFrequencia.obterPorId(this.frequenciaId);
+
+    if (frequencia == null) {
+      return;
+    }
+
+    List<String> valoresFrequencia = frequencia.frequencia.split('-') ?? [];
     int quantidadeFrequencias = valoresFrequencia.length;
     int diasProxRevisao;
 
@@ -88,8 +92,8 @@ class Revisao extends EntityCommon {
   String toString() {
     return '[${this.id}, ' +
         '${this.nome}, ' +
-        '${this.disciplina?.nome}, ' +
-        '${this.frequencia?.frequencia}, ' +
+        '${this.disciplinaId}, ' +
+        '${this.frequenciaId}, ' +
         '${this.dataCadastro}, ' +
         '${this.proxRevisao}, ' +
         '${this.vezesRevisadas}]';
