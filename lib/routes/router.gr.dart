@@ -20,11 +20,11 @@ import '../ui/screens/disciplinas/disciplinas_page.dart' as _i3;
 import '../ui/screens/frequencias/frequencias_page.dart' as _i9;
 import '../ui/screens/frequencias/tutorial_frequencias/tutorial_frequencias_page.dart'
     as _i10;
-import '../ui/screens/revisao/adicionar_revisao_page/adicinar_revisao_page.dart'
+import '../ui/screens/revisoes/adicionar_revisao_page/adicinar_revisao_page.dart'
     as _i7;
-import '../ui/screens/revisao/detalhes_revisao_page/detalhes_revisao_page.dart'
+import '../ui/screens/revisoes/detalhes_revisao_page/detalhes_revisao_page.dart'
     as _i6;
-import '../ui/screens/revisao/revisoes_page.dart' as _i8;
+import '../ui/screens/revisoes/revisoes_page.dart' as _i8;
 import '../ui/widgets/home_page/home_page.dart' as _i1;
 
 class AppRouter extends _i2.RootStackRouter {

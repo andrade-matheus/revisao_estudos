@@ -3,7 +3,7 @@ import 'package:revisao_estudos/ui/screens/calendario/calendario_page.dart';
 import 'package:revisao_estudos/ui/screens/configuracoes/configuracoes_page.dart';
 import 'package:revisao_estudos/ui/screens/disciplinas/disciplinas_page.dart';
 import 'package:revisao_estudos/ui/screens/frequencias/frequencias_page.dart';
-import 'package:revisao_estudos/ui/screens/revisao/revisoes_page.dart';
+import 'package:revisao_estudos/ui/screens/revisoes/revisoes_page.dart';
 
 Widget homeDrawer(BuildContext context) {
   Color corPrimaria = Colors.blue;

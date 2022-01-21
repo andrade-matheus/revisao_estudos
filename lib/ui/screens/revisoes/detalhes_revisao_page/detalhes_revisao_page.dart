@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
-import 'package:revisao_estudos/ui/screens/revisao/detalhes_revisao_page/detalhes_card_widget/detalhes_card.dart';
+import 'package:revisao_estudos/ui/screens/revisoes/detalhes_revisao_page/detalhes_card_widget/detalhes_card.dart';
 
 class DetalhesRevisaoPage extends StatefulWidget {
   final Revisao revisao;
