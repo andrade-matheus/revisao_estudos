@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
-import 'log_tile/log_tile.dart';
-import 'revisao_tile_calendario/revisao_tile_calendario.dart';
-import 'revisao_tile_revisoes/revisao_nome.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/log_tile/log_tile.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/revisao_tile_calendario/revisao_tile_calendario.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/revisao_tile_revisoes/revisao_tile_revisoes.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 class ListaRevisoes extends StatelessWidget {

@@ -18,45 +18,51 @@ class DetalhesRevisaoPage extends StatefulWidget {
 }
 
 class _DetalhesRevisaoPageState extends State<DetalhesRevisaoPage> {
-  late Disciplina _disciplina;
-
-  @override
-  Future<void> initState() async {
-    RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
-    _disciplina = (await repositoryDisciplina.obterPorId(widget.revisao.disciplinaId))!;
-
-    super.initState();
-  }
+  RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        DetalhesCard(
-          title: "Disciplina: ",
-          text: _disciplina.nome,
-        ),
-        DetalhesCard(
-          title: "Nome da revisão: ",
-          text: widget.revisao.nome,
-        ),
-        DetalhesCard(
-          title: "Frequência: ",
-          text: widget.revisao.frequencia.frequencia,
-        ),
-        DetalhesCard(
-          title: "Quantidade de revisões concluídas: ",
-          text: widget.revisao.vezesRevisadas.toString(),
-        ),
-        DetalhesCard(
-          title: "Data do cadastro: ",
-          text: DateFormat('dd / MM / yyyy').format(widget.revisao.dataCadastro),
-        ),
-        DetalhesCard(
-          title: "Data da próxima revisão: ",
-          text: DateFormat('dd / MM / yyyy').format(widget.revisao.proxRevisao),
-        ),
-      ],
+    return FutureBuilder(
+      future: repositoryDisciplina.obterPorId(widget.revisao.disciplinaId),
+      builder: (context, snapshot) {
+        if(snapshot.connectionState == ConnectionState.done){
+          if(snapshot.hasData){
+            Disciplina? _disciplina = snapshot.data as Disciplina?;
+            return Column(
+              children: [
+                DetalhesCard(
+                  title: "Disciplina: ",
+                  text: _disciplina?.nome ?? '',
+                ),
+                DetalhesCard(
+                  title: "Nome da revisão: ",
+                  text: widget.revisao.nome,
+                ),
+                DetalhesCard(
+                  title: "Frequência: ",
+                  text: widget.revisao.frequencia.frequencia,
+                ),
+                DetalhesCard(
+                  title: "Quantidade de revisões concluídas: ",
+                  text: widget.revisao.vezesRevisadas.toString(),
+                ),
+                DetalhesCard(
+                  title: "Data do cadastro: ",
+                  text: DateFormat('dd / MM / yyyy').format(widget.revisao.dataCadastro),
+                ),
+                DetalhesCard(
+                  title: "Data da próxima revisão: ",
+                  text: DateFormat('dd / MM / yyyy').format(widget.revisao.proxRevisao),
+                ),
+              ],
+            );
+          } else {
+            return Container();
+          }
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
     );
   }
 }
