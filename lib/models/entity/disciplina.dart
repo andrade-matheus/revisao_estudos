@@ -12,10 +12,11 @@ class Disciplina extends EntityCommon {
     this.revisoes,
   });
 
-  static Disciplina fromMap(Map<String, dynamic> json) {
+  static Disciplina fromMap(Map<String, dynamic> json, List<Revisao>? revisoes) {
     return Disciplina(
-      id: json['id'] ?? json['idDisciplina'],
-      nome: json['nome'] ?? json['nomeDisciplina'],
+      id: json['id'],
+      nome: json['nome'],
+      revisoes: revisoes,
     );
   }
 
@@ -33,7 +34,7 @@ class Disciplina extends EntityCommon {
   }
 
   @override
-  bool operator == (other) {
+  bool operator ==(other) {
     return other is Disciplina && other.id == this.id;
   }
 
