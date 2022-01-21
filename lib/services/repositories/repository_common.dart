@@ -7,6 +7,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
 
   String get nomeTabela;
   Function get fromMap;
+  Future<bool> utilizado(int id);
 
   Future<Database?> get database async {
     if (_database != null) return _database;
@@ -81,7 +82,10 @@ abstract class RepositoryCommon<T extends EntityCommon> {
     return resultado?.isNotEmpty ?? false;
   }
 
-  Future<void> remover(int id) async {
+  Future<bool> remover(int id) async {
+    if(await utilizado(id))
+      return false;
+
     final db = await database;
     await db?.transaction((txn) async {
       await txn.delete(
@@ -90,6 +94,8 @@ abstract class RepositoryCommon<T extends EntityCommon> {
         whereArgs: [id],
       );
     });
+
+    return true;
   }
 
   Future<void> remoterTodos() async {

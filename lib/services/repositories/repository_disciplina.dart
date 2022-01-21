@@ -12,6 +12,13 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
   Function get fromMap => Disciplina.fromMap;
 
   @override
+  Future<bool> utilizado(int id) async{
+    RepositoryRevisao repositoryRevisao = new RepositoryRevisao();
+    List<Revisao> revisoes = await repositoryRevisao.obterPorDisciplina(id);
+    return revisoes.isNotEmpty;
+  }
+  
+  @override
   Future<List<Disciplina>> obterTodos() async {
     final bd = await database;
     var resultado = await bd?.query(nomeTabela);

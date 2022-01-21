@@ -10,11 +10,25 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
   @override
   Function get fromMap => Revisao.fromMap;
 
-  // Todas revisões de um disciplina
-  Future<List<Revisao>> obterPorDisciplina(Disciplina disciplina) async {
+  @override
+  Future<bool> utilizado(int id) async {
+    return false;
+  }
+
+  // Todas revisões de uma disciplina
+  Future<List<Revisao>> obterPorDisciplina(int disciplinaId) async {
     List<Revisao> revisoes = await obterPor(
       where: 'idDisciplina = ?',
-      whereArgs: [disciplina.id],
+      whereArgs: [disciplinaId],
+    );
+    return revisoes;
+  }
+
+  // Todas revisões de uma frequência
+  Future<List<Revisao>> obterPorFrequencia(int frequenciaId) async {
+    List<Revisao> revisoes = await obterPor(
+      where: 'idFrequencia = ?',
+      whereArgs: [frequenciaId],
     );
     return revisoes;
   }
