@@ -26,18 +26,18 @@ class _RevisoesPageState extends State<RevisoesPage> {
       floatingActionButton: RevisaiFloatingActionButton(
         onPressed: () => context.router.push(const AdicionarRevisaoRoute()),
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 40, 10, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TituloPagina(titulo: 'Todas revisões'),
-            ListaDisciplina(
-              futureDisciplina: repositoryDisciplina.obterTodos(),
-              isCalendario: false,
-            ),
-          ],
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 30, 0, 20),
+            child: TituloPagina(titulo: 'Todas revisões'),
+          ),
+          ListaDisciplina(
+            futureDisciplina: repositoryDisciplina.obterTodos(),
+            isCalendario: false,
+          ),
+        ],
       ),
     );
   }
