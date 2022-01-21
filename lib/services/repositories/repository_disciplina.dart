@@ -30,7 +30,7 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
     List<Revisao> revisoes = await repositoryRevisao.obterTodos();
 
     disciplinas.forEach((disciplina) {
-      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplina?.id).toList();
+      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplinaId).toList();
     });
 
     return disciplinas;
@@ -62,7 +62,7 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
     List<Revisao> revisoes = await repositoryRevisao.obterTodasComLogRevisoesPorData(data);
 
     disciplinas.forEach((disciplina) {
-      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplina?.id).toList();
+      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplinaId).toList();
     });
 
     return disciplinas;
@@ -83,7 +83,7 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
     List<Revisao> revisoes = await repositoryRevisao.obterPorData(data);
 
     disciplinas.forEach((disciplina) {
-      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplina?.id).toList();
+      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplinaId).toList();
     });
 
     return disciplinas;
@@ -102,7 +102,7 @@ class RepositoryDisciplina extends RepositoryCommon<Disciplina> {
     List<Revisao> revisoes = await repositoryRevisao.obterPorData(DateHelper.hoje());
 
     disciplinas.forEach((disciplina) {
-      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplina?.id).toList();
+      disciplina.revisoes = revisoes.where((revisao) => disciplina.id == revisao.disciplinaId).toList();
     });
 
     return disciplinas;

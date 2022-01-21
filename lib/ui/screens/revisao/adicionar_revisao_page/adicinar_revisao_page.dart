@@ -345,8 +345,8 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
     revisao = Revisao(
       id: 0,
       nome: _assuntoTextField.text,
-      disciplina: disciplinaSelecinada,
-      frequencia: frequenciaSelecionada,
+      disciplinaId: disciplinaSelecinada.id,
+      frequenciaId: frequenciaSelecionada.id,
       dataCadastro: dataSelecionada,
       proxRevisao: dataSelecionada.add(Duration(days: diasProxRevisao)),
       vezesRevisadas: int.parse(_vezesRevisadasTextField.text),
