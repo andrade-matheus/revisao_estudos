@@ -63,7 +63,7 @@ class Revisao extends EntityCommon {
       return;
     }
 
-    List<String> valoresFrequencia = frequencia.frequencia.split('-') ?? [];
+    List<String> valoresFrequencia = frequencia.frequencia.split('-');
     int quantidadeFrequencias = valoresFrequencia.length;
     int diasProxRevisao;
 
