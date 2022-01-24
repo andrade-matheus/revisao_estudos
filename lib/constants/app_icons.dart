@@ -10,5 +10,6 @@ class AppIcons {
   static const IconData setaAtraso = Icons.keyboard_arrow_down_rounded;
   static const IconData concluirRevisao = Icons.done_all;
   static const IconData adicionarFloatingActionButton = Icons.add;
+  static const IconData voltar = Icons.arrow_back_ios_rounded;
 
 }

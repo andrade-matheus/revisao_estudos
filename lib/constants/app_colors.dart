@@ -28,6 +28,14 @@ class AppColors {
   // Carregando - ProgressIndicator
   static Color laranjaCarregando = Color(0xFFFF9F41);
 
+  // Botões Nova Revisão
+  static MaterialStateProperty<Color> botaoNovaRevisaoSalvar = MaterialStateProperty.all<Color>(Color(0xFFFF7F00));
+  static MaterialStateProperty<Color> botaoNovaRevisaoCancelar = MaterialStateProperty.all<Color>(Color(0xFFBE0000));
+
+  // TextField Nova Revisão
+  static Color backgroundTextField = Color(0xFFF2F2F2);
+  static Color bordaTextField = Color(0xFF797979);
+
   // Primary Swatch
   static MaterialColor primarySwatch = MaterialColor(
     laranja.value,

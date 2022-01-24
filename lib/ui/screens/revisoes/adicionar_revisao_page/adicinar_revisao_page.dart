@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:intl/intl.dart';
+import 'package:revisao_estudos/constants/app_colors.dart';
 import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/models/entity/frequencia.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
-import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
+import 'package:revisao_estudos/ui/screens/revisoes/adicionar_revisao_page/botao_nova_revisao/botao_nova_revisao.dart';
+import 'package:revisao_estudos/ui/screens/revisoes/adicionar_revisao_page/revisao_text_field/revisao_text_field.dart';
 import 'package:revisao_estudos/ui/widgets/date_picker/date_picker.dart';
+import 'package:revisao_estudos/ui/widgets/dialogo_selecionar/dialogo_selecionar.dart';
+import 'package:revisao_estudos/ui/widgets/titulo_pagina/titulo_pagina.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
-
-// TODO : Refatorar esse classe, ta muito grande.
 
 class AdicionarRevisaoPage extends StatefulWidget {
   @override
@@ -55,162 +58,112 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
-                    child: TextFormField(
-                      textCapitalization: TextCapitalization.sentences,
-                      controller: _assuntoTextField,
-                      decoration: InputDecoration(
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          border: OutlineInputBorder(),
-                          labelText: "Assunto",
-                          hintText: "Assunto da revisão"),
-                      validator: (text) {
-                        if (text == null || text.isEmpty) {
-                          return 'Obrigatório.';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                ),
-              ],
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 40),
+            child: TituloPagina(
+              titulo: 'Nova revisão',
+              voltar: true,
             ),
-            // Spacer(),
-            Row(
+          ),
+          Form(
+            key: _formKey,
+            child: Column(
               children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                    child: TextFormField(
+                Row(
+                  children: [
+                    RevisaoTextField(
+                      controller: _assuntoTextField,
+                      labelText: "Assunto",
+                      hintText: "Assunto da revisão",
+                    ),
+                  ],
+                ),
+                // Spacer(),
+                Row(
+                  children: [
+                    RevisaoTextField(
                       showCursor: true,
                       readOnly: true,
-                      textCapitalization: TextCapitalization.sentences,
                       controller: _disciplinaTextField,
-                      decoration: InputDecoration(
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          border: OutlineInputBorder(),
-                          labelText: "Disciplina",
-                          hintText: "Disciplina"),
-                      validator: (text) {
-                        if (text == null || text.isEmpty) {
-                          return 'Obrigatório.';
-                        }
-                        return null;
-                      },
+                      labelText: "Disciplina",
+                      hintText: "Disciplina",
                       onTap: () => _escolherDisciplinaDialog(context),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                    child: TextFormField(
+                Row(
+                  children: [
+                    RevisaoTextField(
                       showCursor: true,
                       readOnly: true,
-                      textCapitalization: TextCapitalization.sentences,
                       controller: _frequenciaTextField,
-                      decoration: InputDecoration(
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          border: OutlineInputBorder(),
-                          labelText: "Frequência",
-                          hintText: "Frequência"),
-                      validator: (text) {
-                        if (text == null || text.isEmpty) {
-                          return 'Obrigatório.';
-                        }
-                        return null;
-                      },
+                      labelText: "Frequência",
+                      hintText: "Frequência",
                       onTap: () => _escolherFrequenciaDialog(context),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
-                    child: TextFormField(
+                Row(
+                  children: [
+                    RevisaoTextField(
                       enableInteractiveSelection: false,
                       keyboardType: TextInputType.number,
                       controller: _vezesRevisadasTextField,
-                      decoration: InputDecoration(
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          border: OutlineInputBorder(),
-                          labelText: "Vezes Revisadas",
-                          hintText: "0"),
-                      validator: (text) {
-                        if (text == null || text.isEmpty) {
-                          return 'Obrigatório.';
-                        }
-                        return null;
-                      },
+                      labelText: "Vezes Revisadas",
+                      hintText: "Número de revisões já realizada",
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                    child: TextFormField(
+                Row(
+                  children: [
+                    RevisaoTextField(
                       showCursor: true,
                       readOnly: true,
                       controller: _dataTextField,
-                      decoration: InputDecoration(
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          border: OutlineInputBorder(),
-                          labelText: "Data",
-                          hintText: DateFormat('dd / MM / yyyy')
-                              .format(DateHelper.hoje())),
-                      validator: (text) {
-                        if (text == null || text.isEmpty) {
-                          return 'Obrigatório.';
-                        }
-                        return null;
-                      },
+                      labelText: "Data",
+                      hintText:
+                          DateFormat('dd / MM / yyyy').format(DateHelper.hoje()),
                       onTap: () => _escolherDataDialog(context),
                     ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                  child: Row(
+                    children: [
+                      BotaoNovaRevisao(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                        texto: 'Cancelar',
+                        onPressed: () {
+                          context.router.pop();
+                        },
+                        backgroudColor: AppColors.botaoNovaRevisaoCancelar,
+                      ),
+                      BotaoNovaRevisao(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                        texto: 'Salvar',
+                        onPressed: () {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            setState(() {
+                              Revisao novaRevisao = gerarNovaRevisao();
+                              repositoryRevisao.adicionar(novaRevisao);
+                            });
+                            Navigator.pop(context, true);
+                          }
+                        },
+                        backgroudColor: AppColors.botaoNovaRevisaoSalvar,
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          setState(() {
-                            Revisao novaRevisao = gerarNovaRevisao();
-                            repositoryRevisao.adicionar(novaRevisao);
-                          });
-                          Navigator.pop(context, true);
-                        }
-                      },
-                      child: Text("Salvar")),
-                )
-              ],
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -219,48 +172,22 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
     return showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: Text('Escolher Disciplina'),
-          content: FutureBuilder(
-            future: repositoryDisciplina.obterTodos(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  List<Disciplina> disciplinas =
-                      snapshot.data as List<Disciplina>;
-                  return Container(
-                    height: 300,
-                    width: double.maxFinite,
-                    child: ListView.builder(
-                      itemCount: disciplinas.length,
-                      itemBuilder: (context, index) {
-                        Disciplina disciplina = disciplinas[index];
-                        return ListTile(
-                          title: Text(disciplina.nome),
-                          onTap: () {
-                            setState(() {
-                              disciplinaSelecinada = disciplina;
-                              _disciplinaTextField.value = TextEditingValue(
-                                text: disciplina.nome,
-                                selection: TextSelection.fromPosition(
-                                  TextPosition(offset: disciplina.nome.length),
-                                ),
-                              );
-                            });
-                            Navigator.pop(context);
-                          },
-                        );
-                      },
-                    ),
-                  );
-                } else {
-                  return Container();
-                }
-              } else {
-                return Carregando();
-              }
-            },
-          ),
+        return DialogoSelecionar<Disciplina>(
+          titulo: 'Escolha uma Disciplina',
+          future: repositoryDisciplina.obterTodos(),
+          texto: (disciplina) => disciplina.nome,
+          onTap: (Disciplina disciplina) {
+            setState(() {
+              disciplinaSelecinada = disciplina;
+              _disciplinaTextField.value = TextEditingValue(
+                text: disciplina.nome,
+                selection: TextSelection.fromPosition(
+                  TextPosition(offset: disciplina.nome.length),
+                ),
+              );
+            });
+            Navigator.pop(context);
+          },
         );
       },
     );
@@ -270,48 +197,22 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
     return showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: Text('Escolher Frequência'),
-          content: FutureBuilder(
-            future: repositoryFrequencia.obterTodos(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  List<Frequencia> frequencias = snapshot.data as List<Frequencia>;
-                  return Container(
-                    height: 300,
-                    width: double.maxFinite,
-                    child: ListView.builder(
-                      itemCount: frequencias.length,
-                      itemBuilder: (context, index) {
-                        Frequencia frequencia = frequencias[index];
-                        return ListTile(
-                          title: Text(frequencia.frequencia),
-                          onTap: () {
-                            setState(() {
-                              frequenciaSelecionada = frequencia;
-                              _frequenciaTextField.value = TextEditingValue(
-                                text: frequencia.frequencia,
-                                selection: TextSelection.fromPosition(
-                                  TextPosition(
-                                      offset: frequencia.frequencia.length),
-                                ),
-                              );
-                            });
-                            Navigator.pop(context);
-                          },
-                        );
-                      },
-                    ),
-                  );
-                } else {
-                  return Container();
-                }
-              } else {
-                return Carregando();
-              }
-            },
-          ),
+        return DialogoSelecionar<Frequencia>(
+          titulo: 'Escolha uma Frequência',
+          future: repositoryFrequencia.obterTodos(),
+          texto: (frequecia) => frequecia.frequencia,
+          onTap: (Frequencia frequencia) {
+            setState(() {
+              frequenciaSelecionada = frequencia;
+              _frequenciaTextField.value = TextEditingValue(
+                text: frequencia.frequencia,
+                selection: TextSelection.fromPosition(
+                  TextPosition(offset: frequencia.frequencia.length),
+                ),
+              );
+            });
+            Navigator.pop(context);
+          },
         );
       },
     );
