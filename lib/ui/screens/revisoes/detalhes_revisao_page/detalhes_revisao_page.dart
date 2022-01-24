@@ -5,6 +5,7 @@ import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/ui/screens/revisoes/detalhes_revisao_page/detalhes_card_widget/detalhes_card.dart';
 import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
+import 'package:revisao_estudos/ui/widgets/titulo_pagina/titulo_pagina.dart';
 
 class DetalhesRevisaoPage extends StatefulWidget {
   final Revisao revisao;
@@ -23,47 +24,62 @@ class _DetalhesRevisaoPageState extends State<DetalhesRevisaoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: repositoryDisciplina.obterPorId(widget.revisao.disciplinaId),
-      builder: (context, snapshot) {
-        if(snapshot.connectionState == ConnectionState.done){
-          if(snapshot.hasData){
-            Disciplina? _disciplina = snapshot.data as Disciplina?;
-            return Column(
-              children: [
-                DetalhesCard(
-                  title: "Disciplina: ",
-                  text: _disciplina?.nome ?? '',
-                ),
-                DetalhesCard(
-                  title: "Nome da revisão: ",
-                  text: widget.revisao.nome,
-                ),
-                DetalhesCard(
-                  title: "Frequência: ",
-                  text: widget.revisao.frequencia.frequencia,
-                ),
-                DetalhesCard(
-                  title: "Quantidade de revisões concluídas: ",
-                  text: widget.revisao.vezesRevisadas.toString(),
-                ),
-                DetalhesCard(
-                  title: "Data do cadastro: ",
-                  text: DateFormat('dd / MM / yyyy').format(widget.revisao.dataCadastro),
-                ),
-                DetalhesCard(
-                  title: "Data da próxima revisão: ",
-                  text: DateFormat('dd / MM / yyyy').format(widget.revisao.proxRevisao),
-                ),
-              ],
-            );
-          } else {
-            return Container();
-          }
-        } else {
-          return Carregando();
-        }
-      },
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(15, 30, 15, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+            child: TituloPagina(titulo: 'Detalhes da revisão'),
+          ),
+          FutureBuilder(
+            future: repositoryDisciplina.obterPorId(widget.revisao.disciplinaId),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData) {
+                  Disciplina? _disciplina = snapshot.data as Disciplina?;
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      DetalhesCard(
+                        title: "Disciplina",
+                        text: _disciplina?.nome ?? '',
+                      ),
+                      DetalhesCard(
+                        title: "Nome da revisão",
+                        text: widget.revisao.nome,
+                      ),
+                      DetalhesCard(
+                        title: "Frequência",
+                        text: widget.revisao.frequencia.frequencia,
+                      ),
+                      DetalhesCard(
+                        title: "Quantidade de revisões concluídas",
+                        text: widget.revisao.vezesRevisadas.toString(),
+                      ),
+                      DetalhesCard(
+                        title: "Data do cadastro",
+                        text: DateFormat('dd / MM / yyyy')
+                            .format(widget.revisao.dataCadastro),
+                      ),
+                      DetalhesCard(
+                        title: "Data da próxima revisão",
+                        text: DateFormat('dd / MM / yyyy')
+                            .format(widget.revisao.proxRevisao),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Container();
+                }
+              } else {
+                return Carregando();
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 }

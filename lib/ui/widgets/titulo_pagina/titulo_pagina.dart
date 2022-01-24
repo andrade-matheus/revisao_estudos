@@ -34,6 +34,7 @@ class TituloPagina extends StatelessWidget {
           style: TextStyle(
             fontSize: 34,
             fontWeight: FontWeight.bold,
+            color: AppColors.preto
           ),
         ),
       ],
