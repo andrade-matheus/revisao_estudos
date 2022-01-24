@@ -8,8 +8,8 @@ import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
-import 'package:revisao_estudos/ui/screens/revisoes/adicionar_revisao_page/botao_nova_revisao/botao_nova_revisao.dart';
 import 'package:revisao_estudos/ui/screens/revisoes/adicionar_revisao_page/revisao_text_field/revisao_text_field.dart';
+import 'package:revisao_estudos/ui/widgets/botao_revisao/botao_revisao.dart';
 import 'package:revisao_estudos/ui/widgets/date_picker/date_picker.dart';
 import 'package:revisao_estudos/ui/widgets/dialogo_selecionar/dialogo_selecionar.dart';
 import 'package:revisao_estudos/ui/widgets/titulo_pagina/titulo_pagina.dart';
@@ -125,8 +125,8 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
                       readOnly: true,
                       controller: _dataTextField,
                       labelText: "Data",
-                      hintText:
-                          DateFormat('dd / MM / yyyy').format(DateHelper.hoje()),
+                      hintText: DateFormat('dd / MM / yyyy')
+                          .format(DateHelper.hoje()),
                       onTap: () => _escolherDataDialog(context),
                     ),
                   ],
@@ -135,7 +135,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
                   padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                   child: Row(
                     children: [
-                      BotaoNovaRevisao(
+                      BotaoRevisao(
                         padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                         texto: 'Cancelar',
                         onPressed: () {
@@ -143,7 +143,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
                         },
                         backgroudColor: AppColors.botaoNovaRevisaoCancelar,
                       ),
-                      BotaoNovaRevisao(
+                      BotaoRevisao(
                         padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                         texto: 'Salvar',
                         onPressed: () {

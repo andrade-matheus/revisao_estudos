@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/constants/app_colors.dart';
 
-class BotaoNovaRevisao extends StatelessWidget {
+class BotaoRevisao extends StatelessWidget {
   final String texto;
   final VoidCallback onPressed;
   final MaterialStateProperty<Color> backgroudColor;
   final EdgeInsetsGeometry? padding;
 
-  const BotaoNovaRevisao({
+  const BotaoRevisao({
     Key? key,
     required this.texto,
     required this.onPressed,
