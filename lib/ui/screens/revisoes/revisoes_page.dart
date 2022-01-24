@@ -30,7 +30,7 @@ class _RevisoesPageState extends State<RevisoesPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(10, 30, 0, 20),
+            padding: const EdgeInsets.fromLTRB(15, 30, 0, 20),
             child: TituloPagina(titulo: 'Todas revisões'),
           ),
           ListaDisciplina(
