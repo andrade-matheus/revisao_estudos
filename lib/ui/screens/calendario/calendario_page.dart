@@ -5,9 +5,10 @@ import 'package:revisao_estudos/models/provider/botao_concluir_revisao.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
 import 'package:revisao_estudos/routes/router.gr.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
-import 'package:revisao_estudos/ui/screens/calendario/texto_header_widget/texto_header.dart';
+import 'package:revisao_estudos/ui/screens/calendario/texto_titulo_data_selecionada/texto_titulo_data_selecionada.dart';
 import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_disciplina.dart';
 import 'package:revisao_estudos/ui/widgets/revisai_floating_action_button/revisai_floating_action_button.dart';
+import 'package:revisao_estudos/ui/widgets/titulo_pagina/titulo_pagina.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 class CalendarioPage extends StatefulWidget {
@@ -46,9 +47,14 @@ class _CalendarioPageState extends State<CalendarioPage> {
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextoHeader(),
+                TituloPagina(
+                  titulo: 'Suas revisões',
+                  padding: const EdgeInsets.fromLTRB(15, 30, 15, 0),
+                ),
+                TextoTituloDataSelecionada(),
                 ListaDisciplina(
-                  futureDisciplina: repositoryDisciplina.obterParaCalendario(_dataSelecionada),
+                  futureDisciplina: repositoryDisciplina
+                      .obterParaCalendario(_dataSelecionada),
                   data: _dataSelecionada,
                 ),
               ],

@@ -23,12 +23,13 @@ class _RevisoesPageState extends State<RevisoesPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 30, 0, 20),
-            child: TituloPagina(titulo: 'Todas revisões'),
+          TituloPagina(
+            titulo: 'Todas revisões',
+            padding: const EdgeInsets.fromLTRB(15, 30, 15, 20),
           ),
           ListaDisciplina(
-            futureDisciplina: repositoryDisciplina.obterTodasInculindoRevisoes(),
+            futureDisciplina:
+                repositoryDisciplina.obterTodasInculindoRevisoes(),
           ),
         ],
       ),
