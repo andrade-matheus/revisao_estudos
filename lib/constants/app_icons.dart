@@ -11,5 +11,7 @@ class AppIcons {
   static const IconData concluirRevisao = Icons.done_all;
   static const IconData adicionarFloatingActionButton = Icons.add;
   static const IconData voltar = Icons.arrow_back_ios_rounded;
+  static const IconData editar = Icons.edit_outlined;
+  static const IconData exlucir = Icons.delete_outline;
 
 }

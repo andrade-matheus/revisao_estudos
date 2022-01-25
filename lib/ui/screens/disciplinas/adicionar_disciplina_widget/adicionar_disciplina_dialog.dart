@@ -14,18 +14,19 @@ adicionarDisciplinaDialog(BuildContext context) async {
       return AlertDialog(
         title: Text('Adicionar Disciplina'),
         content: Form(
-            key: _formKey,
-            child: TextFormField(
-              textCapitalization: TextCapitalization.sentences,
-              controller: _textFieldController,
-              decoration: InputDecoration(hintText: "Nome da disciplina"),
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Obrigatório.';
-                }
-                return null;
-              },
-            )),
+          key: _formKey,
+          child: TextFormField(
+            textCapitalization: TextCapitalization.sentences,
+            controller: _textFieldController,
+            decoration: InputDecoration(hintText: "Nome da disciplina"),
+            validator: (text) {
+              if (text == null || text.isEmpty) {
+                return 'Obrigatório.';
+              }
+              return null;
+            },
+          ),
+        ),
         actions: <Widget>[
           new TextButton(
             child: new Text('CANCELAR'),
