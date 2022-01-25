@@ -82,8 +82,8 @@ abstract class RepositoryCommon<T extends EntityCommon> {
     return resultado?.isNotEmpty ?? false;
   }
 
-  Future<bool> remover(int id, {bool? force}) async {
-    if((force ?? false) && await utilizado(id))
+  Future<bool> remover(int id, {bool force = false}) async {
+    if(!force && await utilizado(id))
       return false;
 
     final db = await database;
