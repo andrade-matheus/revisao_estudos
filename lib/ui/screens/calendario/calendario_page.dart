@@ -20,7 +20,6 @@ class _CalendarioPageState extends State<CalendarioPage> {
   Color corPrimaria = Colors.blue;
   RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
 
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -41,13 +40,17 @@ class _CalendarioPageState extends State<CalendarioPage> {
           },
           child: Scaffold(
             floatingActionButton: RevisaiFloatingActionButton(
-              onPressed: () => context.router.push(const AdicionarRevisaoRoute()),
+              onPressed: () =>
+                  context.router.push(const AdicionarRevisaoRoute()),
             ),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextoHeader(),
-                ListaDisciplina(futureDisciplina: repositoryDisciplina.obterParaCalendario(_dataSelecionada), isCalendario: true),
+                ListaDisciplina(
+                  futureDisciplina: repositoryDisciplina.obterParaCalendario(_dataSelecionada),
+                  data: _dataSelecionada,
+                ),
               ],
             ),
           ),

@@ -6,12 +6,12 @@ import 'package:revisao_estudos/ui/widgets/sem_revisoes/sem_revisoes.dart';
 
 class ListaDisciplina extends StatelessWidget {
   final Future<List<Disciplina>> futureDisciplina;
-  final bool isCalendario;
+  final DateTime? data;
 
   const ListaDisciplina({
     Key? key,
     required this.futureDisciplina,
-    required this.isCalendario,
+    this.data,
   }) : super(key: key);
 
   @override
@@ -37,7 +37,7 @@ class ListaDisciplina extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 5.0),
                     child: DisciplinaTile(
                       disciplina: disciplina,
-                      isCalendario: isCalendario,
+                      data: data,
                     ),
                   );
                 },

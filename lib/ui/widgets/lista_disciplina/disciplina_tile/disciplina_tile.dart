@@ -5,12 +5,12 @@ import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/lista
 
 class DisciplinaTile extends StatelessWidget {
   final Disciplina disciplina;
-  final bool isCalendario;
+  final DateTime? data;
 
   const DisciplinaTile({
     Key? key,
     required this.disciplina,
-    required this.isCalendario,
+    this.data,
   }) : super(key: key);
 
   @override
@@ -19,8 +19,8 @@ class DisciplinaTile extends StatelessWidget {
       title: disciplina.nome,
       initiallyExpanded: true,
       child: ListaRevisoes(
-        revisoes: disciplina.revisoes ?? [],
-        isCalendario: isCalendario,
+        disciplina: disciplina,
+        data: data,
       ),
     );
   }

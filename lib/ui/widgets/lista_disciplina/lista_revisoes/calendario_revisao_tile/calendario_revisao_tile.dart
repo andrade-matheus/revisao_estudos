@@ -14,12 +14,12 @@ class CalendarioRevisaoTile extends StatefulWidget {
   final bool last;
   final bool first;
 
-  const CalendarioRevisaoTile(
-      {Key? key,
-      required this.revisao,
-      required this.last,
-      required this.first})
-      : super(key: key);
+  const CalendarioRevisaoTile({
+    Key? key,
+    required this.revisao,
+    required this.last,
+    required this.first,
+  }) : super(key: key);
 
   @override
   _CalendarioRevisaoTileState createState() => _CalendarioRevisaoTileState();
@@ -33,11 +33,16 @@ class _CalendarioRevisaoTileState extends State<CalendarioRevisaoTile> {
     int id = context.watch<BotaoConcluirRevisaoProvider>().revisaoId;
     _showButton = _showButton && widget.revisao.id == id;
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         if (widget.revisao.id == id && _showButton) {
-          context.navigateTo(DetalhesRevisaoRoute(revisao: widget.revisao));
+          bool? update = await context.router.push(DetalhesRevisaoRoute(revisao: widget.revisao));
+          if (update ?? false) {
+            setState(() {});
+          }
         } else {
-          context.read<BotaoConcluirRevisaoProvider>().trocarRevisao(widget.revisao.id);
+          context
+              .read<BotaoConcluirRevisaoProvider>()
+              .trocarRevisao(widget.revisao.id);
           setState(() {
             _showButton = !_showButton;
           });

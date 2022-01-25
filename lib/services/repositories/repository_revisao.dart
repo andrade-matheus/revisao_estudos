@@ -32,6 +32,20 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
     return revisoes;
   }
 
+  Future<List<Revisao>> obterParaDisciplinaTile(int disciplinaId, DateTime? data) async {
+    if(data != null){
+      if(DateHelper.isLog(data)){
+        return obterParaDisciplina(disciplinaId, data, false, true);
+      } else if(DateHelper.isSameDay(data, DateHelper.hoje())) {
+        return obterParaDisciplina(disciplinaId, data, true, false);
+      } else {
+        return obterParaDisciplina(disciplinaId, data, false, false);
+      }
+    } else {
+      return obterParaDisciplina(disciplinaId, null, false, false);
+    }
+  }
+
   // Método que retorna uma lista de revisões para composição dos objetos de disciplina
   Future<List<Revisao>> obterParaDisciplina(int disciplinaId, DateTime? data, bool? atrasadas, bool? isLog) async {
     String query = 'SELECT revisao.id, idDisciplina, idFrequencia, nome, dataCadastro, proxRevisao, vezesRevisadas, isArchived FROM revisao';

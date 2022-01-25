@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/routes/router.gr.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_disciplina.dart';
@@ -9,19 +8,14 @@ import 'package:revisao_estudos/ui/widgets/titulo_pagina/titulo_pagina.dart';
 
 class RevisoesPage extends StatefulWidget {
   @override
-  _RevisoesPageState createState() => _RevisoesPageState();
+  State<RevisoesPage> createState() => _RevisoesPageState();
 }
 
 class _RevisoesPageState extends State<RevisoesPage> {
-  Color corPrimaria = Colors.blue;
-  late Revisao novaRevisao;
-  late Future<List<Revisao>> futureRevisoes;
-  List<Revisao> todasRevisoes = [];
-
-  RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
-
   @override
   Widget build(BuildContext context) {
+    RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
+
     return Scaffold(
       floatingActionButton: RevisaiFloatingActionButton(
         onPressed: () => context.router.push(const AdicionarRevisaoRoute()),
@@ -35,7 +29,6 @@ class _RevisoesPageState extends State<RevisoesPage> {
           ),
           ListaDisciplina(
             futureDisciplina: repositoryDisciplina.obterTodasInculindoRevisoes(),
-            isCalendario: false,
           ),
         ],
       ),

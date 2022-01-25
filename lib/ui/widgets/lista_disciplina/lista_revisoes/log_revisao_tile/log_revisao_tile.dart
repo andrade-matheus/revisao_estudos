@@ -6,10 +6,12 @@ import 'package:revisao_estudos/routes/router.gr.dart';
 
 class LogRevisaoTile extends StatelessWidget {
   final Revisao revisao;
+  final VoidCallback notifyParent;
 
   const LogRevisaoTile({
     Key? key,
     required this.revisao,
+    required this.notifyParent,
   }) : super(key: key);
 
   @override
@@ -19,7 +21,12 @@ class LogRevisaoTile extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => context.router.push(DetalhesRevisaoRoute(revisao: revisao)),
+            onTap: () async {
+              var excluido = await context.router.push(DetalhesRevisaoRoute(revisao: revisao));
+              if(excluido as bool? ?? false){
+                notifyParent();
+              }
+            },
             child: Container(
               decoration: BoxDecoration(
                 border: Border(
