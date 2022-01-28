@@ -31,7 +31,7 @@ class _BotoesAcoesState<T extends EntityCommon> extends State<BotoesAcoes>
   void initState() {
     _controller = AnimationController(
       duration: const Duration(milliseconds: 500),
-      reverseDuration: const Duration(milliseconds: 500),
+      reverseDuration: const Duration(milliseconds: 400),
       vsync: this,
     );
 
