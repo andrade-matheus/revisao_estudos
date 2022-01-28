@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/ui/screens/disciplinas/adicionar_editar_disciplina_widget/adicionar_editar_disciplina_dialog.dart';
-import 'package:revisao_estudos/ui/screens/disciplinas/excluir_disciplina_widget/excluir_disciplina_dialog.dart';
 import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
+import 'package:revisao_estudos/ui/widgets/dialogo_excluir/dialogo_excluir.dart';
 import 'package:revisao_estudos/ui/widgets/lista_card_item_acoes/lista_card_item_acoes.dart';
 import 'package:revisao_estudos/ui/widgets/revisai_floating_action_button/revisai_floating_action_button.dart';
 import 'package:revisao_estudos/ui/widgets/titulo_pagina/titulo_pagina.dart';
@@ -112,9 +112,14 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
     var updateState = await showDialog(
       context: context,
       builder: (context) {
-        return ExcluirDisciplinaDialog(
-          disciplina: disciplina,
+        return ExcluirDialog(
+          entidade: 'disciplina',
           utilizada: utilizada,
+          onPressed: () async {
+            RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
+            bool resultado = await repositoryDisciplina.remover(disciplina.id, force: true);
+            Navigator.pop(context, resultado);
+          },
         );
       },
     );
