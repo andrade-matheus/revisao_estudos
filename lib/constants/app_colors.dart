@@ -36,6 +36,10 @@ class AppColors {
   static Color backgroundTextField = Color(0xFFF2F2F2);
   static Color bordaTextField = Color(0xFF797979);
 
+  // TextField Nova/Editar Disciplina
+  static Color underlinePadraoTextField = Color(0xFFFF9F41);
+  static Color underlineErrorTextField = Color(0xFFBE0000);
+
   // Primary Swatch
   static MaterialColor primarySwatch = MaterialColor(
     laranja.value,
