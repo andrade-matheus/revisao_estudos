@@ -28,9 +28,9 @@ class FrequenciaTextField extends StatelessWidget {
         if ((text == null || text.isEmpty)) {
           return 'Campo obrigatório.';
         } else if (text == '0' || text == '00') {
-          return 'A frequência não pode ser apenas "00".';
-        } else if (frequencias.last == '00') {
-          return 'A frequência não pode terminar com "00".';
+          return 'A frequência não pode ser apenas "$text".';
+        } else if (frequencias.last == '0' || frequencias.last == '00') {
+          return 'A frequência não pode terminar com "${frequencias.last}".';
         } else if (!formatoFrequencia.hasMatch(newText)) {
           return 'Padrão de frequência inválida.';
         }
