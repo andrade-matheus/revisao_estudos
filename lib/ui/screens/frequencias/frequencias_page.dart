@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:revisao_estudos/constants/app_icons.dart';
 import 'package:revisao_estudos/models/entity/frequencia.dart';
+import 'package:revisao_estudos/routes/router.gr.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/ui/screens/frequencias/adicionar_frequencia_dialog/adicionar_frequencia_dialog.dart';
 import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
@@ -25,9 +28,21 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
       ),
       body: Column(
         children: [
-          TituloPagina(
-            titulo: 'Suas frequências',
+          Padding(
             padding: EdgeInsets.fromLTRB(15, 30, 15, 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TituloPagina(
+                  titulo: 'Suas frequências',
+                  padding: EdgeInsets.zero,
+                ),
+                IconButton(
+                  icon: Icon(AppIcons.infoFrequencia),
+                  onPressed: () => context.router.push(TutorialFrequenciasRoute()),
+                )
+              ],
+            ),
           ),
           FutureBuilder(
             future: repositoryFrequencia.obterTodos(),
@@ -39,7 +54,8 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
                   return Expanded(
                     child: ListaCardItemAcoes(
                       itens: frequencias,
-                      onPressedExcluir: (frequencia) => excluirFrequencia(frequencia as Frequencia),
+                      onPressedExcluir: (frequencia) =>
+                          excluirFrequencia(frequencia as Frequencia),
                     ),
                   );
                 } else {
@@ -80,7 +96,8 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
           utilizada: utilizada,
           onPressed: () async {
             RepositoryFrequencia repositoryFrequencia = RepositoryFrequencia();
-            bool resultado = await repositoryFrequencia.remover(frequencia.id, force: true);
+            bool resultado =
+                await repositoryFrequencia.remover(frequencia.id, force: true);
             Navigator.pop(context, resultado);
           },
         );

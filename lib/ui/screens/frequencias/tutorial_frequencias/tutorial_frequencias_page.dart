@@ -1,71 +1,103 @@
 import 'package:flutter/material.dart';
+import 'package:revisao_estudos/models/entity/frequencia.dart';
+import 'package:revisao_estudos/ui/screens/frequencias/tutorial_frequencias/botao_voltar/botao_voltar.dart';
+import 'package:revisao_estudos/ui/screens/frequencias/tutorial_frequencias/mostra_frequencia/mostra_frequencia.dart';
+import 'package:revisao_estudos/ui/widgets/titulo_pagina/titulo_pagina.dart';
 
 class TutorialFrequenciasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          RichText(
-            text: TextSpan(
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-              ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: 'Como escrever sua frequência:\n\n',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          TituloPagina(
+            titulo: 'Frequências',
+            voltar: true,
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text:
+                            'A frequência é a frequência em dias que suas revisões vão acontecer.\n\n',
+                      ),
+                      TextSpan(
+                        text: 'Por Exemplo:\n\n',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
+                      ),
+                      TextSpan(
+                        text:
+                            'Para ter a primeira revisão de um conteúdo daqui uma semana, e a segunda revisão duas semanas após a primeira revisão, a frequência a se utilizar seria:',
+                        style: TextStyle(),
+                      ),
+                    ],
+                  ),
                 ),
-                TextSpan(
-                  text:
-                      'A frequência é a frequência em dias que suas revisões vão acontecer.',
+                MostraFrequencia(
+                  frequencia: Frequencia(
+                    id: 0,
+                    frequencia: '07-14',
+                  ),
                 ),
-                TextSpan(
-                  text:
-                      '\n\nPor exemplo: se pretende fazer a primeira revisão daqui uma semana, e a segunda revisão duas semanas depois da primeira revisão, a frequência seria:',
-                  style: TextStyle(),
+                Text(
+                  'Caso queira começar revisar ainda hoje ou amanhã, basta utilizar as seguintes frequências respectivamente:',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
                 ),
-                TextSpan(
-                  text: '\n"7-14"',
-                  style: TextStyle(),
+                MostraFrequencia(
+                  frequencia: Frequencia(
+                    id: 0,
+                    frequencia: '00-07-14',
+                  ),
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                 ),
-                TextSpan(
-                  text:
-                      '\n\nSe quiser fazer a revisão ainda hoje ou amanhã basta fazer a frequência assim:',
-                  style: TextStyle(),
+                MostraFrequencia(
+                  frequencia: Frequencia(
+                    id: 0,
+                    frequencia: '01-07-14',
+                  ),
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
                 ),
-                TextSpan(
-                  text: '\n "0-7-14" ou "1-7-14"',
-                  style: TextStyle(),
-                ),
-                TextSpan(
-                  text:
-                      '\n\n "0" referenciando zero dias a partir de hoje, ou seja ainda hoje.',
-                  style: TextStyle(),
-                ),
-                TextSpan(
-                  text:
-                      '\n "1" referenciando um dia a partir de hoje, ou seja amanhã.',
-                  style: TextStyle(),
-                ),
-                TextSpan(
-                  text: '\n\nEla não deve:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                TextSpan(
-                  text: '\n  - Ser apenas "0"',
-                  style: TextStyle(),
-                ),
-                TextSpan(
-                  text: '\n  - Terminar em zero, por exemplo "7-14-0"',
-                  style: TextStyle(),
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'Atenção:\n\n',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
+                      ),
+                      TextSpan(
+                        text:
+                            'Sua frequência não pode conter apenas zeros, e nem terminar em zero. E lembre-se, o último valor da sua frequência se repete para sempre.',
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
+          BotaoVoltar(),
         ],
       ),
     );

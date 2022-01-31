@@ -26,6 +26,6 @@ class Frequencia extends EntityCommon {
 
   @override
   String toString() {
-    return this.frequencia;
+    return this.frequencia.replaceAll('-', ' - ');
   }
 }

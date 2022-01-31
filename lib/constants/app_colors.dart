@@ -40,6 +40,10 @@ class AppColors {
   static Color underlinePadraoTextField = Color(0xFFFF9F41);
   static Color underlineErrorTextField = Color(0xFFBE0000);
 
+  // Botões Voltar Tutorial Frequencia
+  static Color bordaBotaoVoltar = Color(0xFFFF9F41);
+  static MaterialStateProperty<Color> fundoBotaoVoltar = MaterialStateProperty.all<Color>(branco);
+
   // Primary Swatch
   static MaterialColor primarySwatch = MaterialColor(
     laranja.value,
