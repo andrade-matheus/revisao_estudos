@@ -24,6 +24,6 @@ Future<bool> confirmacaoRestaurarBackup(BuildContext context) async {
         ],
       );
     },
-  );
+  ) ?? false;
   return resultado;
 }
