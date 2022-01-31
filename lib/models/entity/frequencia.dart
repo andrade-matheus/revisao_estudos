@@ -1,6 +1,6 @@
 import 'package:revisao_estudos/models/interface/entity_common.dart';
 
-class Frequencia extends EntityCommon {
+class Frequencia extends EntityCommon<Frequencia> {
   int id;
   String frequencia;
 
@@ -27,5 +27,10 @@ class Frequencia extends EntityCommon {
   @override
   String toString() {
     return this.frequencia.replaceAll('-', ' - ');
+  }
+
+  @override
+  int compareTo(Frequencia other) {
+    return frequencia.compareTo(other.frequencia);
   }
 }

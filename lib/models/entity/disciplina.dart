@@ -1,7 +1,7 @@
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/models/interface/entity_common.dart';
 
-class Disciplina extends EntityCommon {
+class Disciplina extends EntityCommon<Disciplina> {
   int id;
   String nome;
   List<Revisao>? revisoes;
@@ -47,4 +47,9 @@ class Disciplina extends EntityCommon {
 
   @override
   int get hashCode => super.hashCode;
+
+  @override
+  int compareTo(Disciplina other) {
+    return nome.compareTo(other.nome);
+  }
 }

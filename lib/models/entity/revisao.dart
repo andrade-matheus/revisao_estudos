@@ -6,7 +6,7 @@ import 'package:revisao_estudos/services/repositories/repository_log_revisao.dar
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 import 'package:revisao_estudos/utils/date/date_helper.dart';
 
-class Revisao extends EntityCommon {
+class Revisao extends EntityCommon<Revisao> {
   int id;
   String nome;
   int disciplinaId;
@@ -90,5 +90,10 @@ class Revisao extends EntityCommon {
         '${this.dataCadastro}, ' +
         '${this.proxRevisao}, ' +
         '${this.vezesRevisadas}]';
+  }
+
+  @override
+  int compareTo(Revisao other) {
+    return nome.compareTo(other.nome);
   }
 }
