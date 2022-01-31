@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/models/entity/frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
-import 'package:revisao_estudos/ui/screens/frequencias/adicionar_frequencia_widget/adicionar_frequencia_dialog.dart';
+import 'package:revisao_estudos/ui/screens/frequencias/adicionar_frequencia_dialog/adicionar_frequencia_dialog.dart';
 import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
 import 'package:revisao_estudos/ui/widgets/dialogo_excluir/dialogo_excluir.dart';
 import 'package:revisao_estudos/ui/widgets/lista_card_item_acoes/lista_card_item_acoes.dart';
