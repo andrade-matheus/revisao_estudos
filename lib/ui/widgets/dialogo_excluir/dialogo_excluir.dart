@@ -28,7 +28,7 @@ class ExcluirDialog extends StatelessWidget {
         ),
         new TextButton(
           child: new Text('EXCLUIR'),
-          onPressed: () => onPressed,
+          onPressed: () => onPressed(),
         )
       ],
     );

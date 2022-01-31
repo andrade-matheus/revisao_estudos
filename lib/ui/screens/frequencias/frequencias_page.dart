@@ -39,8 +39,7 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
                   return Expanded(
                     child: ListaCardItemAcoes(
                       itens: frequencias,
-                      onPressedExcluir: (frequencia) =>
-                          excluirFrequencia(frequencia as Frequencia),
+                      onPressedExcluir: (frequencia) => excluirFrequencia(frequencia as Frequencia),
                     ),
                   );
                 } else {
@@ -81,8 +80,7 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
           utilizada: utilizada,
           onPressed: () async {
             RepositoryFrequencia repositoryFrequencia = RepositoryFrequencia();
-            bool resultado =
-                await repositoryFrequencia.remover(frequencia.id, force: true);
+            bool resultado = await repositoryFrequencia.remover(frequencia.id, force: true);
             Navigator.pop(context, resultado);
           },
         );
