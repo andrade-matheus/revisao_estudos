@@ -42,7 +42,8 @@ abstract class RepositoryCommon<T extends EntityCommon> {
   Future<List<T>> obterTodos() async {
     final bd = await database;
     var resultado = await bd?.query(nomeTabela);
-    return await fromMapList(resultado ?? []);
+    List<T> lista =  await fromMapList(resultado ?? []);
+    return lista;
   }
 
   Future<List<T>> obterPor({required String where, required List<Object> whereArgs}) async {
@@ -52,13 +53,15 @@ abstract class RepositoryCommon<T extends EntityCommon> {
       where: where,
       whereArgs: whereArgs,
     );
-    return await fromMapList(resultado ?? []);
+    List<T> lista =  await fromMapList(resultado ?? []);
+    return lista;
   }
 
   Future<List<T>> obterPorRawQuery(String query, List<Object> arguments) async {
     final bd = await database;
     var resultado = await bd?.rawQuery(query, arguments);
-    return await fromMapList(resultado ?? []);
+    List<T> lista =  await fromMapList(resultado ?? []);
+    return lista;
   }
 
   Future<T> atualizar(T param) async {
@@ -112,6 +115,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
         await txn.insert(nomeTabela, element.toMap());
       });
     });
+    param.sort((a,b) => a.compareTo(b));
     return param;
   }
 
@@ -127,6 +131,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
         );
       });
     });
+    param.sort((a,b) => a.compareTo(b));
     return param;
   }
 
@@ -139,6 +144,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
     } else {
       lista = new List<T>.from([]);
     }
+    lista.sort((a,b) => a.compareTo(b));
     return lista;
   }
 }
