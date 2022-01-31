@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:revisao_estudos/ui/screens/configuracoes/configuracao_tile/configuracao_tile.dart';
 import 'package:revisao_estudos/utils/notificacoes/controle_de_notificacoes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,8 +24,8 @@ class _ConfiguracaoNotificacaoState extends State<ConfiguracaoNotificacao> {
     int minuto = sharedPreferences.getInt("MINUTOS_NOTIFICACAO") ?? 30;
     return Column(
       children: [
-        ListTile(
-          title: Text("Notificações diárias"),
+        ConfiguracaoTile(
+          title: "Notificações diárias",
           trailing: Switch(
             value: _notificacaoDiaria,
             onChanged: (value) {
@@ -37,8 +38,8 @@ class _ConfiguracaoNotificacaoState extends State<ConfiguracaoNotificacao> {
             },
           ),
         ),
-        ListTile(
-          title: Text("Horário da notificação"),
+        ConfiguracaoTile(
+          title: "Horário da notificação",
           trailing: Padding(
             padding: EdgeInsets.fromLTRB(0, 0, 8, 0),
             child: Text(
