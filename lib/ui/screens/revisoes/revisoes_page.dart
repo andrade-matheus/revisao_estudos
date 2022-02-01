@@ -17,6 +17,7 @@ class _RevisoesPageState extends State<RevisoesPage> {
     RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: RevisaiFloatingActionButton(
         onPressed: () => context.router.push(const AdicionarRevisaoRoute()),
       ),

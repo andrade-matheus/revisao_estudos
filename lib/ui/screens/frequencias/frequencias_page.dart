@@ -24,6 +24,7 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: RevisaiFloatingActionButton(
         onPressed: () => adicionarFrequencia(),
       ),

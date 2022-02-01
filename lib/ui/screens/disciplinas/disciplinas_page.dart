@@ -20,7 +20,7 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       floatingActionButton: RevisaiFloatingActionButton(
         onPressed: () => adicionarDisciplina(),
       ),

@@ -40,6 +40,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
             }
           },
           child: Scaffold(
+            resizeToAvoidBottomInset: false,
             floatingActionButton: RevisaiFloatingActionButton(
               onPressed: () =>
                   context.router.push(const AdicionarRevisaoRoute()),

@@ -58,112 +58,112 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 20, 0, 40),
-            child: TituloPagina(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+        child: Column(
+          children: [
+            TituloPagina(
               titulo: 'Nova revisão',
               voltar: true,
             ),
-          ),
-          Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    RevisaoTextField(
-                      controller: _assuntoTextField,
-                      labelText: "Assunto",
-                      hintText: "Assunto da revisão",
-                    ),
-                  ],
-                ),
-                // Spacer(),
-                Row(
-                  children: [
-                    RevisaoTextField(
-                      showCursor: true,
-                      readOnly: true,
-                      controller: _disciplinaTextField,
-                      labelText: "Disciplina",
-                      hintText: "Disciplina",
-                      onTap: () => _escolherDisciplinaDialog(context),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    RevisaoTextField(
-                      showCursor: true,
-                      readOnly: true,
-                      controller: _frequenciaTextField,
-                      labelText: "Frequência",
-                      hintText: "Frequência",
-                      onTap: () => _escolherFrequenciaDialog(context),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    RevisaoTextField(
-                      enableInteractiveSelection: false,
-                      keyboardType: TextInputType.number,
-                      controller: _vezesRevisadasTextField,
-                      labelText: "Vezes Revisadas",
-                      hintText: "Número de revisões já realizada",
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    RevisaoTextField(
-                      showCursor: true,
-                      readOnly: true,
-                      controller: _dataTextField,
-                      labelText: "Data",
-                      hintText: DateFormat('dd / MM / yyyy')
-                          .format(DateHelper.hoje()),
-                      onTap: () => _escolherDataDialog(context),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                  child: Row(
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Row(
                     children: [
-                      BotaoRevisao(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                        texto: 'Cancelar',
-                        onPressed: () {
-                          context.router.pop();
-                        },
-                        backgroudColor: AppColors.botaoNovaRevisaoCancelar,
-                      ),
-                      BotaoRevisao(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        texto: 'Salvar',
-                        onPressed: () {
-                          if (_formKey.currentState?.validate() ?? false) {
-                            setState(() {
-                              Revisao novaRevisao = gerarNovaRevisao();
-                              repositoryRevisao.adicionar(novaRevisao);
-                            });
-                            Navigator.pop(context, true);
-                          }
-                        },
-                        backgroudColor: AppColors.botaoNovaRevisaoSalvar,
+                      RevisaoTextField(
+                        controller: _assuntoTextField,
+                        labelText: "Assunto",
+                        hintText: "Assunto da revisão",
                       ),
                     ],
                   ),
-                ),
-              ],
+                  // Spacer(),
+                  Row(
+                    children: [
+                      RevisaoTextField(
+                        showCursor: true,
+                        readOnly: true,
+                        controller: _disciplinaTextField,
+                        labelText: "Disciplina",
+                        hintText: "Disciplina",
+                        onTap: () => _escolherDisciplinaDialog(context),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      RevisaoTextField(
+                        showCursor: true,
+                        readOnly: true,
+                        controller: _frequenciaTextField,
+                        labelText: "Frequência",
+                        hintText: "Frequência",
+                        onTap: () => _escolherFrequenciaDialog(context),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      RevisaoTextField(
+                        enableInteractiveSelection: false,
+                        keyboardType: TextInputType.number,
+                        controller: _vezesRevisadasTextField,
+                        labelText: "Vezes Revisadas",
+                        hintText: "Número de revisões já realizada",
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      RevisaoTextField(
+                        showCursor: true,
+                        readOnly: true,
+                        controller: _dataTextField,
+                        labelText: "Data",
+                        hintText: DateFormat('dd / MM / yyyy')
+                            .format(DateHelper.hoje()),
+                        onTap: () => _escolherDataDialog(context),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    child: Row(
+                      children: [
+                        BotaoRevisao(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          texto: 'Cancelar',
+                          onPressed: () {
+                            context.router.pop();
+                          },
+                          backgroudColor: AppColors.botaoNovaRevisaoCancelar,
+                        ),
+                        BotaoRevisao(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          texto: 'Salvar',
+                          onPressed: () {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              setState(() {
+                                Revisao novaRevisao = gerarNovaRevisao();
+                                repositoryRevisao.adicionar(novaRevisao);
+                              });
+                              Navigator.pop(context, true);
+                            }
+                          },
+                          backgroudColor: AppColors.botaoNovaRevisaoSalvar,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
