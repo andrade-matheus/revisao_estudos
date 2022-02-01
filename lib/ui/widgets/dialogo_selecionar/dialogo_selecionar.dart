@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
 
 class DialogoSelecionar<T> extends StatelessWidget {
@@ -40,7 +41,7 @@ class DialogoSelecionar<T> extends StatelessWidget {
                 ),
               );
             } else {
-              return Text('Nenhuma ${T.toString()} foi adicionada ainda.');
+              return Text('Nenhuma ${(T == Disciplina) ? 'disciplina' : 'frequência'} foi adicionada ainda.');
             }
           } else {
             return Carregando();
