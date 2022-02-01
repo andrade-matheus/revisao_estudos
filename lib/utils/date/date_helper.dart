@@ -36,7 +36,27 @@ class DateHelper {
     } else if (data.isBefore(amanha())) {
       return false;
     } else {
+      return false;
+    }
+  }
+
+  static bool useLogTile(DateTime data) {
+    if (data.isBefore(hoje())) {
       return true;
+    } else if (data.isBefore(amanha())) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  static int isToday(DateTime data) {
+    if (data.isBefore(hoje())) {
+      return -1;
+    } else if (data.isBefore(amanha())) {
+      return 0;
+    } else {
+      return 1;
     }
   }
 

@@ -45,9 +45,8 @@ class _ListaRevisoesState extends State<ListaRevisoes> {
 
                   // Caso seja a tela de revisões e não a tela Calendário.
                   if (widget.data != null) {
-                    DateTime data =
-                        context.read<DataSelecionada>().dataSelecionada;
-                    if (DateHelper.isLog(data)) {
+                    DateTime data = context.read<DataSelecionada>().dataSelecionada;
+                    if (DateHelper.useLogTile(data)) {
                       return LogRevisaoTile(
                         revisao: revisao,
                         notifyParent: atualizar,

@@ -33,28 +33,30 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
   }
 
   Future<List<Revisao>> obterParaDisciplinaTile(int disciplinaId, DateTime? data) async {
-    if(data != null){
-      if(DateHelper.isLog(data)){
+    if (data != null) {
+      int isToday = DateHelper.isToday(data);
+      if (isToday < 0) {
         return obterParaDisciplina(disciplinaId, data, false, true);
-      } else if(DateHelper.isSameDay(data, DateHelper.hoje())) {
+      } else if (isToday == 0) {
         return obterParaDisciplina(disciplinaId, data, true, false);
-      } else {
+      } else if (isToday > 0) {
         return obterParaDisciplina(disciplinaId, data, false, false);
       }
-    } else {
-      return obterParaDisciplina(disciplinaId, null, false, false);
     }
+    return obterParaDisciplina(disciplinaId, null, false, false);
   }
 
   // Método que retorna uma lista de revisões para composição dos objetos de disciplina
   Future<List<Revisao>> obterParaDisciplina(int disciplinaId, DateTime? data, bool? atrasadas, bool? isLog) async {
-    String query = 'SELECT revisao.id, idDisciplina, idFrequencia, nome, dataCadastro, proxRevisao, vezesRevisadas, isArchived FROM revisao';
+    String query =
+        'SELECT revisao.id, idDisciplina, idFrequencia, nome, dataCadastro, proxRevisao, vezesRevisadas, isArchived FROM revisao';
     List<Object> arguments = [];
 
     if (data != null) {
       if (isLog ?? false) {
         query += ' INNER JOIN logRevisao ON logRevisao.idRevisao = revisao.id';
-        query += ' WHERE date(logRevisao.dataRevisao) = date(?) AND idDisciplina == ?';
+        query +=
+            ' WHERE date(logRevisao.dataRevisao) = date(?) AND idDisciplina == ?';
       } else if (atrasadas ?? false) {
         query += ' WHERE date(proxRevisao) < ? AND idDisciplina = ?';
       } else {

@@ -24,7 +24,7 @@ class ListaDisciplina extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             disciplinas = (snapshot.data ?? []) as List<Disciplina>? ?? [];
             if (disciplinas.isEmpty) {
-              return SemRevisoes();
+              return SemRevisoes(data: data,);
             } else {
               return ListView.builder(
                 padding: const EdgeInsets.fromLTRB(15, 15, 15, 80),
