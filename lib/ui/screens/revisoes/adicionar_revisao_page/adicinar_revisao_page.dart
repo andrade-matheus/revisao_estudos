@@ -219,10 +219,12 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
   }
 
   _escolherDataDialog(BuildContext context) async {
-    DateTime dataEscolhida = await escolherDataDialog(context, dataSelecionada);
-    setState(() {
-      dataSelecionada = dataEscolhida;
-    });
+    DateTime? dataEscolhida = await escolherDataDialog(context, dataSelecionada);
+    if(dataEscolhida != null){
+      setState(() {
+        dataSelecionada = dataEscolhida;
+      });
+    }
     String dataStr = DateFormat('dd / MM / yyyy').format(dataSelecionada);
     _dataTextField.value = TextEditingValue(
       text: dataStr,

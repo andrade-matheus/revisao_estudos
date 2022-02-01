@@ -11,8 +11,10 @@ class TextoTituloDataSelecionada extends StatelessWidget {
     DateTime dataSelecionada = context.watch<DataSelecionada>().dataSelecionada;
     return GestureDetector(
       onTap: () async {
-        var data = await escolherDataDialog(context, dataSelecionada);
-        context.read<DataSelecionada>().defineData(data);
+        DateTime? data = await escolherDataDialog(context, dataSelecionada);
+        if(data != null){
+          context.read<DataSelecionada>().defineData(data);
+        }
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(15, 0, 15, 20),
