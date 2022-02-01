@@ -38,4 +38,13 @@ class ComandosSQL {
     dataRevisao TEXT,
     FOREIGN KEY (idRevisao) REFERENCES revisao(id) ON DELETE CASCADE
   )''';
+
+  static String insertFrequenciasPadrao = '''
+  INSERT INTO frequencia (valorFrequencia) 
+  VALUES 
+      ('07-14'),
+      ('00-07-14'),
+      ('00-07-14-30'),
+      ('00-07-14-30-60');
+  ''';
 }

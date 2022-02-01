@@ -6,5 +6,6 @@ class DbMigrator {
     2: ComandosSQL.createTableFrequencia,
     3: ComandosSQL.createTableRevisao,
     4: ComandosSQL.createTableLogRevisao,
+    5: ComandosSQL.insertFrequenciasPadrao,
   };
 }
