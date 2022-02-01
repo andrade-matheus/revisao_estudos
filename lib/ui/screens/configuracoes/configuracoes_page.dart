@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/ui/screens/configuracoes/backup_widget/criar_backup.dart';
-import 'package:revisao_estudos/ui/screens/configuracoes/backup_widget/restaurar_backup.dart';
+import 'package:revisao_estudos/ui/screens/configuracoes/backup/criar_backup_tile/criar_backup_tile.dart';
+import 'package:revisao_estudos/ui/screens/configuracoes/backup/restaurar_backup_tile/restaurar_backup_tile.dart';
 import 'package:revisao_estudos/ui/screens/configuracoes/notificacao_widget/configuracao_notificacao.dart';
 import 'package:revisao_estudos/ui/widgets/titulo_pagina/titulo_pagina.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,8 +30,8 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                   return Column(
                     children: [
                       ConfiguracaoNotificacao(sharedPreferences: sharedPreferences),
-                      CriarBackup(),
-                      RestaurarBackup(),
+                      CriarBackupTile(),
+                      RestaurarBackupTile(),
                     ],
                   );
                 } else {

@@ -3,7 +3,7 @@ import 'package:revisao_estudos/ui/screens/configuracoes/configuracao_tile/confi
 import 'package:revisao_estudos/ui/widgets/dialogo_confirmacao/dialogo_confirmacao.dart';
 import 'package:revisao_estudos/utils/backup/backup.dart';
 
-class RestaurarBackup extends StatelessWidget {
+class RestaurarBackupTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConfiguracaoTile(
