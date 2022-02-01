@@ -28,17 +28,15 @@ class ListaDisciplina extends StatelessWidget {
             } else {
               return ListView.builder(
                 padding: const EdgeInsets.fromLTRB(15, 15, 15, 80),
+                addAutomaticKeepAlives: true,
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: disciplinas.length,
                 itemBuilder: (context, index) {
                   Disciplina disciplina = disciplinas[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5.0),
-                    child: DisciplinaTile(
-                      disciplina: disciplina,
-                      data: data,
-                    ),
+                  return DisciplinaTile(
+                    disciplina: disciplina,
+                    data: data,
                   );
                 },
               );

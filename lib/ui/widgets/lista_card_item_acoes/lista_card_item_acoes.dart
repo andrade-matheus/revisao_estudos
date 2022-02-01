@@ -31,11 +31,12 @@ class _ListaCardItemAcoesState<T extends EntityCommon>
       return ListView.builder(
         padding: EdgeInsets.fromLTRB(15, 15, 15, 80),
         itemCount: widget.itens.length,
+        addAutomaticKeepAlives: true,
         itemBuilder: (context, index) {
           T item = widget.itens[index] as T;
-          GlobalKey<CardItemAcoesState<T>> _key =
-              GlobalKey<CardItemAcoesState<T>>();
+          GlobalKey<CardItemAcoesState<T>> _key = GlobalKey<CardItemAcoesState<T>>();
           _keysListCard[item.id] = _key;
+
           return CardItemAcoes<T>(
             key: _key,
             item: item,

@@ -24,11 +24,14 @@ class CardItemAcoes<T extends EntityCommon> extends StatefulWidget {
   CardItemAcoesState<T> createState() => CardItemAcoesState<T>();
 }
 
-class CardItemAcoesState<T extends EntityCommon> extends State<CardItemAcoes> {
+class CardItemAcoesState<T extends EntityCommon> extends State<CardItemAcoes> with AutomaticKeepAliveClientMixin {
   bool _showButton = false;
 
   @override
   Widget build(BuildContext context) {
+    // Necessário para o AutomaticKeepAliveClientMixin.
+    super.build(context);
+
     return Padding(
       padding: widget.padding ?? const EdgeInsets.fromLTRB(0, 0, 0, 10),
       child: GestureDetector(
@@ -94,4 +97,7 @@ class CardItemAcoesState<T extends EntityCommon> extends State<CardItemAcoes> {
       });
     }
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
