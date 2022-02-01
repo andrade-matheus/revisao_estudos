@@ -44,6 +44,26 @@ class AppColors {
   static Color bordaBotaoVoltar = Color(0xFFFF9F41);
   static MaterialStateProperty<Color> fundoBotaoVoltar = MaterialStateProperty.all<Color>(branco);
 
+  // ##############################################################################################
+  // Cores genéricas
+  // ##############################################################################################
+
+  // Swatch laranja
+  static Color laranja100 = Color(0xFFFFCB99);
+  static Color laranja200 = Color(0xFFFFAD5C);
+  static Color laranja300 = Color(0xFFFF9F41);
+  static Color laranja400 = Color(0xFFFF8F1F);
+  static Color laranja500 = Color(0xFFFF7F00);
+
+
+  // Swatch laranja
+  static Color erro100 = Color(0xFFD27373);
+  static Color erro200 = Color(0xFFCE5C5C);
+  static Color erro300 = Color(0xFFCA4545);
+  static Color erro400 = Color(0xFFC62E2E);
+  static Color erro500 = Color(0xFFBE0000);
+
+
   // Primary Swatch
   static MaterialColor primarySwatch = MaterialColor(
     laranja.value,
