@@ -6,6 +6,7 @@ import 'package:revisao_estudos/routes/router.gr.dart';
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/ui/screens/frequencias/adicionar_frequencia_dialog/adicionar_frequencia_dialog.dart';
 import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
+import 'package:revisao_estudos/ui/widgets/dialogo_confirmacao/dialogo_confirmacao.dart';
 import 'package:revisao_estudos/ui/widgets/dialogo_excluir/dialogo_excluir.dart';
 import 'package:revisao_estudos/ui/widgets/lista_card_item_acoes/lista_card_item_acoes.dart';
 import 'package:revisao_estudos/ui/widgets/revisai_floating_action_button/revisai_floating_action_button.dart';
@@ -88,23 +89,28 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
     RepositoryFrequencia repositoryFrequencia = RepositoryFrequencia();
     bool utilizada = await repositoryFrequencia.utilizado(frequencia.id);
 
-    var updateState = await showDialog(
+    bool? result = await showDialog(
       context: context,
       builder: (context) {
         return ExcluirDialog(
           entidade: 'frequência',
           utilizada: utilizada,
-          onPressed: () async {
-            RepositoryFrequencia repositoryFrequencia = RepositoryFrequencia();
-            bool resultado =
-                await repositoryFrequencia.remover(frequencia.id, force: true);
-            Navigator.pop(context, resultado);
-          },
         );
       },
     );
 
-    if (updateState ?? false) {
+    if (result ?? false) {
+      bool excluido = await repositoryFrequencia.remover(frequencia.id, force: true);
+      if (!excluido) {
+        showDialog(
+          context: context,
+          builder: (context) => DialogoConfirmacao(
+            titulo: 'Ops...',
+            texto: 'Não foi possível excluir a frequência',
+            mensagemUsuario: true,
+          ),
+        );
+      }
       setState(() {});
     }
   }

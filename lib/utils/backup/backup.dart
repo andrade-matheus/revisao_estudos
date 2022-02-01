@@ -23,7 +23,7 @@ class Backup {
   }
 
   // CRIAÇÃO DO BACKUP
-  Future<bool> gerarBackup() async {
+  Future<String?> gerarBackup() async {
     try {
       print('GERANDO BACKUP');
 
@@ -47,18 +47,18 @@ class Backup {
         String path = diretorio.path;
         final file = File('$path/revisao_backup_${DateHelper.formatarParaArquivo(DateTime.now())}.txt');
         file.writeAsString(json);
-        return true;
+        return path;
       }
 
-      return false;
+      return null;
     } catch (e) {
       print(e.toString());
-      return false;
+      return null;
     }
   }
 
   // RESTAURANDO O BACKUP
-  Future<String> restoreBackup() async {
+  Future<int> restoreBackup() async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles();
       if (result != null) {
@@ -85,13 +85,13 @@ class Backup {
 
         await batch?.commit(continueOnError: false, noResult: true);
 
-        return 'O backup foi restaurado com sucesso.';
+        return 1;
       } else {
-        return 'A restauração do backup foi cancelada, ou um nenhum arquivo foi selecionado.';
+        return 0;
       }
     } catch (e) {
       print(e.toString());
-      return 'Error! Não foi possível finalizar a restauração do bakcup.';
+      return -1;
     }
   }
 

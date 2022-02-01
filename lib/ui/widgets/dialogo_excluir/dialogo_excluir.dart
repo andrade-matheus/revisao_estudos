@@ -1,36 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:revisao_estudos/ui/widgets/dialogo_confirmacao/dialogo_confirmacao.dart';
 
 class ExcluirDialog extends StatelessWidget {
   final String entidade;
   final bool utilizada;
-  final Function onPressed;
 
   const ExcluirDialog({
     Key? key,
     required this.entidade,
     required this.utilizada,
-    required this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text("Deseja mesmo excluir essa $entidade?"),
-      content: utilizada
-          ? Text('A $entidade possui revisões, se optar por exclui-la, todas as revisões vinculadas támbem serão excluídas.')
-          : Text('A $entidade não possui nenhuma revisão vinculada a ela.'),
-      actions: [
-        new TextButton(
-          child: new Text('CANCELAR'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        new TextButton(
-          child: new Text('EXCLUIR'),
-          onPressed: () => onPressed(),
-        )
-      ],
+    String titulo = "Deseja mesmo excluir essa $entidade?";
+    String texto = utilizada
+        ? 'A $entidade possui revisões, se optar por exclui-la, todas as revisões vinculadas támbem serão excluídas.'
+        : 'A $entidade não possui nenhuma revisão vinculada a ela.';
+
+    return DialogoConfirmacao(
+      titulo: titulo,
+      texto: texto,
+      textoBotaoConfirmar: 'EXCLUIR',
     );
   }
 }

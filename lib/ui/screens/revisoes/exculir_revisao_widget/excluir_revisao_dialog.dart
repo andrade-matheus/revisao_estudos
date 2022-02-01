@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 
+@deprecated
 excluirRevisaoDialog(BuildContext context, Revisao revisao) async {
   bool resultado = false;
   RepositoryRevisao repositoryRevisao = RepositoryRevisao();

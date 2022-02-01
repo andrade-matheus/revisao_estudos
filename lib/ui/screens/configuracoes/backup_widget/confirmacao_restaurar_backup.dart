@@ -1,29 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:revisao_estudos/ui/widgets/dialogo_confirmacao/dialogo_confirmacao.dart';
 
+@deprecated
 Future<bool> confirmacaoRestaurarBackup(BuildContext context) async {
   bool resultado = await showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text("Tem certeza que deseja restaurar um backup?"),
-        content: Text("Todos os dados não salvos serão apagados!"),
-        actions: [
-          new TextButton(
-            child: new Text('CANCELAR'),
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-          ),
-          // Spacer(),
-          new TextButton(
-            child: new Text('CONFIRMAR'),
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-          )
-        ],
-      );
-    },
-  ) ?? false;
+        context: context,
+        builder: (context) {
+          return DialogoConfirmacao(
+            titulo: 'Tem certeza que deseja restaurar um backup?',
+            texto: 'Todos os dados não salvos serão apagados!',
+          );
+        },
+      ) ??
+      false;
   return resultado;
 }

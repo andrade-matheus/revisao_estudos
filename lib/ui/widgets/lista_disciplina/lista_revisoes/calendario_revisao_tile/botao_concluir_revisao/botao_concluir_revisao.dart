@@ -84,7 +84,6 @@ class _BotaoConcluirRevisaoState extends State<BotaoConcluirRevisao>
             return DialogoConfirmacao(
               titulo: 'Concluir revisão?',
               textoBotaoConfirmar: 'CONCLUIR',
-              textoBotaoRecusar: 'CANCELAR',
             );
           },
         ) ??

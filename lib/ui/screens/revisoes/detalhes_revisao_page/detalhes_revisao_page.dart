@@ -36,10 +36,14 @@ class _DetalhesRevisaoPageState extends State<DetalhesRevisaoPage> {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
-            child: TituloPagina(titulo: 'Detalhes da revisão', voltar: true,),
+            child: TituloPagina(
+              titulo: 'Detalhes da revisão',
+              voltar: true,
+            ),
           ),
           FutureBuilder(
-            future: repositoryDisciplina.obterPorId(widget.revisao.disciplinaId),
+            future:
+                repositoryDisciplina.obterPorId(widget.revisao.disciplinaId),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
@@ -99,13 +103,14 @@ class _DetalhesRevisaoPageState extends State<DetalhesRevisaoPage> {
   }
 
   _excluirRevisao() async {
-    bool resultado = await showDialog(
-        context: context,
-        builder: (context) {
-          return DialogoConfirmacao(titulo: 'Excluir revisão?');
-        }) ?? false;
+    bool? resultado = await showDialog(
+      context: context,
+      builder: (context) {
+        return DialogoConfirmacao(titulo: 'Excluir revisão?');
+      },
+    );
 
-    if (resultado) {
+    if (resultado ?? false) {
       RepositoryRevisao repositoryRevisao = RepositoryRevisao();
       repositoryRevisao.remover(widget.revisao.id);
       context.router.pop(true);

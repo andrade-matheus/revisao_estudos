@@ -3,6 +3,7 @@ import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/ui/screens/disciplinas/adicionar_editar_disciplina_widget/adicionar_editar_disciplina_dialog.dart';
 import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
+import 'package:revisao_estudos/ui/widgets/dialogo_confirmacao/dialogo_confirmacao.dart';
 import 'package:revisao_estudos/ui/widgets/dialogo_excluir/dialogo_excluir.dart';
 import 'package:revisao_estudos/ui/widgets/lista_card_item_acoes/lista_card_item_acoes.dart';
 import 'package:revisao_estudos/ui/widgets/revisai_floating_action_button/revisai_floating_action_button.dart';
@@ -34,12 +35,15 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
-                  List<Disciplina> disciplinas = snapshot.data as List<Disciplina>;
+                  List<Disciplina> disciplinas =
+                      snapshot.data as List<Disciplina>;
                   return Expanded(
                     child: ListaCardItemAcoes<Disciplina>(
                       itens: disciplinas,
-                      onPressedEditar: (disciplina) => editarDisciplina(disciplina as Disciplina),
-                      onPressedExcluir: (disciplina) => excluirDisciplina(disciplina as Disciplina),
+                      onPressedEditar: (disciplina) =>
+                          editarDisciplina(disciplina as Disciplina),
+                      onPressedExcluir: (disciplina) =>
+                          excluirDisciplina(disciplina as Disciplina),
                     ),
                   );
                 } else {
@@ -109,22 +113,28 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
     RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
     bool utilizada = await repositoryDisciplina.utilizado(disciplina.id);
 
-    var updateState = await showDialog(
+    bool? result = await showDialog(
       context: context,
       builder: (context) {
         return ExcluirDialog(
           entidade: 'disciplina',
           utilizada: utilizada,
-          onPressed: () async {
-            RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
-            bool resultado = await repositoryDisciplina.remover(disciplina.id, force: true);
-            Navigator.pop(context, resultado);
-          },
         );
       },
     );
 
-    if (updateState ?? false) {
+    if (result ?? false) {
+      bool excluido = await repositoryDisciplina.remover(disciplina.id, force: true);
+      if (!excluido) {
+        showDialog(
+          context: context,
+          builder: (context) => DialogoConfirmacao(
+            titulo: 'Ops...',
+            texto: 'Não foi possível excluir a disciplina',
+            mensagemUsuario: true,
+          ),
+        );
+      }
       setState(() {});
     }
   }
