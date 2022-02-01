@@ -29,51 +29,54 @@ class _ListaRevisoesState extends State<ListaRevisoes> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: repositoryRevisao.obterParaDisciplinaTile(
-            widget.disciplina.id, widget.data),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasData) {
-              List<Revisao> revisoes = snapshot.data as List<Revisao>;
-              return ListView.builder(
-                padding: EdgeInsets.zero,
-                physics: ClampingScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: revisoes.length,
-                itemBuilder: (context, index) {
-                  Revisao revisao = revisoes[index];
+      future: repositoryRevisao.obterParaDisciplinaTile(
+          widget.disciplina.id, widget.data),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
+            List<Revisao> revisoes = snapshot.data as List<Revisao>;
+            return ListView.builder(
+              padding: EdgeInsets.zero,
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: revisoes.length,
+              itemBuilder: (context, index) {
+                Revisao revisao = revisoes[index];
 
-                  // Caso seja a tela de revisões e não a tela Calendário.
-                  if (widget.data != null) {
-                    DateTime data = context.read<DataSelecionada>().dataSelecionada;
-                    if (DateHelper.useLogTile(data)) {
-                      return LogRevisaoTile(
-                        revisao: revisao,
-                        notifyParent: atualizar,
-                      );
-                    } else {
-                      return CalendarioRevisaoTile(
-                        revisao: revisao,
-                        last: revisoes.length - 1 == index,
-                        first: index == 0,
-                      );
-                    }
-                  } else {
+                // Caso seja a tela de revisões e não a tela Calendário.
+                if (widget.data != null) {
+                  DateTime data =
+                      context.read<DataSelecionada>().dataSelecionada;
+                  if (DateHelper.useLogTile(data)) {
                     return LogRevisaoTile(
                       revisao: revisao,
                       notifyParent: atualizar,
                     );
+                  } else {
+                    return CalendarioRevisaoTile(
+                      revisao: revisao,
+                      last: revisoes.length - 1 == index,
+                      first: index == 0,
+                    );
                   }
-                },
-              );
-            } else {
-              // TODO: Criar widget 'Disciplina não possui revisões'
-              return Container();
-            }
+                } else {
+                  return LogRevisaoTile(
+                    revisao: revisao,
+                    notifyParent: atualizar,
+                  );
+                }
+              },
+            );
           } else {
-            return Carregando();
+            return Center(
+              child: Text('Disciplina não possui revisões'),
+            );
           }
-        });
+        } else {
+          return Carregando();
+        }
+      },
+    );
   }
 
   atualizar() {

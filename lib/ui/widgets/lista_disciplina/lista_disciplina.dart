@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
 import 'package:revisao_estudos/ui/widgets/lista_disciplina/disciplina_tile/disciplina_tile.dart';
-import 'package:revisao_estudos/ui/widgets/sem_revisoes/sem_revisoes.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/sem_revisoes/sem_revisoes.dart';
 
 class ListaDisciplina extends StatelessWidget {
   final Future<List<Disciplina>> futureDisciplina;
