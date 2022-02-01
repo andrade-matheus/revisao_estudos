@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:revisao_estudos/models/entity/disciplina.dart';
-import 'package:revisao_estudos/ui/widgets/expansion_card/expansion_card_widget.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/disciplina_tile/expansion_card/expansion_card_widget.dart';
 import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_revisoes/lista_revisoes.dart';
 
 class DisciplinaTile extends StatefulWidget{

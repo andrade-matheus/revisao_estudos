@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:revisao_estudos/ui/widgets/expansion_card/card_header/card_title/card_title.dart';
-import 'package:revisao_estudos/ui/widgets/expansion_card/card_header/expand_arrow/expand_arrow.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/disciplina_tile/expansion_card/card_header/card_title/card_title.dart';
+import 'package:revisao_estudos/ui/widgets/lista_disciplina/disciplina_tile/expansion_card/card_header/expand_arrow/expand_arrow.dart';
 
 class CardHeader extends StatefulWidget {
   final String? title;
