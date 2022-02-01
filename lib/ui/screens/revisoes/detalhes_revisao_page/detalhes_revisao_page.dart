@@ -6,8 +6,8 @@ import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/models/entity/revisao.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
+import 'package:revisao_estudos/ui/screens/revisoes/botao_revisao/botao_revisao.dart';
 import 'package:revisao_estudos/ui/screens/revisoes/detalhes_revisao_page/detalhes_card_widget/detalhes_card.dart';
-import 'package:revisao_estudos/ui/widgets/botao_revisao/botao_revisao.dart';
 import 'package:revisao_estudos/ui/widgets/carregando/carregando.dart';
 import 'package:revisao_estudos/ui/widgets/dialogo_confirmacao/dialogo_confirmacao.dart';
 import 'package:revisao_estudos/ui/widgets/titulo_pagina/titulo_pagina.dart';
@@ -80,11 +80,11 @@ class _DetalhesRevisaoPageState extends State<DetalhesRevisaoPage> {
                       Row(
                         children: [
                           BotaoRevisao(
-                              texto: 'Excluir revisão',
-                              onPressed: _excluirRevisao,
-                              backgroudColor:
-                                  AppColors.botaoNovaRevisaoCancelar,
-                              padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+                            texto: 'Excluir revisão',
+                            onPressed: _excluirRevisao,
+                            backgroudColor: AppColors.botaoNovaRevisaoCancelar,
+                            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                          ),
                         ],
                       )
                     ],

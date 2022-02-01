@@ -9,7 +9,7 @@ import 'package:revisao_estudos/services/repositories/repository_disciplina.dart
 import 'package:revisao_estudos/services/repositories/repository_frequencia.dart';
 import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 import 'package:revisao_estudos/ui/screens/revisoes/adicionar_revisao_page/revisao_text_field/revisao_text_field.dart';
-import 'package:revisao_estudos/ui/widgets/botao_revisao/botao_revisao.dart';
+import 'package:revisao_estudos/ui/screens/revisoes/botao_revisao/botao_revisao.dart';
 import 'package:revisao_estudos/ui/widgets/date_picker/date_picker.dart';
 import 'package:revisao_estudos/ui/widgets/dialogo_selecionar/dialogo_selecionar.dart';
 import 'package:revisao_estudos/ui/widgets/titulo_pagina/titulo_pagina.dart';
