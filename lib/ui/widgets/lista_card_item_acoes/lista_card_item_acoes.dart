@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:revisao_estudos/models/entity/disciplina.dart';
 import 'package:revisao_estudos/models/interface/entity_common.dart';
 import 'package:revisao_estudos/models/typedef/typedef.dart';
 import 'package:revisao_estudos/ui/widgets/lista_card_item_acoes/card_item_acoes/card_item_acoes.dart';
@@ -19,28 +20,41 @@ class ListaCardItemAcoes<T extends EntityCommon> extends StatefulWidget {
   _ListaCardItemAcoesState<T> createState() => _ListaCardItemAcoesState<T>();
 }
 
-class _ListaCardItemAcoesState<T extends EntityCommon> extends State<ListaCardItemAcoes> {
+class _ListaCardItemAcoesState<T extends EntityCommon>
+    extends State<ListaCardItemAcoes> {
   Map<int, GlobalKey<CardItemAcoesState<T>>> _keysListCard = {};
   int? _currentId;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.fromLTRB(15, 15, 15, 80),
-      itemCount: widget.itens.length,
-      itemBuilder: (context, index) {
-        T item = widget.itens[index] as T;
-        GlobalKey<CardItemAcoesState<T>> _key = GlobalKey<CardItemAcoesState<T>>();
-        _keysListCard[item.id] = _key;
-        return CardItemAcoes<T>(
-          key: _key,
-          item: item,
-          currentIdCallback: (id) => _currentIdCallback(id),
-          onPressedEditar: widget.onPressedEditar,
-          onPressedExcluir: widget.onPressedExcluir,
-        );
-      },
-    );
+    if (widget.itens.isNotEmpty) {
+      return ListView.builder(
+        padding: EdgeInsets.fromLTRB(15, 15, 15, 80),
+        itemCount: widget.itens.length,
+        itemBuilder: (context, index) {
+          T item = widget.itens[index] as T;
+          GlobalKey<CardItemAcoesState<T>> _key =
+              GlobalKey<CardItemAcoesState<T>>();
+          _keysListCard[item.id] = _key;
+          return CardItemAcoes<T>(
+            key: _key,
+            item: item,
+            currentIdCallback: (id) => _currentIdCallback(id),
+            onPressedEditar: widget.onPressedEditar,
+            onPressedExcluir: widget.onPressedExcluir,
+          );
+        },
+      );
+    } else {
+      return Center(
+        child: Text(
+          'Nenhuma ${(T == Disciplina) ? 'disciplina' : 'frequência'} foi adicionada ainda.',
+          style: TextStyle(
+            fontSize: 20
+          ),
+        ),
+      );
+    }
   }
 
   int? _currentIdCallback(int? id) {
