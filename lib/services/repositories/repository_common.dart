@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 abstract class RepositoryCommon<T extends EntityCommon> {
   static Database? _database;
 
-  String get _tableName;
+  String get tableName;
   Function get fromMap;
   Future<bool> isBeingUsed(int id);
 
@@ -25,7 +25,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
     final bd = await database;
     await bd?.transaction((txn) async {
       item.id = await txn.insert(
-        _tableName,
+        tableName,
         map,
       );
     });
@@ -35,7 +35,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
   Future<T?> getById(int id) async {
     final db = await database;
     var result = await db?.query(
-      _tableName,
+      tableName,
       where: 'id = ?',
       whereArgs: [id],
     );
@@ -44,7 +44,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
 
   Future<List<T>> getAll() async {
     final bd = await database;
-    var result = await bd?.query(_tableName);
+    var result = await bd?.query(tableName);
     List<T> lista =  await fromMapListToItemList(result ?? []);
     return lista;
   }
@@ -52,7 +52,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
   Future<List<T>> getByQuery({required String where, required List<Object> whereArgs}) async {
     final bd = await database;
     var result = await bd?.query(
-      _tableName,
+      tableName,
       where: where,
       whereArgs: whereArgs,
     );
@@ -70,7 +70,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
   Future<T> update(T param) async {
     final db = await database;
     await db?.update(
-      _tableName,
+      tableName,
       param.toMap(),
       where: 'id = ?',
       whereArgs: [param.id],
@@ -85,7 +85,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
     final db = await database;
     await db?.transaction((txn) async {
       await txn.delete(
-        _tableName,
+        tableName,
         where: 'id = ?',
         whereArgs: [id],
       );
@@ -97,7 +97,7 @@ abstract class RepositoryCommon<T extends EntityCommon> {
   Future<void> deleteAll() async {
     final db = await database;
     await db?.transaction((txn) async {
-      await txn.rawDelete('DELETE FROM $_tableName');
+      await txn.rawDelete('DELETE FROM $tableName');
     });
   }
 
