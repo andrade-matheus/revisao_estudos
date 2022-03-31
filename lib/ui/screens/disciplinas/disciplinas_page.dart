@@ -31,7 +31,7 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
             padding: EdgeInsets.fromLTRB(15, 30, 15, 20),
           ),
           FutureBuilder(
-            future: repositoryDisciplina.obterTodos(),
+            future: repositoryDisciplina.getAll(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
@@ -68,7 +68,7 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
           botaoConfirmar: 'ADICIONAR',
           onPressed: (nomeDisciplina) {
             RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
-            repositoryDisciplina.adicionar(
+            repositoryDisciplina.add(
               Disciplina(
                 id: 0,
                 nome: nomeDisciplina,
@@ -93,7 +93,7 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
           botaoConfirmar: 'EDITAR',
           onPressed: (nomeDisciplina) {
             RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
-            repositoryDisciplina.atualizar(
+            repositoryDisciplina.update(
               Disciplina(
                 id: disciplina.id,
                 nome: nomeDisciplina,
@@ -111,7 +111,7 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
 
   excluirDisciplina(Disciplina disciplina) async {
     RepositoryDisciplina repositoryDisciplina = RepositoryDisciplina();
-    bool utilizada = await repositoryDisciplina.utilizado(disciplina.id);
+    bool utilizada = await repositoryDisciplina.isBeingUsed(disciplina.id);
 
     bool? result = await showDialog(
       context: context,
@@ -124,7 +124,7 @@ class _DisciplinasPageState extends State<DisciplinasPage> {
     );
 
     if (result ?? false) {
-      bool excluido = await repositoryDisciplina.remover(disciplina.id, force: true);
+      bool excluido = await repositoryDisciplina.delete(disciplina.id, forceDelete: true);
       if (!excluido) {
         showDialog(
           context: context,

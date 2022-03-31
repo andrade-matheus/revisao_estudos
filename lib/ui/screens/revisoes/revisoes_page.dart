@@ -30,7 +30,7 @@ class _RevisoesPageState extends State<RevisoesPage> {
           ),
           ListaDisciplina(
             futureDisciplina:
-                repositoryDisciplina.obterTodasInculindoRevisoes(),
+                repositoryDisciplina.obterTodasDisciplinasInstanciandoRevisoes(),
           ),
         ],
       ),

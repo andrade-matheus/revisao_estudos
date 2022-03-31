@@ -149,7 +149,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
                             if (_formKey.currentState?.validate() ?? false) {
                               setState(() {
                                 Revisao novaRevisao = gerarNovaRevisao();
-                                repositoryRevisao.adicionar(novaRevisao);
+                                repositoryRevisao.add(novaRevisao);
                               });
                               Navigator.pop(context, true);
                             }
@@ -174,7 +174,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
       builder: (context) {
         return DialogoSelecionar<Disciplina>(
           titulo: 'Escolha uma Disciplina',
-          future: repositoryDisciplina.obterTodos(),
+          future: repositoryDisciplina.getAll(),
           texto: (disciplina) => disciplina.nome,
           onTap: (Disciplina disciplina) {
             setState(() {
@@ -199,7 +199,7 @@ class _AdicionarRevisaoPageState extends State<AdicionarRevisaoPage> {
       builder: (context) {
         return DialogoSelecionar<Frequencia>(
           titulo: 'Escolha uma Frequência',
-          future: repositoryFrequencia.obterTodos(),
+          future: repositoryFrequencia.getAll(),
           texto: (frequecia) => frequecia.frequencia,
           onTap: (Frequencia frequencia) {
             setState(() {

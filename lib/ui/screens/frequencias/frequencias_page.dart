@@ -47,7 +47,7 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
             ),
           ),
           FutureBuilder(
-            future: repositoryFrequencia.obterTodos(),
+            future: repositoryFrequencia.getAll(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
@@ -88,7 +88,7 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
 
   excluirFrequencia(Frequencia frequencia) async {
     RepositoryFrequencia repositoryFrequencia = RepositoryFrequencia();
-    bool utilizada = await repositoryFrequencia.utilizado(frequencia.id);
+    bool utilizada = await repositoryFrequencia.isBeingUsed(frequencia.id);
 
     bool? result = await showDialog(
       context: context,
@@ -101,7 +101,7 @@ class _FrequenciasPageState extends State<FrequenciasPage> {
     );
 
     if (result ?? false) {
-      bool excluido = await repositoryFrequencia.remover(frequencia.id, force: true);
+      bool excluido = await repositoryFrequencia.delete(frequencia.id, forceDelete: true);
       if (!excluido) {
         showDialog(
           context: context,

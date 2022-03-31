@@ -34,7 +34,7 @@ class AdicionarFequenciaDialog extends StatelessWidget {
                 frequencia: _controller.text.replaceAll(' ', ''),
               );
               RepositoryFrequencia repositoryFrequencia = RepositoryFrequencia();
-              repositoryFrequencia.adicionar(novaFrequencia);
+              repositoryFrequencia.add(novaFrequencia);
               Navigator.pop(context, true);
               _controller.clear();
             }

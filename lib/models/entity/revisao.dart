@@ -32,7 +32,7 @@ class Revisao extends EntityCommon<Revisao> {
     return Revisao(
       id: json['id'] ?? json['idRevisao'],
       disciplinaId: json['idDisciplina'],
-      frequencia: (await repositoryFrequencia.obterPorId(json['idFrequencia']))!,
+      frequencia: (await repositoryFrequencia.getById(json['idFrequencia']))!,
       nome: json['nome'] ?? json['nomeRevisao'],
       dataCadastro: DateTime.parse(json['dataCadastro']),
       proxRevisao: DateTime.parse(json['proxRevisao']),
@@ -70,7 +70,7 @@ class Revisao extends EntityCommon<Revisao> {
 
     proxRevisao = DateHelper.hoje().add(Duration(days: diasProxRevisao));
     RepositoryRevisao repositoryRevisao = RepositoryRevisao();
-    repositoryRevisao.atualizar(this);
+    repositoryRevisao.update(this);
 
     LogRevisao novoLog = LogRevisao(
       id: 0,
@@ -78,7 +78,7 @@ class Revisao extends EntityCommon<Revisao> {
       dataRevisao: DateHelper.hoje(),
     );
     RepositoryLogRevisao repositoryLogRevisao = RepositoryLogRevisao();
-    repositoryLogRevisao.adicionar(novoLog);
+    repositoryLogRevisao.add(novoLog);
   }
 
   @override

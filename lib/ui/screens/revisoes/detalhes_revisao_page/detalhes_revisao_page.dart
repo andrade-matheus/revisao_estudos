@@ -43,7 +43,7 @@ class _DetalhesRevisaoPageState extends State<DetalhesRevisaoPage> {
           ),
           FutureBuilder(
             future:
-                repositoryDisciplina.obterPorId(widget.revisao.disciplinaId),
+                repositoryDisciplina.getById(widget.revisao.disciplinaId),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
@@ -112,7 +112,7 @@ class _DetalhesRevisaoPageState extends State<DetalhesRevisaoPage> {
 
     if (resultado ?? false) {
       RepositoryRevisao repositoryRevisao = RepositoryRevisao();
-      repositoryRevisao.remover(widget.revisao.id);
+      repositoryRevisao.delete(widget.revisao.id);
       context.router.pop(true);
     }
   }

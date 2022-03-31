@@ -78,10 +78,10 @@ class _MyAppState extends State<MyApp> {
     RepositoryRevisao repositoryRevisao = RepositoryRevisao();
     RepositoryLogRevisao repositoryLogRevisao = RepositoryLogRevisao();
 
-    var frequencias = await repositoryFrequencia.obterTodos();
-    var disciplinas = await repositoryDisciplina.obterTodos();
-    var revisoes = await repositoryRevisao.obterTodos();
-    var logRevisoes = await repositoryLogRevisao.obterTodos();
+    var frequencias = await repositoryFrequencia.getAll();
+    var disciplinas = await repositoryDisciplina.getAll();
+    var revisoes = await repositoryRevisao.getAll();
+    var logRevisoes = await repositoryLogRevisao.getAll();
 
     print('\nFREQUENCIAS');
     for (var item in frequencias) {
