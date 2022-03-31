@@ -4,19 +4,19 @@ import 'package:revisao_estudos/utils/date/date_helper.dart';
 
 class RepositoryRevisao extends RepositoryCommon<Revisao> {
   @override
-  String get nomeTabela => 'revisao';
+  String get tableName => 'revisao';
 
   @override
   Function get fromMap => Revisao.fromMap;
 
   @override
-  Future<bool> utilizado(int id) async {
+  Future<bool> isBeingUsed(int id) async {
     return false;
   }
 
   // Todas revisões de uma disciplina
   Future<List<Revisao>> obterPorDisciplina(int disciplinaId) async {
-    List<Revisao> revisoes = await obterPor(
+    List<Revisao> revisoes = await getByQuery(
       where: 'idDisciplina = ?',
       whereArgs: [disciplinaId],
     );
@@ -25,7 +25,7 @@ class RepositoryRevisao extends RepositoryCommon<Revisao> {
 
   // Todas revisões de uma frequência
   Future<List<Revisao>> obterPorFrequencia(int frequenciaId) async {
-    List<Revisao> revisoes = await obterPor(
+    List<Revisao> revisoes = await getByQuery(
       where: 'idFrequencia = ?',
       whereArgs: [frequenciaId],
     );

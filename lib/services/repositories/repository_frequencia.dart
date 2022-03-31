@@ -5,13 +5,13 @@ import 'package:revisao_estudos/services/repositories/repository_revisao.dart';
 
 class RepositoryFrequencia extends RepositoryCommon<Frequencia> {
   @override
-  String get nomeTabela => "frequencia";
+  String get tableName => "frequencia";
 
   @override
   Function get fromMap => Frequencia.fromMap;
 
   @override
-  Future<bool> utilizado(int id) async {
+  Future<bool> isBeingUsed(int id) async {
     RepositoryRevisao repositoryRevisao = new RepositoryRevisao();
     List<Revisao> revisoes = await repositoryRevisao.obterPorFrequencia(id);
     return revisoes.isNotEmpty;

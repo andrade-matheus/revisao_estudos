@@ -3,13 +3,13 @@ import 'package:revisao_estudos/services/repositories/repository_common.dart';
 
 class RepositoryLogRevisao extends RepositoryCommon<LogRevisao> {
   @override
-  String get nomeTabela => "logRevisao";
+  String get tableName => "logRevisao";
 
   @override
   Function get fromMap => LogRevisao.fromMap;
 
   @override
-  Future<bool> utilizado(int id) async {
+  Future<bool> isBeingUsed(int id) async {
     return true;
   }
 }
