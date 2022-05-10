@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:revisao_estudos/constants/app_colors.dart';
 import 'package:revisao_estudos/constants/app_fontes.dart';
 import 'package:revisao_estudos/routes/router.gr.dart';
@@ -13,6 +15,13 @@ import 'package:revisao_estudos/utils/notificacoes/controle_de_notificacoes.dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DatabaseConfig.initDB();
+
+  await Firebase.initializeApp();
+
+  // Pass all uncaught errors from the framework to Crashlytics.
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+
+
   runApp(MyApp());
   //  F56D11 launcher icon hex collor
   //  FFC68D adaptive icon background hex collor
