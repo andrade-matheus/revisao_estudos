@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:revisao_estudos/constants/app_colors.dart';
-import 'package:revisao_estudos/constants/app_fontes.dart';
+import 'package:revisao_estudos/constants/theme.dart';
 import 'package:revisao_estudos/routes/router.gr.dart';
 import 'package:revisao_estudos/services/database/database_config.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
@@ -53,27 +52,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: [
         const Locale('pt'),
       ],
-      theme: ThemeData(
-        primarySwatch: AppColors.primarySwatch,
-        colorScheme: ColorScheme.light(
-          brightness: Brightness.light,
-          background: AppColors.branco,
-          onBackground: AppColors.preto,
-          error: AppColors.erro500,
-          onError: AppColors.branco,
-          primary: AppColors.laranja400,
-          primaryVariant: AppColors.laranja500,
-          onPrimary: AppColors.branco,
-          secondary: AppColors.laranja200,
-          secondaryVariant: AppColors.laranja300,
-          onSecondary: AppColors.preto,
-          surface: AppColors.branco,
-          onSurface: AppColors.preto,
-        ),
-        canvasColor: AppColors.branco,
-        fontFamily: AppFontes.roboto,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: revisaiTheme,
       debugShowCheckedModeBanner: false,
       title: 'RevisAí',
       routeInformationParser: _appRouter.defaultRouteParser(),
