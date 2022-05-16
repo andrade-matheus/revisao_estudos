@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:revisao_estudos/models/provider/botao_concluir_revisao.dart';
 import 'package:revisao_estudos/models/provider/data_selecionada.dart';
-import 'package:revisao_estudos/routes/router.gr.dart';
 import 'package:revisao_estudos/services/repositories/repository_disciplina.dart';
 import 'package:revisao_estudos/ui/screens/calendario/texto_titulo_data_selecionada/texto_titulo_data_selecionada.dart';
 import 'package:revisao_estudos/ui/widgets/lista_disciplina/lista_disciplina.dart';
